@@ -37,25 +37,23 @@
 
                 <div class="injuries-header">
                     <label class="mat-label">Leziuni</label>
-                    <button mat-mini-fab (click)="sidenav.toggle()">
+                    <button *ngIf="!casualtyForm.value.injuries.length" mat-mini-fab (click)="sidenav.toggle()">
                         <mat-icon>add</mat-icon>
+                    </button>
+                    <button class="edit-injuries-button" *ngIf="casualtyForm.value.injuries.length" mat-icon-button (click)="sidenav.toggle()">
+                        <mat-icon>edit</mat-icon>
                     </button>
                 </div>
 
-                <div class="injuries-container" formArrayName="injuries">
-                    <!-- <app-maneuver-list-item *ngFor="let maneuver of maneuversForms.controls; let i = index" matRipple
-                        [maneuver]="maneuver.value" (click)="editManeuver(i); sidenav.toggle()">
-                    </app-maneuver-list-item> -->
-                    <div class="selected-injuries-list">
-                        <div class="selected-injury-item" *ngFor="let selectedInjury of casualtyForm.value.injuries">
-                            {{selectedInjury.name}}
-                        </div>
-                    </div>
-                </div>
+                <mat-chip-list *ngIf="casualtyForm.value.injuries.length" class="injuries-container">
+                    <mat-chip selected color="accent" *ngFor="let selectedInjury of casualtyForm.value.injuries" (click)="sidenav.toggle()">
+                        {{selectedInjury.name}}
+                    </mat-chip>
+                </mat-chip-list>
 
                 <mat-form-field>
                     <mat-label>Detalii</mat-label>
-                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
                         formControlName="details" spellcheck="false"></textarea>
                 </mat-form-field>
             </div>

@@ -1,6 +1,7 @@
+import { untilDestroyed } from 'ngx-take-until-destroy';
 import { cloneDeep } from 'lodash';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Component, OnInit, Input, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, EventEmitter, Output, AfterViewInit, OnDestroy } from '@angular/core';
 import { Injury } from 'src/app/types/injury';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
@@ -12,18 +13,19 @@ import { InjuryService } from 'src/app/services/injury.service';
   templateUrl: './add-injuries.component.html',
   styleUrls: ['./add-injuries.component.scss']
 })
-export class AddInjuriesComponent implements OnInit {
+export class AddInjuriesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input()
   set injuries(injuries: Injury[]) {
+    this.initialSelectedInjuries$.next(cloneDeep(injuries));
     this.selectedInjuries$.next(cloneDeep(injuries));
-    this.focusSearchInput();
   }
 
   visible = true;
   selectable = true;
   removable = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  initialSelectedInjuries$ = new BehaviorSubject<Injury[]>([]);
   selectedInjuries$ = new BehaviorSubject<Injury[]>([]);
   isLoading$ = new BehaviorSubject<boolean>(true);
   injuries$!: Observable<Injury[]>;
@@ -32,6 +34,7 @@ export class AddInjuriesComponent implements OnInit {
   placeholder = 'Cauta...';
 
   @ViewChild('screen', { static: false }) screen: ElementRef;
+  @ViewChild('content', { static: false }) content: ElementRef;
   scrolling$ = new BehaviorSubject<boolean>(false);
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
   searching$ = new BehaviorSubject<boolean>(false);
@@ -45,6 +48,9 @@ export class AddInjuriesComponent implements OnInit {
 
   ngOnInit() {
     this.injuries$ = this.getInjuries();
+    this.search.valueChanges.pipe(
+      untilDestroyed(this)
+    ).subscribe(() => this.content.nativeElement.scrollTop = 0);
   }
 
   private getInjuries(): Observable<Injury[]> {
@@ -72,14 +78,12 @@ export class AddInjuriesComponent implements OnInit {
     injuries.push(injury);
     this.selectedInjuries$.next(injuries);
     this.clearSearchInput();
-    this.focusSearchInput();
   }
 
   removeInjury(injury: Injury) {
     const injuries = this.selectedInjuries$.getValue().filter(selectedInjury => selectedInjury._id !== injury._id);
     this.selectedInjuries$.next(injuries);
     this.clearSearchInput();
-    this.focusSearchInput();
   }
 
   select() {
@@ -106,8 +110,30 @@ export class AddInjuriesComponent implements OnInit {
     setTimeout(() => this.searchInput.nativeElement.focus(), 0);
   }
 
-  back(): void {
+  back() {
+    setTimeout(() => {
+      this.resetSelectedInjuries();
+    }, 300);
     this.backEmitter.emit();
+  }
+
+  resetSelectedInjuries() {
+    this.selectedInjuries$.next(cloneDeep(this.initialSelectedInjuries$.getValue()));
+  }
+
+  ngAfterViewInit() {
+    this.content.nativeElement.addEventListener('scroll', () => {
+      const scrollTop = this.content.nativeElement.scrollTop;
+      const scrolling = this.scrolling$.getValue();
+      if (scrollTop > 0 && scrolling === false) {
+        this.scrolling$.next(true);
+      } else if (scrollTop === 0 && scrolling === true) {
+        this.scrolling$.next(false);
+      }
+    }, true);
+  }
+
+  ngOnDestroy(): void {
   }
 
 }
