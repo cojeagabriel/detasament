@@ -1,5 +1,5 @@
 <div #screen class="screen">
-    <div class="chips-header">
+    <div class="chips-header" [class.raised]="scrolling$ | async">
         <div class="nav">
             <button mat-icon-button (click)="back()">
                 <mat-icon>arrow_back</mat-icon>
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div class="content">
+    <div #content class="content">
 
         <mat-selection-list #list class="injuries-container" [compareWith]="compareObjects">
             <mat-list-option *ngFor="let injury of injuries$ | async" [selected]="isSelected(injury)" [value]="injury" (click)="onInjuryClick(injury)">

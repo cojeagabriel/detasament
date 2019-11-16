@@ -1,3 +1,5 @@
+@import "../../../assets/scss/variables";
+
 .chips-header {
     transition: box-shadow 150ms ease-in-out;
     width: 100%;
@@ -13,6 +15,11 @@
         height: 56px;
         display: flex;
         align-items: center;
+    }
+
+    &.raised{
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08),
+        0 1px 3px -1px rgba(0, 0, 0, 0.2);
     }
 }
 
@@ -46,6 +53,39 @@
         
         .mat-form-field-infix{
             border-top: none;
+        }
+    }
+}
+
+mat-selection-list{
+    ::ng-deep {
+        .mat-pseudo-checkbox{
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: solid 1px rgba(0, 0, 0, 0.16);
+        }
+
+        .mat-pseudo-checkbox.mat-pseudo-checkbox-checked{
+            border-color: transparent;
+            background-color: $primary;
+            &::after{
+                left: 50%;
+                top: 45%;
+                transform: translate(-50%, -50%) rotate(-45deg);
+            }
+        }
+
+        .mat-list-item-content{
+            padding: 0 24px !important;
+        }
+    }
+}
+
+mat-form-field{
+    ::ng-deep{
+        .mat-form-field-wrapper{
+            padding-bottom: 16px;
         }
     }
 }
