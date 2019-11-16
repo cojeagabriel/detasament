@@ -1,0 +1,77 @@
+<mat-sidenav-container class="container" [hasBackdrop]="false">
+    <mat-sidenav #sidenav mode="push" class="sidenav" [fixedInViewport]="true" opened="false" position="end"
+        [autoFocus]="false">
+        <app-add-injuries [injuries]="injuries" (setSelectedInjuries)="setInjuries($event)"
+            (backEmitter)="close()"></app-add-injuries>
+    </mat-sidenav>
+
+    <mat-sidenav-content [formGroup]="casualtyForm">
+        <div #screen class="screen">
+            <div class="header" [class.raised]="scrolling$ | async">
+                <button mat-icon-button (click)="back()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <span
+                    class="top-bar-title mat-typogrphy">{{ 'Creează o victimă' }}</span>
+
+                <!-- <div class="actions">
+                    <button *ngIf="editInjury$ | async" mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="delete()">Șterge</button>
+                    </mat-menu>
+                </div> -->
+            </div>
+            <div class="content">
+                <mat-form-field>
+                    <mat-label>Nume</mat-label>
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="3" formControlName="name" spellcheck="false"></textarea>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="number" placeholder="Varsta" formControlName="age">
+                </mat-form-field>
+
+                <div class="injuries-header">
+                    <label class="mat-label">Leziuni</label>
+                    <button mat-mini-fab (click)="sidenav.toggle()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+
+                <div class="injuries-container" formArrayName="injuries">
+                    <!-- <app-maneuver-list-item *ngFor="let maneuver of maneuversForms.controls; let i = index" matRipple
+                        [maneuver]="maneuver.value" (click)="editManeuver(i); sidenav.toggle()">
+                    </app-maneuver-list-item> -->
+                    <div class="selected-injuries-list">
+                        <div class="selected-injury-item" *ngFor="let selectedInjury of casualtyForm.value.injuries">
+                            {{selectedInjury.name}}
+                        </div>
+                    </div>
+                </div>
+
+                <mat-form-field>
+                    <mat-label>Detalii</mat-label>
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"
+                        formControlName="details" spellcheck="false"></textarea>
+                </mat-form-field>
+            </div>
+
+            <div class="footer">
+                <div class="actions">
+                    <button mat-raised-button color="accent"
+                        [disabled]="!casualtyForm.value.name" (click)="log()">
+                        {{ 'Creează' }}</button>
+                </div>
+            </div>
+            <div *ngIf="loading$ | async" class="overlay">
+                <div class="loader-container">
+                    <mat-spinner></mat-spinner>
+                </div>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

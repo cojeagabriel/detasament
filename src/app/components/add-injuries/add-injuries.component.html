@@ -1,0 +1,50 @@
+<div #screen class="screen">
+    <div class="chips-header">
+        <div class="nav">
+            <button mat-icon-button (click)="back()">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            
+            <span class="top-bar-title mat-typogrphy">Selectează leziunile</span>
+        </div>
+        <div class="injuries-chip-list-container">
+            <mat-form-field class="injuries-chip-list" [floatLabel]="'never'">
+                <mat-chip-list #chipList>
+                    <mat-chip color="accent" selected *ngFor="let injury of (selectedInjuries$ | async)" [selectable]="selectable" [removable]="removable"
+                        (removed)="removeInjury(injury)">
+                        {{injury.name}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input #searchInput 
+                        [placeholder]="placeholder"
+                        [formControl]="search"
+                        spellcheck="false"
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (focus)="placeholder = ''"
+                        (blur)="placeholder = 'Cauta...'">
+                </mat-chip-list>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <mat-selection-list #list class="injuries-container" [compareWith]="compareObjects">
+            <mat-list-option *ngFor="let injury of injuries$ | async" [selected]="isSelected(injury)" [value]="injury" (click)="onInjuryClick(injury)">
+                {{injury.name}}
+            </mat-list-option>
+        </mat-selection-list>
+
+        <div class="footer">
+            <div class="actions">
+                <button mat-raised-button color="accent"
+                    (click)="select()">Selectează</button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="isLoading$ | async" class="loader-container">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>

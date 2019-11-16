@@ -1,0 +1,35 @@
+<!-- <div class="container">
+  <h2 class="mat-headline"> {{ (case$ | async)?.context }}</h2>
+
+  <mat-card *ngFor="let victim of pickedVictims$ | async; let i = index">
+    <div class="card-header">
+      <div class="state-number">
+        {{ i + 1 }}
+      </div>
+      <h3 class="card-title">{{ victim.name }}, {{ victim.age }} ani</h3>
+
+      <div class="card-actions-container">
+        <button mat-icon-button color="accent" (click)="refreshPick(victim._id)">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let injury of victim.injuries"> 
+          <mat-icon aria-hidden="false">arrow_right</mat-icon>
+          {{ injury.nume }}  
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="actions-container">
+    <button mat-icon-button color="accent" (click)="refreshPicks()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <button (click)="createCase()" mat-raised-button color="accent">Începe caz</button>
+  </div>
+
+</div>
+<app-case-code *ngIf="caseCode.length == 4" [caseCode]="caseCode"></app-case-code> -->

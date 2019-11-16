@@ -1,0 +1,12 @@
+<span class="maneuver-description">
+    {{ maneuver?.description }}
+</span>
+
+<span class="score-container">
+    <div class="score-chip">
+        {{ maneuver?.score.average? maneuver?.score.average : '-' }}
+    </div>
+    <div class="score-chip">
+        {{ maneuver?.score.maximum }}
+    </div>
+</span>

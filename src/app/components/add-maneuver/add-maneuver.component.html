@@ -1,0 +1,51 @@
+<div #screen class="screen">
+    <div class="header" [class.raised]="scrolling$ | async">
+        <button mat-icon-button (click)="back()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+    
+        <span class="top-bar-title mat-typogrphy">{{ (editManeuver$ | async) ? 'Modifică manevra' : 'Adaugă o manevră' }}</span>
+    
+        <div class="actions" *ngIf="editManeuver$ | async">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="delete()">Șterge</button>
+            </mat-menu>
+        </div>
+    </div>
+    
+    <div class="content">
+        <mat-form-field>
+            <textarea placeholder="Descriere" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" [(ngModel)]="description" spellcheck="false"></textarea>
+        </mat-form-field>
+    
+        <div class="custom-form-field">
+            <label class="mat-label">Punctaj maxim</label>
+            <mat-chip-list class="custom-chip-list">
+                <mat-chip *ngFor="let key of getKeys(score.maximum); let i = index" [selected]="score.maximum[key]"
+                    (click)="setScore(score.maximum, key)">
+                    {{ key == '0'? '-' : key}}
+                </mat-chip>
+                <mat-chip class="add-chip" (click)="openAddScoreDialog('maximum')">
+                    <mat-icon>add</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+
+        <div class="custom-form-field">
+            <mat-slide-toggle labelPosition="before" [disabled]="getScore(score.maximum) % 2 !== 0" [(ngModel)]="score.average">Punctaj mediu</mat-slide-toggle>
+        </div>
+
+
+        <div class="footer">
+            <div class="actions">
+                <button mat-raised-button color="accent" [disabled]="!description || !getScore(score.maximum)"
+                    (click)="save()">{{ (editManeuver$ | async) ? 'Salvează': 'Adaugă' }}</button>
+            </div>
+        </div>
+    
+    </div>
+</div>

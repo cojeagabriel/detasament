@@ -1,0 +1,140 @@
+[{
+    "name": "Sef de echipaj",
+    "injuries": [
+        {
+            "nume": "Prezentarea echipei si masuri de securitate",
+            "manevre": [
+                {
+                    "descriere": "Impresie generala",
+                    "punctajMaxim": 4,
+                    "punctajPartial": 2
+                },
+                {
+                    "descriere": "Asigurare rapida asupra sigurantei zonei",
+                    "punctajMaxim": 4,
+                    "punctajPartial": 2
+                },
+                {
+                    "descriere": "Comportament preventiv",
+                    "punctajMaxim": 4,
+                    "punctajPartial": 2
+                },
+                {
+                    "descriere": "Realizarea unei zone sigure pentru victime ",
+                    "punctajMaxim": 4,
+                    "punctajPartial": 2
+                }
+            ]
+        },
+        {
+            "nume": "Apelul de urgenta",
+            "manevre": [
+                    {
+                    "descriere": "Apel precoce ( in mai putin de 2 minute )",
+                    "punctajMaxim": 3
+                },
+                {
+                    "descriere": "Cine cheama ?",
+                    "punctajMaxim": 1
+                },
+                {
+                    "descriere": "Ce s-a intamplat (tip accident) ?",
+                    "punctajMaxim": 2,
+                    "punctajPartial": 1
+                },
+                {
+                    "descriere": "Numarul victimelor si afectiuni",
+                    "punctajMaxim": 2,
+                    "punctajPartial": 1
+                },
+                {
+                    "descriere": "Locatia si numarul de telefon. ",
+                    "punctajMaxim": 2,
+                    "punctajPartial": 1
+                }
+            ]
+        },
+        {
+            "nume": "Activitatea sefului de echipaj",
+            "manevre": [
+                {
+                    "descriere": "Calm si increzator",
+                    "punctajMaxim": 2,
+                    "punctajPartial": 1
+                },
+                {
+                    "descriere": "Pastreaza controlul situatiei",
+                    "punctajMaxim": 4,
+                    "punctajPartial": 2
+                },
+                {
+                    "descriere": "Conducerea grupului",
+                    "punctajMaxim": 4,
+                    "punctajPartial": 2
+                },
+                {
+                    "descriere": "Incurajare echipaj",
+                    "punctajMaxim": 2,
+                    "punctajPartial": 1
+                },
+                {
+                    "descriere": "Ajuta membrii echipei",
+                    "punctajMaxim": 2,
+                    "punctajPartial": 1
+                },
+                {
+                    "descriere": "Colaborarea cu unitatile de interventie si politie",
+                    "punctajMaxim": 6,
+                    "punctajPartial": 3
+                },
+                {
+                    "descriere": "Apel de reactualizare a raportului",
+                    "punctajMaxim": 2
+                }
+            ]
+        },
+        {
+            "nume": "Activitatea echipei",
+            "manevre": [
+                {
+                    "descriere": "Organizarea si colaborarea in echipa",
+                    "punctajMaxim": 4,
+                    "punctajPartial": 2
+                },
+                {
+                    "descriere": "Folosirea corecta a materialelor si echipamentului",
+                    "punctajMaxim": 4,
+                    "punctajPartial": 2
+                },
+                {
+                    "descriere": "Initiativa si creativitate",
+                    "punctajMaxim": 4,
+                    "punctajPartial": 2
+                },
+                {
+                    "descriere": "Incadrarea in timp (10 min)",
+                    "punctajMaxim": 2
+                },
+                {
+                    "descriere": "Truse prim ajutor ",
+                    "punctajMaxim": 2
+                }
+            ]
+        },
+        {
+            "nume": "Raportul final",
+            "manevre": [
+                {
+                    "descriere": "Numarul victimelor cu afectiuni si PA acordat",
+                    "punctajMaxim": 4,
+                    "punctajPartial": 2
+                },
+                {
+                    "descriere": "Aprecierea corecta a gravitatii victimelor si triajul pentru transport",
+                    "punctajMaxim": 6,
+                    "punctajPartial": 3
+                }
+            ]
+        }
+    ]
+}]

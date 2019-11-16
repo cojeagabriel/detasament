@@ -1,0 +1,89 @@
+@import "../../../assets/scss/variables";
+
+.mat-headline {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.victim-injuries-text{
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.container {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.header-container{
+  box-sizing: border-box;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+}
+
+.score-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h5 {
+    font-size: 1.3em;
+  }
+
+  span {
+    font-size: 3em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: 300;
+
+    small {
+      font-size: 16px;
+      color: #ccc;
+    }
+  }
+}
+
+.injuries-container{
+  margin-bottom: 60px;
+  box-sizing: border-box;
+}
+
+.score-container{
+  margin-bottom: 30px;
+}
+
+.injuries-summary-container{
+  box-sizing: border-box;
+    padding: 30px;
+}
+
+.injuries-summary{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.casualty-name-container{
+  display: flex;
+  align-items: center;
+
+  mat-icon{
+    margin-right: 8px;
+  }
+}
+
+.injuries-list-container{
+  box-sizing: border-box;
+  padding-left: 32px;
+}

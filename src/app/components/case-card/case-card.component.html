@@ -1,0 +1,13 @@
+<div class="card">
+  <p>Case code: {{case.caseCode | uppercase}}</p>
+  <p>{{case.context}}</p>
+  <p>{{case._id}}</p>
+  <p>Number of victims: {{case.victims.length}}</p>
+  <div class="actions">
+    <button (click)="deleteCase(case.caseCode)" mat-button>
+      <mat-icon>
+        delete
+      </mat-icon>
+    </button>
+  </div>
+</div>

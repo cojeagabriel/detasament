@@ -1,0 +1,10 @@
+<div class="container">
+    <h2 class="mat-headline">Codul de acces al cazului</h2>
+
+    <div class="content">
+        <span class="mat-typography case-code">{{ caseCode | uppercase }}</span>
+
+        <button [routerLink]="['/../../case/' + caseCode]" mat-raised-button color="accent">Arbitrează caz</button>
+    </div>
+
+</div>

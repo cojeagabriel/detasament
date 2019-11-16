@@ -1,0 +1,127 @@
+@import "../../../assets/scss/variables";
+
+:host {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border: solid 1px #f8f8f8;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    background-color: white;
+    margin-bottom: 16px;
+}
+
+.name{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.age{
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.42);
+    margin-top: 4px;
+}
+
+.mat-flat-button{
+    background-color: $primary;
+    color: white;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 24px 16px 0;
+}
+
+.content{
+    box-sizing: border-box;
+    padding: 16px;
+    width: 100%;
+}
+
+.footer{
+    box-sizing: border-box;
+    padding: 0 16px 16px;
+
+    &:nth-child(2){
+        margin-top: 24px;
+    }
+}
+
+.injuries-list{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    box-sizing: border-box;
+    padding-left: 16px;
+
+    li{
+        position: relative;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        line-height: 1.7;
+        display: flex;
+        align-items: center;
+        color: rgba(0, 0, 0, 0.64);
+
+        &:before{
+            content: "";
+            display: inline-block;
+            margin-right: 16px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: red;
+        }
+    }
+}
+
+.actions{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    box-sizing: border-box;
+    padding: 4px;
+
+    button{
+        .material-icons {
+          font-size: 18px;
+          color: rgba(0, 0, 0, 0.16);
+          transition: color .15s ease-in-out;
+        }
+
+        &.panelOpen{
+            .material-icons {
+              font-size: 18px;
+              color: $primary;
+            }
+        }
+    }
+}
+
+mat-expansion-panel{
+    width: 100%;
+    border-radius: 0;
+    box-sizing: border-box;
+    border-top: dashed 1px transparent;
+    transition: border-color .15s ease-in-out;
+
+    span{
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.42);
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    &.mat-expanded {
+        border-top-color:rgba(0, 0, 0, 0.08);
+    }
+}

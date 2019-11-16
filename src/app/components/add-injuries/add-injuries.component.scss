@@ -1,0 +1,51 @@
+.chips-header {
+    transition: box-shadow 150ms ease-in-out;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: solid 1px #e5e5e5;
+
+    .nav{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 8px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.screen{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.content{
+    overflow: scroll;
+    box-sizing: border-box;
+    padding-bottom: 120px;
+}
+
+.loader-container {
+  height: calc(100% - 52px);
+}
+
+.injuries-chip-list-container{
+    padding: 0 24px;
+}
+
+.injuries-chip-list{
+    width: 100%;
+
+    ::ng-deep {
+        .mat-form-field-underline {
+          display: none;
+        }
+        
+        .mat-form-field-infix{
+            border-top: none;
+        }
+    }
+}

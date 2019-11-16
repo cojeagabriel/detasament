@@ -1,0 +1,12 @@
+<div class="maneuver-container container" [ngClass]="{'score-selected': score !== null}">
+    <div class="maneuver-description-container">
+        <span class="mat-small maneuver-description">
+            {{ maneuver.description }}
+        </span>
+    </div>
+    <div class="score-container">
+        <button class="score" [ngClass]="{'selected': score === 0}" mat-button disableRipple (click)="selectScore(0)">0</button>
+        <button class="score" [ngClass]="{'selected': maneuver.score.average && score === maneuver.score.average}" mat-button disableRipple [disabled]="!maneuver.score.average" (click)="selectScore(maneuver.score.average)">{{ maneuver.score.average || '-' }}</button>
+        <button class="score" [ngClass]="{'selected': score === maneuver.score.maximum}" mat-button disableRipple (click)="selectScore(maneuver.score.maximum)">{{ maneuver.score.maximum }}</button>
+    </div>
+</div>
