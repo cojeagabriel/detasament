@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { CasualtyService } from './../../services/casualty.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
@@ -22,6 +24,8 @@ export class CreateCasualtyComponent implements OnInit, AfterViewInit {
   constructor(
     private formBuilder: FormBuilder,
     private location: Location,
+    private casualtyService: CasualtyService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -57,8 +61,13 @@ export class CreateCasualtyComponent implements OnInit, AfterViewInit {
     (this.casualtyForm.controls.injuries as FormArray).push(new FormControl(injury));
   }
 
-  log() {
-    console.log(this.casualtyForm.value);
+  save() {
+    this.casualtyService.add({
+      ...this.casualtyForm.value,
+      injuries: this.casualtyForm.value.injuries.map(injury => injury._id)
+    }).subscribe(res => {
+      this.router.navigate(['/casualties'], { replaceUrl: true });
+    });
   }
 
   close() {

@@ -1,16 +1,14 @@
 <div class="casualty-card">
     <div class="card-header">
-        <span class="card-title mat-typography">Gabriel Cojea</span>
-        <span class="card-subtitle mat-typography">22 ani</span>
+        <span class="card-title mat-typography">{{ casualty.name }}</span>
+        <span class="card-subtitle mat-typography">{{ casualty.age }} ani</span>
     </div>
     <div class="card-content">
         <mat-chip-list>
-            <mat-chip selectable="false">Fractura de coloana cervicale</mat-chip>
-            <mat-chip selectable="false">Hemoragie</mat-chip>
-            <mat-chip selectable="false">Epilepsie</mat-chip>
+            <mat-chip *ngFor="let injury of casualty.injuries" selectable="false" focused="false" disableRipple>{{ injury.name }}</mat-chip>
         </mat-chip-list>
         <p class="details mat-typography">
-            A cazut si s-a lovit la cap. Face epilepsie timp de 30s dupa 2 minute de la inceperea cazului.
+            {{ casualty.details }}
         </p>
     </div>
 </div>

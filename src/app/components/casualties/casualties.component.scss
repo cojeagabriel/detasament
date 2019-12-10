@@ -13,9 +13,17 @@
 
 .casualties-container{
     box-sizing: border-box;
-    padding: 0 32px;
+    padding: 0 24px;
 
     app-casualty-card-v2{
         margin-bottom: 16px;
     }
+}
+
+.content{
+    padding-top: 24px;
+}
+
+.screen{
+    padding-bottom: 120px;
 }

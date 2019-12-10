@@ -16,7 +16,7 @@ export class InjuryService {
     return this.http.get('https://barem-dezastre.herokuapp.com/injuries');
   }
 
-  getInjury(id: string): Observable<any> {
+  getInjury(id: string): Observable<Injury> {
     return this.http.get('https://barem-dezastre.herokuapp.com/injuries').pipe(
       map(injuries => (injuries as Injury[]).filter(injury => injury._id === id)[0])
     );

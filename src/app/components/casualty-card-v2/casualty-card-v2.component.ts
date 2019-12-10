@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Casualty } from 'src/app/types/casualty';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-casualty-card-v2',
@@ -10,9 +9,6 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 export class CasualtyCardV2Component implements OnInit {
 
   @Input() casualty: Casualty;
-
-  @ViewChild('screen', { static: false }) screen: ElementRef;
-  scrolling$ = new BehaviorSubject(false);
 
   constructor() { }
 
