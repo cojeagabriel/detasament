@@ -1,3 +1,4 @@
+import { CasualtyResponse } from '../types/casualty-response';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -24,7 +25,12 @@ export class CasualtyService {
   }
 
   getCasualties(): Observable<Casualty[]> {
-    return this.http.get('https://barem-dezastre.herokuapp.com/casualties/') as Observable<Casualty[]>;
+    return this.http.get('https://barem-dezastre.herokuapp.com/casualties') as Observable<Casualty[]>;
+  }
+
+  add(casualty: CasualtyResponse) {
+    console.log(casualty);
+    return this.http.post('https://barem-dezastre.herokuapp.com/casualties', casualty);
   }
 
     // getVictims(filters: VictimFilters): Observable<Victim[]> {

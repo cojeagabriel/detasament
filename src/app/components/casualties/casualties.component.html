@@ -37,9 +37,7 @@
 
     <div class="content">
         <div class="casualties-container">
-            <app-casualty-card-v2></app-casualty-card-v2>
-            <app-casualty-card-v2></app-casualty-card-v2>
-            <app-casualty-card-v2></app-casualty-card-v2>
+            <app-casualty-card-v2 *ngFor="let casualty of casualties$ | async" [casualty]="casualty"></app-casualty-card-v2>
         </div>
     </div>
 </div>

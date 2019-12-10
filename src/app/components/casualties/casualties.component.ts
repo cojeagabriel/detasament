@@ -1,5 +1,9 @@
+import { CasualtyService } from './../../services/casualty.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Casualty } from 'src/app/types/casualty';
+import { Observable } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-casualties',
@@ -8,14 +12,22 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 })
 export class CasualtiesComponent implements OnInit, AfterViewInit {
 
+  casualties$ = this.getCasualtiesObservable();
   isLoading$ = new BehaviorSubject(true);
 
   @ViewChild('screen', { static: false }) screen: ElementRef;
   scrolling$ = new BehaviorSubject(false);
 
-  constructor() { }
+  constructor(
+    private casualtyService: CasualtyService,
+    private location: Location
+  ) { }
 
   ngOnInit() {
+  }
+
+  private getCasualtiesObservable(): Observable<Casualty[]> {
+    return this.casualtyService.getCasualties();
   }
 
   ngAfterViewInit() {
@@ -29,7 +41,9 @@ export class CasualtiesComponent implements OnInit, AfterViewInit {
     }, true);
   }
 
-  back() {}
+  back() {
+    this.location.back();
+  }
 
   openSearch() {}
 
