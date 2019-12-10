@@ -9,6 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { InjuriesV2Component } from './components/injuries-v2/injuries-v2.component';
+import { CasualtiesComponent } from './components/casualties/casualties.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { state: '0' } },
@@ -30,6 +31,12 @@ const routes: Routes = [
     children: [
       { path: '', component: CasesV2Component, data: { state: '1' } },
       { path: 'create', component: CreateCaseV2Component, canDeactivate: [CanDeactivateGuardGuard], data: { state: '2' } }
+    ]
+  },
+  {
+    path: 'casualties',
+    children: [
+      { path: '', component: CasualtiesComponent, data: { state: '1' } },
     ]
   },
   { path: 'create-casualty', component: CreateCasualtyComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '1' } },
