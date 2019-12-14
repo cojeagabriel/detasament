@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Casualty } from 'src/app/types/casualty';
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
+import { tap, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-casualties',
@@ -27,7 +28,10 @@ export class CasualtiesComponent implements OnInit, AfterViewInit {
   }
 
   private getCasualtiesObservable(): Observable<Casualty[]> {
-    return this.casualtyService.getCasualties();
+    return this.casualtyService.getCasualties().pipe(
+      tap(() => this.isLoading$.next(false)),
+      shareReplay(1)
+    );
   }
 
   ngAfterViewInit() {

@@ -1,7 +1,12 @@
 <div class="casualty-card">
     <div class="card-header">
-        <span class="card-title mat-typography">{{ casualty.name }}</span>
-        <span class="card-subtitle mat-typography">{{ casualty.age }} ani</span>
+        <div class="card-avatar">
+            <mat-icon>account_circle</mat-icon>
+        </div>
+        <div class="card-text">
+            <span class="card-title mat-typography">{{ casualty.name }}</span>
+            <span class="card-subtitle mat-typography">{{ casualty.age }} ani</span>
+        </div>
     </div>
     <div class="card-content">
         <mat-chip-list>

@@ -28,9 +28,16 @@ export class CasualtyService {
     return this.http.get('https://barem-dezastre.herokuapp.com/casualties') as Observable<Casualty[]>;
   }
 
-  add(casualty: CasualtyResponse) {
-    console.log(casualty);
+  add(casualty: CasualtyResponse): Observable<Casualty> {
     return this.http.post('https://barem-dezastre.herokuapp.com/casualties', casualty);
+  }
+
+  // update(casualty: CasualtyResponse): Observable<Casualty> {
+  //   return this.http.post(`https://barem-dezastre.herokuapp.com/casualties`, casualty);
+  // }
+
+  delete(id: string): Observable<Casualty> {
+    return this.http.delete(`https://barem-dezastre.herokuapp.com/casualties/${id}`);
   }
 
     // getVictims(filters: VictimFilters): Observable<Victim[]> {

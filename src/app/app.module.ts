@@ -61,6 +61,7 @@ import { CreateCasualtyComponent } from './components/create-casualty/create-cas
 import { AddInjuriesComponent } from './components/add-injuries/add-injuries.component';
 import { CasualtyCardV2Component } from './components/casualty-card-v2/casualty-card-v2.component';
 import { CasualtiesComponent } from './components/casualties/casualties.component';
+import { CasualtyComponent } from './components/casualty/casualty.component';
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { CasualtiesComponent } from './components/casualties/casualties.componen
     CreateCasualtyComponent,
     AddInjuriesComponent,
     CasualtyCardV2Component,
-    CasualtiesComponent
+    CasualtiesComponent,
+    CasualtyComponent
   ],
   entryComponents: [
     AddManeuverComponent,

@@ -13,16 +13,19 @@
                 </button>
 
                 <span
-                    class="top-bar-title mat-typogrphy">{{ 'Creează o victimă' }}</span>
+                    class="top-bar-title mat-typogrphy">{{ (edit$ | async) ? 'Modifică victima' : 'Creează o victimă' }}</span>
 
-                <!-- <div class="actions">
-                    <button *ngIf="editInjury$ | async" mat-icon-button [matMenuTriggerFor]="menu">
+                <div class="actions">
+                    <!-- <button *ngIf="edit$ | async" mat-icon-button [matMenuTriggerFor]="menu">
                         <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item (click)="delete()">Șterge</button>
-                    </mat-menu>
-                </div> -->
+                    </mat-menu> -->
+                    <button mat-icon-button (click)="delete()">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
             </div>
             <div class="content">
                 <mat-form-field>
@@ -46,7 +49,7 @@
                 </div>
 
                 <mat-chip-list *ngIf="casualtyForm.value.injuries.length" class="injuries-container">
-                    <mat-chip selected color="accent" *ngFor="let selectedInjury of casualtyForm.value.injuries" (click)="sidenav.toggle()">
+                    <mat-chip selected color="accent" *ngFor="let selectedInjury of injuries" (click)="sidenav.toggle()">
                         {{selectedInjury.name}}
                     </mat-chip>
                 </mat-chip-list>
@@ -62,7 +65,7 @@
                 <div class="actions">
                     <button mat-raised-button color="accent"
                         [disabled]="!casualtyForm.value.name" (click)="save()">
-                        {{ 'Creează' }}</button>
+                        {{ (edit$ | async) ? 'Salvează' : 'Creează' }}</button>
                 </div>
             </div>
             <div *ngIf="loading$ | async" class="overlay">

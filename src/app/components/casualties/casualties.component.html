@@ -10,6 +10,9 @@
             <button mat-icon-button (click)="openSearch()">
                 <mat-icon>search</mat-icon>
             </button>
+            <button mat-icon-button [routerLink]="'create'">
+                <mat-icon>add</mat-icon>
+            </button>
         </div>
     </div>
 
@@ -31,13 +34,13 @@
         </div>
     </div> -->
 
-    <!-- <div *ngIf="isLoading$ | async" class="loader-container">
+    <div *ngIf="isLoading$ | async" class="loader-container">
         <mat-spinner></mat-spinner>
-    </div> -->
+    </div>
 
     <div class="content">
         <div class="casualties-container">
-            <app-casualty-card-v2 *ngFor="let casualty of casualties$ | async" [casualty]="casualty"></app-casualty-card-v2>
+            <app-casualty-card-v2 *ngFor="let casualty of casualties$ | async" [casualty]="casualty" [routerLink]="casualty._id"></app-casualty-card-v2>
         </div>
     </div>
 </div>
