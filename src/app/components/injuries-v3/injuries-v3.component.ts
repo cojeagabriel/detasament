@@ -1,7 +1,10 @@
+import { InjuryV2 } from './../../types/injury-v2.d';
 import { Location } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { startWith, switchMap, shareReplay, filter, map, withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'app-injuries-v3',
@@ -10,11 +13,14 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class InjuriesV3Component implements OnInit, AfterViewInit {
 
-  injuries$ = this.db.collection('injuries').valueChanges({idField: 'id'});
+  search = new FormControl('');
+  injuries$ = this.getInjuriesObservable();
 
+  @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
   @ViewChild('screen', { static: false }) screen: ElementRef;
   scrolling$ = new BehaviorSubject(false);
   loading$ = new BehaviorSubject(true);
+  searching$ = new BehaviorSubject(false);
 
 
   constructor(
@@ -24,6 +30,39 @@ export class InjuriesV3Component implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.injuries$.subscribe(res => this.loading$.next(false));
+  }
+
+  private getInjuriesObservable(): Observable<InjuryV2[]> {
+    return this.search.valueChanges.pipe(
+      startWith(''),
+      switchMap(searchText => {
+        return this.db.collection<InjuryV2>('injuries', ref => ref.orderBy('name', 'asc')).valueChanges({ idField: 'id' })
+          .pipe(
+            map(injuries => {
+              return injuries.filter(injury => injury.name.toLowerCase().includes(searchText.toLowerCase()));
+            })
+          );
+      }),
+      shareReplay(1)
+    );
+  }
+
+  openSearch() {
+    this.searching$.next(true);
+    this.focusSearchInput();
+  }
+
+  focusSearchInput() {
+    setTimeout(() => this.searchInput.nativeElement.focus(), 0);
+  }
+
+  clearSearchInput() {
+    this.search.setValue('');
+  }
+
+  closeSearch() {
+    this.clearSearchInput();
+    this.searching$.next(false);
   }
 
   back() {

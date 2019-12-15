@@ -1,5 +1,5 @@
 <div #screen class="screen">
-    <div class="header" [class.raised]="scrolling$ | async">
+    <div *ngIf="!(searching$ | async)" class="header" [class.raised]="scrolling$ | async">
         <button mat-icon-button (click)="back()">
             <mat-icon>arrow_back</mat-icon>
         </button>
@@ -7,6 +7,26 @@
         <span class="top-bar-title mat-typogrphy">Leziuni</span>
     
         <div class="actions">
+            <button mat-icon-button (click)="openSearch()">
+                <mat-icon>search</mat-icon>
+            </button>
+            <button mat-icon-button [routerLink]="'create'">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="searching$ | async" class="header" [class.raised]="scrolling$ | async">
+        <button mat-icon-button (click)="closeSearch()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+    
+        <input #searchInput type="text" placeholder="Caută după nume" class="top-bar-title search-input" [formControl]="search" spellcheck="false">
+    
+        <div class="actions">
+            <button [disabled]="!search.value.length" mat-icon-button (click)="clearSearchInput();">
+                <mat-icon>close</mat-icon>
+            </button>
             <button mat-icon-button [routerLink]="'create'">
                 <mat-icon>add</mat-icon>
             </button>

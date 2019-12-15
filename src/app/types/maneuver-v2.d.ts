@@ -1,5 +1,5 @@
 export interface ManeuverV2 {
-    descriptiob: string,
+    description: string,
     score: number,
     average: boolean,
 }
