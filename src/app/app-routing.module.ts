@@ -10,17 +10,21 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { InjuriesV2Component } from './components/injuries-v2/injuries-v2.component';
 import { CasualtiesComponent } from './components/casualties/casualties.component';
+import { CasualtyComponent } from './components/casualty/casualty.component';
+import { InjuriesV3Component } from './components/injuries-v3/injuries-v3.component';
+import { InjuryV3Component } from './components/injury-v3/injury-v3.component';
+import { InjuryFormComponent } from './components/injury-form/injury-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { state: '0' } },
   { path: 'injuries',
     children: [
-      { path: '', component: InjuriesV2Component, data: { state: '1' } },
-      { path: 'create', component: CreateInjuryV2Component, canDeactivate: [CanDeactivateGuardGuard], data: { state: '2' } },
+      { path: '', component: InjuriesV3Component, data: { state: '1' } },
+      { path: 'create', component: InjuryFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '2' } },
       { path: ':id',
         children: [
-          { path: '', component: InjuryV2Component, data: { state: '2' } },
-          { path: 'edit', component: CreateInjuryV2Component, canDeactivate: [CanDeactivateGuardGuard], data: { state: '3' } }
+          { path: '', component: InjuryV3Component, data: { state: '2' } },
+          { path: 'edit', component: InjuryFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '3' } }
         ],
         data: { state: '2' }
       },
@@ -37,6 +41,15 @@ const routes: Routes = [
     path: 'casualties',
     children: [
       { path: '', component: CasualtiesComponent, data: { state: '1' } },
+      { path: 'create', component: CreateCasualtyComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '2' } },
+      {
+        path: ':id',
+        children: [
+          { path: '', component: CasualtyComponent, data: { state: '2' } },
+          { path: 'edit', component: CreateCasualtyComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '3' } }
+        ],
+        data: { state: '2' }
+      },
     ]
   },
   { path: 'create-casualty', component: CreateCasualtyComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '1' } },

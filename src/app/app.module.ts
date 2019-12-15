@@ -61,6 +61,16 @@ import { CreateCasualtyComponent } from './components/create-casualty/create-cas
 import { AddInjuriesComponent } from './components/add-injuries/add-injuries.component';
 import { CasualtyCardV2Component } from './components/casualty-card-v2/casualty-card-v2.component';
 import { CasualtiesComponent } from './components/casualties/casualties.component';
+import { CasualtyComponent } from './components/casualty/casualty.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { InjuriesV3Component } from './components/injuries-v3/injuries-v3.component';
+import { InjuryV3Component } from './components/injury-v3/injury-v3.component';
+import { ManeuverListItemV2Component } from './components/maneuver-list-item-v2/maneuver-list-item-v2.component';
+import { InjuryFormComponent } from './components/injury-form/injury-form.component';
+import { ManeuverFormComponent } from './components/maneuver-form/maneuver-form.component';
 
 
 @NgModule({
@@ -92,7 +102,15 @@ import { CasualtiesComponent } from './components/casualties/casualties.componen
     CreateCasualtyComponent,
     AddInjuriesComponent,
     CasualtyCardV2Component,
-    CasualtiesComponent
+    CasualtiesComponent,
+    CasualtyComponent,
+    LoginComponent,
+    RegisterComponent,
+    InjuriesV3Component,
+    InjuryV3Component,
+    ManeuverListItemV2Component,
+    InjuryFormComponent,
+    ManeuverFormComponent
   ],
   entryComponents: [
     AddManeuverComponent,
@@ -127,15 +145,13 @@ import { CasualtiesComponent } from './components/casualties/casualties.componen
     MatRippleModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production
+    }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
-  providers: [
-    CaseService,
-    CasualtyService,
-    InjuryService,
-    ManeuverService
-  ],
+  providers: [CaseService, CasualtyService, InjuryService, ManeuverService],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}
