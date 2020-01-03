@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CasualtyCardV2Component implements OnInit {
 
+  objectKeys = Object.keys;
+
   @Input() casualty: Casualty;
 
   constructor() { }

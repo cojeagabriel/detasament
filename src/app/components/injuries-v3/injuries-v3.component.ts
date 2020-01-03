@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { startWith, switchMap, shareReplay, filter, map, withLatestFrom } from 'rxjs/operators';
+import { startWith, switchMap, shareReplay, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-injuries-v3',

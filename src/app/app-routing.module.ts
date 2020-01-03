@@ -14,6 +14,9 @@ import { CasualtyComponent } from './components/casualty/casualty.component';
 import { InjuriesV3Component } from './components/injuries-v3/injuries-v3.component';
 import { InjuryV3Component } from './components/injury-v3/injury-v3.component';
 import { InjuryFormComponent } from './components/injury-form/injury-form.component';
+import { CasualtiesV2Component } from './components/casualties-v2/casualties-v2.component';
+import { CasualtyFormComponent } from './components/casualty-form/casualty-form.component';
+import { CasualtyV2Component } from './components/casualty-v2/casualty-v2.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { state: '0' } },
@@ -40,19 +43,19 @@ const routes: Routes = [
   {
     path: 'casualties',
     children: [
-      { path: '', component: CasualtiesComponent, data: { state: '1' } },
-      { path: 'create', component: CreateCasualtyComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '2' } },
+      { path: '', component: CasualtiesV2Component, data: { state: '1' } },
+      { path: 'create', component: CasualtyFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '2' } },
       {
         path: ':id',
         children: [
-          { path: '', component: CasualtyComponent, data: { state: '2' } },
-          { path: 'edit', component: CreateCasualtyComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '3' } }
+          { path: '', component: CasualtyV2Component, data: { state: '2' } },
+          { path: 'edit', component: CasualtyFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '3' } }
         ],
         data: { state: '2' }
       },
     ]
   },
-  { path: 'create-casualty', component: CreateCasualtyComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '1' } },
+  { path: 'create-casualty', component: CasualtyFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '1' } },
   { path: 'triage', component: TriageComponent},
 ];
 

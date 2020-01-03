@@ -1,39 +1,37 @@
-import { InjuryV2 } from './../../types/injury-v2.d';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Location } from '@angular/common';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { switchMap, shareReplay } from 'rxjs/operators';
+import { BehaviorSubject, Observable, combineLatest, defer } from 'rxjs';
+import { Casualty } from 'src/app/types/casualty';
 
 @Component({
-  selector: 'app-injury-v3',
-  templateUrl: './injury-v3.component.html',
-  styleUrls: ['./injury-v3.component.scss']
+  selector: 'app-casualties-v2',
+  templateUrl: './casualties-v2.component.html',
+  styleUrls: ['./casualties-v2.component.scss']
 })
-export class InjuryV3Component implements OnInit, AfterViewInit {
+export class CasualtiesV2Component implements OnInit, AfterViewInit {
 
-  injury$: Observable<InjuryV2>;
+  casualties$ = this.getCasualtiesObservable();
 
   @ViewChild('screen', { static: false }) screen: ElementRef;
   scrolling$ = new BehaviorSubject(false);
+  loading$ = new BehaviorSubject(true);
 
   constructor(
     private db: AngularFirestore,
-    private router: Router,
-    private route: ActivatedRoute,
     private location: Location
   ) { }
 
   ngOnInit() {
-    this.injury$ = this.route.params.pipe(
-      switchMap(params => this.db.collection('injuries').doc<InjuryV2>(params.id).valueChanges()),
-      shareReplay(1)
-    );
+    this.casualties$.subscribe(res => this.loading$.next(false));
   }
 
   back() {
     this.location.back();
+  }
+
+  private getCasualtiesObservable(): Observable<Casualty[]> {
+    return this.db.collection<Casualty>('casualties').valueChanges({ idField: 'id' });
   }
 
   ngAfterViewInit() {

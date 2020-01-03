@@ -11,10 +11,25 @@
     background-color: #fff;
 }
 
-.loader-container {
-    height: calc(100% - 52px);
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 24px;
 }
 
 .screen {
   padding-bottom: 128px;
+}
+
+.casualties-container{
+
+    app-casualty-card-v2{
+        margin-bottom: 16px;
+    }
+}
+
+.loader-container {
+    height: calc(100% - 52px);
 }
