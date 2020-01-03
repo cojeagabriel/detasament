@@ -1,13 +1,15 @@
+import { untilDestroyed } from 'ngx-take-until-destroy';
+import { CasualtyV2 } from './../../types/casualty-v2.d';
 import { ManeuverV2 } from './../../types/maneuver-v2.d';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { InjuryV2 } from './../../types/injury-v2.d';
 import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { MatSidenav } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
-import { filter, switchMap, tap, map } from 'rxjs/operators';
+import { filter, switchMap, tap, map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-injury-form',
@@ -67,11 +69,30 @@ export class InjuryFormComponent implements OnInit, AfterViewInit {
     this.loading$.next(true);
 
     if (this.form.value.id) {
-      this.db.collection('injuries').doc<InjuryV2>(formValue.id).update(formValueWithoutId)
-        .then(injury => {
-          this.loading$.next(false);
-          this.back();
-        });
+      const updateCasualties$ = this.db.collection<CasualtyV2>('casualties').valueChanges({ idField: 'id' }).pipe(
+        take(1),
+        map(casualties => {
+          return casualties.filter(casualty => casualty.injuries[formValue.id]);
+        }),
+        switchMap(casualties => {
+          const updates$ = casualties.map(casualty => {
+            casualty.injuries[formValue.id] = formValue.name;
+            return this.db.collection('casualties').doc(casualty.id).update(casualty);
+          });
+
+          return combineLatest(updates$);
+        })
+      );
+
+      const updateInjury$ = this.db.collection('injuries').doc<InjuryV2>(formValue.id).update(formValueWithoutId);
+
+      combineLatest(
+        updateCasualties$,
+        updateInjury$
+      ).subscribe(() => {
+        this.loading$.next(false);
+        this.back();
+      });
     } else {
       this.db.collection('injuries').add(formValueWithoutId)
         .then(injury => {
