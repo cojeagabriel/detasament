@@ -71,6 +71,10 @@ import { InjuryV3Component } from './components/injury-v3/injury-v3.component';
 import { ManeuverListItemV2Component } from './components/maneuver-list-item-v2/maneuver-list-item-v2.component';
 import { InjuryFormComponent } from './components/injury-form/injury-form.component';
 import { ManeuverFormComponent } from './components/maneuver-form/maneuver-form.component';
+import { CasualtiesV2Component } from './components/casualties-v2/casualties-v2.component';
+import { CasualtyFormComponent } from './components/casualty-form/casualty-form.component';
+import { AddInjuriesV2Component } from './components/add-injuries-v2/add-injuries-v2.component';
+import { CasualtyV2Component } from './components/casualty-v2/casualty-v2.component';
 
 
 @NgModule({
@@ -110,7 +114,11 @@ import { ManeuverFormComponent } from './components/maneuver-form/maneuver-form.
     InjuryV3Component,
     ManeuverListItemV2Component,
     InjuryFormComponent,
-    ManeuverFormComponent
+    ManeuverFormComponent,
+    CasualtiesV2Component,
+    CasualtyFormComponent,
+    AddInjuriesV2Component,
+    CasualtyV2Component
   ],
   entryComponents: [
     AddManeuverComponent,

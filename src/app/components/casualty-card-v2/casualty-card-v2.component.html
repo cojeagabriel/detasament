@@ -9,8 +9,8 @@
         </div>
     </div>
     <div class="card-content">
-        <mat-chip-list>
-            <mat-chip *ngFor="let injury of casualty.injuries" selectable="false" focused="false" disableRipple>{{ injury.name }}</mat-chip>
+        <mat-chip-list class="simple-chip-list">
+            <mat-chip *ngFor="let key of objectKeys(casualty.injuries)" selectable="false" focused="false" disableRipple>{{ casualty.injuries[key] }}</mat-chip>
         </mat-chip-list>
         <p class="details mat-typography">
             {{ casualty.details }}

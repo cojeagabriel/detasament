@@ -42,9 +42,11 @@ export class InjuryFormComponent implements OnInit, AfterViewInit {
       .pipe(
         filter(params => params.id),
         switchMap(params => {
-          return this.db.collection('injuries').doc<InjuryV2>(params.id).valueChanges().pipe(
-            map(injury => {
-              return { ...injury, id: params.id };
+          return this.db.collection('injuries').doc<InjuryV2>(params.id).snapshotChanges().pipe(
+            map(actions => {
+              const data = actions.payload.data();
+              const id = actions.payload.id;
+              return { ...data, id };
             })
           );
         }),
@@ -52,21 +54,26 @@ export class InjuryFormComponent implements OnInit, AfterViewInit {
       )
       .subscribe(injury => {
         this.editing$.next(true);
-        this.setFormFromInjury(injury);
+        if (injury.name) {
+          this.setFormFromInjury(injury);
+        }
       });
   }
 
   save() {
+    const formValue = this.form.value;
+    const { id, ...formValueWithoutId} = formValue;
+
     this.loading$.next(true);
 
     if (this.form.value.id) {
-      this.db.collection('injuries').doc<InjuryV2>(this.form.value.id).update(this.form.value)
+      this.db.collection('injuries').doc<InjuryV2>(formValue.id).update(formValueWithoutId)
         .then(injury => {
           this.loading$.next(false);
           this.back();
         });
     } else {
-      this.db.collection('injuries').add(this.form.value)
+      this.db.collection('injuries').add(formValueWithoutId)
         .then(injury => {
           this.loading$.next(false);
           this.router.navigate(['/injuries/' + injury.id], { replaceUrl: true });

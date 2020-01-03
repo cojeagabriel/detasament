@@ -197,24 +197,25 @@ mat-chip{
   align-items: center;
   box-sizing: border-box;
   padding: 0 8px;
+  background-color: #fff;
 
   .actions {
     display: flex;
   }
 
-  &.raised {
-    // box-shadow: 
-    //   0 1px 1px 0 rgba(0, 0, 0, .08),
-    //   0 2px 2px -2px rgba(0, 0, 0, .2);
-    // box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .2);
+  // &.raised {
+  //   // box-shadow: 
+  //   //   0 1px 1px 0 rgba(0, 0, 0, .08),
+  //   //   0 2px 2px -2px rgba(0, 0, 0, .2);
+  //   // box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .2);
 
-    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08),
-    // 0 2px 2px -2px rgba(0, 0, 0, 0.12);
+  //   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08),
+  //   // 0 2px 2px -2px rgba(0, 0, 0, 0.12);
 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08),
-    0 1px 3px -1px rgba(0, 0, 0, 0.2);
-    background-color: #fff;
-  }
+  //   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08),
+  //   0 1px 3px -1px rgba(0, 0, 0, 0.2);
+  //   background-color: #fff;
+  // }
 
   .search {
     position: absolute;
@@ -307,6 +308,7 @@ mat-chip{
 
 .footer{
   position: absolute;
+  z-index: 99;
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
@@ -383,4 +385,92 @@ mat-spinner {
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     margin: 0;
+}
+
+.overlay {
+  position: absolute;
+  z-index: 999;
+  display: flex;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.form-field-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 16px 0;
+
+    .mat-label {
+        margin-bottom: 0;
+    }
+
+    .actions{
+        display: flex;
+    }
+}
+
+.chips-header {
+    transition: box-shadow 150ms ease-in-out;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: solid 1px #e5e5e5;
+
+    .nav{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 8px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.header,
+.chips-header {
+  &.raised{
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08),
+      0 1px 3px -1px rgba(0, 0, 0, 0.2);
+  }
+}
+
+mat-selection-list{
+  .mat-pseudo-checkbox{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: solid 1px rgba(0, 0, 0, 0.16);
+  }
+
+  .mat-pseudo-checkbox.mat-pseudo-checkbox-checked{
+    border-color: transparent;
+    background-color: $primary;
+    &::after{
+      left: 50%;
+      top: 45%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+
+  .mat-list-item-content{
+    padding: 0 24px !important;
+  }
+}
+
+.mat-chip{
+  font-weight: 400;
+}
+
+.simple-chip-list{
+  .mat-chip.mat-standard-chip{
+    background-color: #F3F3F3;
+    &:after{
+      display: none;
+    }
+  }
 }
