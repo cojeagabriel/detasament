@@ -17,6 +17,7 @@ import { InjuryFormComponent } from './components/injury-form/injury-form.compon
 import { CasualtiesV2Component } from './components/casualties-v2/casualties-v2.component';
 import { CasualtyFormComponent } from './components/casualty-form/casualty-form.component';
 import { CasualtyV2Component } from './components/casualty-v2/casualty-v2.component';
+import { CaseFormComponent } from './components/case-form/case-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { state: '0' } },
@@ -56,6 +57,7 @@ const routes: Routes = [
     ]
   },
   { path: 'create-casualty', component: CasualtyFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '1' } },
+  { path: 'create-case', component: CaseFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '1' } },
   { path: 'triage', component: TriageComponent},
 ];
 

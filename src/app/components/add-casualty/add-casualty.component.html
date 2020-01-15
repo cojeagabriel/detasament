@@ -7,14 +7,14 @@
     <mat-sidenav-content [formGroup]="form">
         <div #screen class="screen">
             <div class="header" [class.raised]="scrolling$ | async">
-                <button mat-icon-button (click)="back()">
+                <button mat-icon-button (click)="screenService.close()">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
 
-                <span class="top-bar-title">{{ (id$ | async) ? 'Modifică victima' : 'Creează o victimă' }}</span>
+                <span class="top-bar-title">{{ (casualty$ | async) ? 'Modifică victima' : 'Creează o victimă' }}</span>
 
                 <div class="actions">
-                    <button *ngIf="id$ | async" mat-icon-button (click)="delete()">
+                    <button *ngIf="casualty$ | async" mat-icon-button (click)="delete()">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>
@@ -31,20 +31,20 @@
 
                 <div class="form-field-header">
                     <label class="mat-label">Leziuni</label>
-                    
+
                     <div class="actions">
                         <button *ngIf="!hasInjuries" mat-mini-fab (click)="sidenav.toggle()">
                             <mat-icon>add</mat-icon>
                         </button>
-                        <button *ngIf="hasInjuries" class="edit-injuries-button" mat-icon-button (click)="sidenav.toggle()">
+                        <button *ngIf="hasInjuries" class="edit-injuries-button" mat-icon-button
+                            (click)="sidenav.toggle()">
                             <mat-icon>edit</mat-icon>
                         </button>
                     </div>
                 </div>
 
                 <mat-chip-list *ngIf="hasInjuries" class="injuries-container">
-                    <mat-chip selected color="accent" *ngFor="let injury of injuries"
-                        (click)="sidenav.toggle()">
+                    <mat-chip selected color="accent" *ngFor="let injury of injuries" (click)="sidenav.toggle()">
                         {{injury.name}}
                     </mat-chip>
                 </mat-chip-list>
@@ -59,7 +59,7 @@
             <div class="footer">
                 <div class="actions">
                     <button mat-raised-button color="accent" [disabled]="!form.valid || !hasInjuries" (click)="save()">
-                        {{ (id$ | async) ? 'Salvează' : 'Creează' }}</button>
+                        {{ (casualty$ | async) ? 'Salvează' : 'Creează' }}</button>
                 </div>
             </div>
 

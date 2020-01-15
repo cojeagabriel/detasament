@@ -1,3 +1,4 @@
+import { ScreenService } from './../../services/screen.service';
 import { Location } from '@angular/common';
 import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -36,6 +37,7 @@ export class CasualtyFormComponent implements OnInit, OnDestroy, AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
+    public screenService: ScreenService,
     private db: AngularFirestore
   ) { }
 
@@ -147,20 +149,8 @@ export class CasualtyFormComponent implements OnInit, OnDestroy, AfterViewInit {
     };
   }
 
-  close() {
-    this.sidenav.close();
-  }
-
   back() {
     this.location.back();
-  }
-
-  canDeactivate(): boolean {
-    if (this.sidenav.opened) {
-      this.close();
-      return false;
-    }
-    return true;
   }
 
   ngAfterViewInit() {

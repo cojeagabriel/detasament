@@ -1,3 +1,4 @@
+import { ScreenService } from './services/screen.service';
 import { CasualtyService } from './services/casualty.service';
 import { InjuryService } from './services/injury.service';
 import { ManeuverService } from './services/maneuver.service';
@@ -75,6 +76,10 @@ import { CasualtiesV2Component } from './components/casualties-v2/casualties-v2.
 import { CasualtyFormComponent } from './components/casualty-form/casualty-form.component';
 import { AddInjuriesV2Component } from './components/add-injuries-v2/add-injuries-v2.component';
 import { CasualtyV2Component } from './components/casualty-v2/casualty-v2.component';
+import { CasesV3Component } from './components/cases-v3/cases-v3.component';
+import { CaseV2Component } from './components/case-v2/case-v2.component';
+import { CaseFormComponent } from './components/case-form/case-form.component';
+import { AddCasualtyComponent } from './components/add-casualty/add-casualty.component';
 
 
 @NgModule({
@@ -118,7 +123,11 @@ import { CasualtyV2Component } from './components/casualty-v2/casualty-v2.compon
     CasualtiesV2Component,
     CasualtyFormComponent,
     AddInjuriesV2Component,
-    CasualtyV2Component
+    CasualtyV2Component,
+    CasesV3Component,
+    CaseV2Component,
+    CaseFormComponent,
+    AddCasualtyComponent
   ],
   entryComponents: [
     AddManeuverComponent,
@@ -159,7 +168,13 @@ import { CasualtyV2Component } from './components/casualty-v2/casualty-v2.compon
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
-  providers: [CaseService, CasualtyService, InjuryService, ManeuverService],
+  providers: [
+    CaseService,
+    CasualtyService,
+    InjuryService,
+    ManeuverService,
+    ScreenService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

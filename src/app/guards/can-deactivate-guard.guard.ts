@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, CanDeactivate, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { ScreenService } from '../services/screen.service';
 
 interface CanDeactivateComponent {
   canDeactivate(): boolean;
@@ -13,6 +14,7 @@ export class CanDeactivateGuardGuard implements CanDeactivate<CanDeactivateCompo
 
   constructor(
     private location: Location,
+    private screenService: ScreenService
   ) { }
 
   canDeactivate(
@@ -21,14 +23,9 @@ export class CanDeactivateGuardGuard implements CanDeactivate<CanDeactivateCompo
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot
   ): boolean {
-    const canDeactivateResult = component.canDeactivate();
+    const canDeactivateResult = this.screenService.canDeactivate();
     if (!canDeactivateResult) {
-      // window.history.pushState({}, '', currentState.url);
-      // const currentUrlTree = this.router.createUrlTree([], currentRoute);
-      // const currentUrl = currentUrlTree.toString();
-      // this.location.go(currentUrl);
       this.location.go(currentState.url);
-      // window.history.pushState({}, '', currentState.url);
     }
     return canDeactivateResult;
   }

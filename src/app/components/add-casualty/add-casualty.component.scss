@@ -1,0 +1,72 @@
+:host {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 8px 10px -5px rgba(0, 0, 0, .2),
+    0 16px 24px 2px rgba(0, 0, 0, .14),
+    0 6px 30px 5px rgba(0, 0, 0, .12);
+  background-color: #fff;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 24px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-sidenav {
+  width: 100%;
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav-content {
+    position: relative;
+    height: 100%;
+
+    .screen {
+        padding-bottom: 100px;
+        padding-top: 52px;
+        box-sizing: border-box;
+
+        .content {
+            padding-top: 24px;
+        }
+    }
+}
+
+.injuries-container{
+  margin-bottom: 36px;
+}
+
+.edit-injuries-button{
+  color: rgba(0, 0, 0, 0.16);
+}
+
+.header{
+    .actions{
+        button {
+            mat-icon{
+                color: rgba(0, 0, 0, 0.24);
+                transition: color 100ms ease;
+            }
+
+            &:active {
+                mat-icon{
+                    color: black;
+                }
+            }
+        }
+    }
+}
