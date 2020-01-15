@@ -1,3 +1,4 @@
+import { ScreenService } from './../../services/screen.service';
 import { MatDialog } from '@angular/material';
 import { Location } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -39,10 +40,10 @@ export class ManeuverFormComponent implements OnInit, AfterViewInit {
   editing$ = new BehaviorSubject(false);
 
   @Output() setManeuver = new EventEmitter<{ maneuver: ManeuverV2 | null, index: number | null }>();
-  @Output() backEmitter = new EventEmitter<boolean>();
 
   constructor(
     private fb: FormBuilder,
+    private screenService: ScreenService,
     private matDialog: MatDialog
   ) { }
 
@@ -109,7 +110,7 @@ export class ManeuverFormComponent implements OnInit, AfterViewInit {
 
   back() {
     this.init();
-    this.backEmitter.emit();
+    this.screenService.close();
   }
 
   ngAfterViewInit() {

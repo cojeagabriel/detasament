@@ -1,3 +1,4 @@
+import { ScreenService } from './../../services/screen.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -37,9 +38,9 @@ export class AddInjuriesV2Component implements OnInit, OnDestroy, AfterViewInit 
   searching$ = new BehaviorSubject(false);
 
   @Output() setSelectedInjuries = new EventEmitter<any[]>();
-  @Output() backEmitter = new EventEmitter<boolean>();
 
   constructor(
+    private screenService: ScreenService,
     private db: AngularFirestore
   ) { }
 
@@ -111,7 +112,7 @@ export class AddInjuriesV2Component implements OnInit, OnDestroy, AfterViewInit 
     setTimeout(() => {
       this.resetSelectedInjuries();
     }, 300);
-    this.backEmitter.emit();
+    this.screenService.close();
   }
 
   resetSelectedInjuries() {

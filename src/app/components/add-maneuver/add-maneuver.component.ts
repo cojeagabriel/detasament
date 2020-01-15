@@ -62,7 +62,6 @@ export class AddManeuverComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    // this.preventBackButton();
   }
 
   private initManeuver(): void {

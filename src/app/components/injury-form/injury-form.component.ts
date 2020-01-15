@@ -1,3 +1,4 @@
+import { ScreenService } from './../../services/screen.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { CasualtyV2 } from './../../types/casualty-v2.d';
 import { ManeuverV2 } from './../../types/maneuver-v2.d';
@@ -36,6 +37,7 @@ export class InjuryFormComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
+    public screenService: ScreenService,
     private location: Location
   ) { }
 
@@ -152,20 +154,8 @@ export class InjuryFormComponent implements OnInit, AfterViewInit {
     this.sidenav.close();
   }
 
-  close() {
-    this.sidenav.close();
-  }
-
   back() {
     this.location.back();
-  }
-
-  canDeactivate(): boolean {
-    if (this.sidenav.opened) {
-      this.close();
-      return false;
-    }
-    return true;
   }
 
   ngAfterViewInit() {
