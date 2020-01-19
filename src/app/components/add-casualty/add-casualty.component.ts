@@ -35,7 +35,8 @@ export class AddCasualtyComponent implements OnInit, OnDestroy, AfterViewInit {
     name: ['test', Validators.required],
     age: [22, Validators.required],
     injuries: this.fb.array([]),
-    details: undefined
+    details: undefined,
+    visible: [false]
   });
 
   @ViewChild('sidenav', { static: false }) sidenav: MatSidenav;

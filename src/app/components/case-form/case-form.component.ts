@@ -1,7 +1,7 @@
 import { CasualtyV2 } from './../../types/casualty-v2.d';
 import { ScreenService } from './../../services/screen.service';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { MatSidenav } from '@angular/material';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -62,6 +62,29 @@ export class CaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   save() {
     console.log(this.form.value);
+    const formValue = this.form.value;
+    this.loading$.next(true);
+
+    this.saveCasualties().subscribe(casualtiesRef => {
+      const casualties = casualtiesRef.map((casualty: any) => casualty.id);
+      this.db.collection('cases').add({
+        ...formValue,
+        casualties,
+        new: true
+      }).then(res => {
+        this.loading$.next(false);
+        this.location.back();
+      });
+    });
+
+  }
+
+  saveCasualties() {
+    const uploads$ = this.casualties.map(casualty => {
+      return this.db.collection('casualties').add(casualty);
+    });
+
+    return combineLatest(uploads$);
   }
 
   get hasCasualties(): boolean {

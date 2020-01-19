@@ -1,0 +1,48 @@
+@import "../../../assets/scss/variables";
+
+:host{
+    display: flex;
+}
+
+.custom-card{
+    position: relative;
+    width: 100%;
+    border-radius: 6px;
+    border: solid 1px #F3F3F3;
+    box-shadow: 0 8px 12px -3px rgba(0, 0, 0, .08),
+        0 1px 3px -3px rgba(0, 0, 0, .2);
+    background-color: #fff;
+    transition: all 150ms ease;
+
+    &:active {
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .1),
+        0 1px 3px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    &.new{
+        &:before{
+            content: '';
+            position: absolute;
+            left: -13px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background-color: $primary;
+            border-radius: 50%;
+        }
+    }
+}
+
+.card-content{
+    padding: 8px 24px;
+    min-height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.name {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
