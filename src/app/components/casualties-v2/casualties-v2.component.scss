@@ -16,7 +16,7 @@
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 24px;
+  padding: 24px;
 }
 
 .screen {
@@ -24,7 +24,6 @@
 }
 
 .casualties-container{
-
     app-casualty-card-v2{
         margin-bottom: 16px;
     }

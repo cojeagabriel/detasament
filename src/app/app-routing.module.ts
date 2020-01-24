@@ -45,6 +45,7 @@ const routes: Routes = [
         path: ':id',
         children: [
           { path: '', component: CaseV2Component, data: { state: '2' } },
+          { path: 'casualties/:id', component: CasualtyV2Component, data: { state: '3' } },
           { path: 'edit', component: CaseFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '3' } }
         ],
         data: { state: '2' }
@@ -66,8 +67,6 @@ const routes: Routes = [
       },
     ]
   },
-  { path: 'create-casualty', component: CasualtyFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '1' } },
-  { path: 'create-case', component: CaseFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '1' } },
   { path: 'triage', component: TriageComponent},
 ];
 

@@ -35,7 +35,11 @@ export class CasesV3Component implements OnInit, AfterViewInit {
     return this.search.valueChanges.pipe(
       startWith(''),
       switchMap(searchText => {
-        return this.db.collection<CaseV2>('cases', ref => ref.orderBy('name', 'asc')).valueChanges({ idField: 'id' });
+        return this.db.collection<CaseV2>('cases', ref => ref.orderBy('name', 'asc')).valueChanges({ idField: 'id' }).pipe(
+          map((cases: CaseV2[]) => {
+            return cases.filter(cs => cs.name.toLowerCase().includes(searchText.toLowerCase()));
+          })
+        );
       }),
       shareReplay(1)
     );

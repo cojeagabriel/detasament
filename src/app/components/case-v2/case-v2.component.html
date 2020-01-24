@@ -1,1 +1,30 @@
-<p>case-v2 works!</p>
+<div #screen class="screen">
+    <div class="header" [class.raised]="scrolling$ | async">
+        <button mat-icon-button (click)="back()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <span class="top-bar-title"></span>
+
+        <div class="actions">
+            <button mat-icon-button [routerLink]="'edit'">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="content-header">
+            <span class="title">{{ (case$ | async)?.name }}</span>
+            <span *ngIf="(case$ | async)?.details" class="text">{{ (case$ | async)?.details }}</span>
+        </div>
+
+        <div class="casualties">
+            <label class="label">Victime</label>
+            <div class="casualties-container">
+                <app-casualty-card-v2 *ngFor="let casualty of casualties$ | async" [casualty]="casualty" [routerLink]="'casualties/' + casualty.id">
+                </app-casualty-card-v2>
+            </div>
+        </div>
+    </div>
+</div>

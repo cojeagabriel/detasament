@@ -31,7 +31,7 @@ export class CasualtiesV2Component implements OnInit, AfterViewInit {
   }
 
   private getCasualtiesObservable(): Observable<Casualty[]> {
-    return this.db.collection<Casualty>('casualties').valueChanges({ idField: 'id' });
+    return this.db.collection<Casualty>('casualties', ref => ref.where('visible', '==', true)).valueChanges({ idField: 'id' });
   }
 
   ngAfterViewInit() {

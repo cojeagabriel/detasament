@@ -8,7 +8,7 @@ import { trigger, transition, style, query, group, animate } from '@angular/anim
   styleUrls: ['./app.component.scss'],
   animations: [
     trigger('routeAnimation', [
-      transition('0 => 1, 1 => 2, 2 => 3, 3 => 4', [
+      transition('0 => 1, 1 => 2, 2 => 3, 3 => 4, 4 => 5', [
         query(':enter', style({ transform: 'translateX(100%)' })),
         query(':enter, :leave', style({ position: 'absolute', top: 0, left: 0, right: 0 })),
         // animate the leave page away
@@ -21,7 +21,7 @@ import { trigger, transition, style, query, group, animate } from '@angular/anim
         ]),
         // animate('1s', style({ height: '*'})),
       ]),
-      transition('4 => 3, 3 => 2, 2 => 1, 1 => 0', [
+      transition('5 => 4, 4 => 3, 3 => 2, 2 => 1, 1 => 0', [
         query(':enter', style({ transform: 'translateX(-100%)' })),
         query(':enter, :leave', style({ position: 'absolute', top: 0, left: 0, right: 0 })),
         // animate the leave page away

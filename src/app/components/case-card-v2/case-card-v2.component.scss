@@ -9,23 +9,21 @@
     width: 100%;
     border-radius: 6px;
     border: solid 1px #F3F3F3;
-    box-shadow: 0 8px 12px -3px rgba(0, 0, 0, .08),
-        0 1px 3px -3px rgba(0, 0, 0, .2);
+    box-shadow: $elevate-4;
     background-color: #fff;
-    transition: all 150ms ease;
+    transition: $transition;
 
     &:active {
-        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .1),
-        0 1px 3px -1px rgba(0, 0, 0, 0.1);
+        box-shadow: $elevate-2;
     }
 
     &.new{
         &:before{
             content: '';
             position: absolute;
-            left: -13px;
+            left: 10px;
             top: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(0, -50%);
             width: 6px;
             height: 6px;
             background-color: $primary;
@@ -43,6 +41,6 @@
 }
 
 .name {
-    font-family: 'Roboto', sans-serif;
+    font-family: $primary-font;
     margin: 0;
 }

@@ -1,61 +1,64 @@
+@import "../../../assets/scss/variables";
+
 :host{
     display: flex;
 }
 
-.casualty-card{
-    position: relative;
+.custom-card{
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    border-radius: 6px;
-    border: solid 1px #F3F3F3;
-    box-shadow: 0 8px 12px -3px rgba(0, 0, 0, .08),
-        0 1px 3px -3px rgba(0, 0, 0, .2);
+    box-sizing: border-box;
+    border-radius: 4px;
     background-color: #fff;
-    transition: all 150ms ease;
+    border: solid 1px $white-grey;
+    box-shadow: $elevate-4;
+    transition: $transition;
 
     &:active {
-        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .1),
-        0 1px 3px -1px rgba(0, 0, 0, 0.1);
+        box-shadow: $elevate-2;
     }
 }
 
 .card-header{
     display: flex;
     align-items: center;
-    padding: 20px 24px 0;
-    margin-bottom: 20px;
+    padding: 16px 16px 0;
+}
 
-    .card-avatar{
-        display: flex;
-        mat-icon{
-            width: 28px;
-            height: 28px;
-            font-size: 28px;
-            color: rgba($color: #000, $alpha: 0.64);
-        }
-    }
+.card-content{
+    padding: 18px 16px 0;
 
-    .card-text{
-        margin-left: 8px;
-        display: flex;
+    &:last-child{
+        padding-bottom: 16px;
     }
 }
 
 .card-title{
-    font-size: 16px;
-    font-weight: 600;
-    margin-right: 4px;
+    font-family: $primary-font;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    letter-spacing: .0178571429em;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    color: $dark-grey;
 }
 
-.card-subtitle{
-    color: rgba(0, 0, 0, .54);
-    display: none;
+.card-avatar{
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+
+    mat-icon{
+        width: 28px;
+        height: 28px;
+        font-size: 28px;
+        color: $grey;
+    }
 }
 
-.card-content{
-    padding: 0 24px 8px;
-}
-
-.details{
-    color: rgba(0, 0, 0, .54);
-    margin: 20px 0 16px;
+mat-chip-list{
+    display: flex;
+    margin-bottom: 14px;
 }

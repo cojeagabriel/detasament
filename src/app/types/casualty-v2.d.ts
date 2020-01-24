@@ -4,4 +4,6 @@ export interface CasualtyV2 {
     age: number;
     injuries: { [key: string]: string }[];
     details?: string;
+    editable?: boolean;
+    visible?: boolean;
 }

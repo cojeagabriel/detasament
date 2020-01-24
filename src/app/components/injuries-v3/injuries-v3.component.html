@@ -24,7 +24,7 @@
         <input #searchInput type="text" placeholder="Caută după nume" class="top-bar-title search-input" [formControl]="search" spellcheck="false">
     
         <div class="actions">
-            <button [disabled]="!search.value.length" mat-icon-button (click)="clearSearchInput();">
+            <button *ngIf="search.value.length" mat-icon-button (click)="clearSearchInput();">
                 <mat-icon>close</mat-icon>
             </button>
             <button mat-icon-button [routerLink]="'create'">

@@ -1,0 +1,69 @@
+:host{
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 8px 10px -5px rgba(0, 0, 0, .2),
+  0 16px 24px 2px rgba(0, 0, 0, .14),
+  0 6px 30px 5px rgba(0, 0, 0, .12);
+  background-color: #fff;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px 24px;
+}
+
+.header{
+    .actions{
+        button {
+            mat-icon{
+                color: rgba(0, 0, 0, 0.24);
+                transition: color 100ms ease;
+            }
+
+            &:active {
+                mat-icon{
+                    color: black;
+                }
+            }
+        }
+    }
+}
+
+.title{
+    &:not(:last-child) {
+        padding-bottom: 18px;
+    }
+}
+
+.content-header{
+    margin-bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.casualties {
+    width: 100%;
+}
+
+.casualties-container{
+    width: 100%;
+
+    app-casualty-card-v2{
+        margin-bottom: 16px;
+    }
+}
+
+.label{
+    margin-bottom: 8px;
+}
+
+.screen{
+    padding-bottom: 64px;
+}
