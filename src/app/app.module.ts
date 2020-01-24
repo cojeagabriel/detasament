@@ -80,6 +80,7 @@ import { CasesV3Component } from './components/cases-v3/cases-v3.component';
 import { CaseV2Component } from './components/case-v2/case-v2.component';
 import { CaseFormComponent } from './components/case-form/case-form.component';
 import { AddCasualtyComponent } from './components/add-casualty/add-casualty.component';
+import { CaseCardV2Component } from './components/case-card-v2/case-card-v2.component';
 
 
 @NgModule({
@@ -127,7 +128,8 @@ import { AddCasualtyComponent } from './components/add-casualty/add-casualty.com
     CasesV3Component,
     CaseV2Component,
     CaseFormComponent,
-    AddCasualtyComponent
+    AddCasualtyComponent,
+    CaseCardV2Component
   ],
   entryComponents: [
     AddManeuverComponent,

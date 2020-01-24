@@ -24,7 +24,9 @@ export class CasualtyFormComponent implements OnInit, OnDestroy, AfterViewInit {
     name: [undefined, Validators.required],
     age: [undefined, Validators.required],
     injuries: this.fb.array([]),
-    details: undefined
+    details: undefined,
+    visible: [true],
+    editable: [true]
   });
 
   @ViewChild('sidenav', { static: false }) sidenav: MatSidenav;

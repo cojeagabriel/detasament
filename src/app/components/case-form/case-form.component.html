@@ -49,7 +49,7 @@
 
             <div class="footer">
                 <div class="actions">
-                    <button mat-raised-button color="accent" (click)="save()">
+                    <button mat-raised-button color="accent" [disabled]="!form.valid || !hasCasualties" (click)="save()">
                         {{ (id$ | async) ? 'Salvează' : 'Creează' }}
                     </button>
                 </div>

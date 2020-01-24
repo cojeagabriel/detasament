@@ -101,6 +101,7 @@ export class ManeuverFormComponent implements OnInit, AfterViewInit {
   }
 
   init() {
+    this.editing$.next(false);
     this.scores = this.getInitialScores();
     this.form.reset();
   }
@@ -109,7 +110,9 @@ export class ManeuverFormComponent implements OnInit, AfterViewInit {
   }
 
   back() {
-    this.init();
+    setTimeout(() => {
+      this.init();
+    }, 300);
     this.screenService.close();
   }
 

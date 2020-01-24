@@ -151,7 +151,7 @@ export class InjuryFormComponent implements OnInit, AfterViewInit {
     } else if (value && !value.maneuver && value.index !== null) {
       this.maneuversForms.removeAt(value.index);
     }
-    this.sidenav.close();
+    this.screenService.close();
   }
 
   back() {

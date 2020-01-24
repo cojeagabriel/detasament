@@ -1,19 +1,16 @@
-<div class="casualty-card">
+<div class="custom-card">
     <div class="card-header">
         <div class="card-avatar">
             <mat-icon>account_circle</mat-icon>
         </div>
-        <div class="card-text">
-            <span class="card-title mat-typography">{{ casualty.name }}</span>
-            <span class="card-subtitle mat-typography">{{ casualty.age }} ani</span>
-        </div>
+        <div class="card-title">{{ casualty.name }}</div>
     </div>
     <div class="card-content">
         <mat-chip-list class="simple-chip-list">
             <mat-chip *ngFor="let key of objectKeys(casualty.injuries)" selectable="false" focused="false" disableRipple>{{ casualty.injuries[key] }}</mat-chip>
         </mat-chip-list>
-        <p class="details mat-typography">
+        <div class="text">
             {{ casualty.details }}
-        </p>
+        </div>
     </div>
 </div>

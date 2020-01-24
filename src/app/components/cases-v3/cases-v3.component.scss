@@ -1,0 +1,35 @@
+:host {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 8px 10px -5px rgba(0, 0, 0, .2),
+        0 16px 24px 2px rgba(0, 0, 0, .14),
+        0 6px 30px 5px rgba(0, 0, 0, .12);
+    background-color: #fff;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 16px 24px;
+}
+
+.loader-container {
+    height: calc(100% - 52px);
+}
+
+.screen {
+  padding-bottom: 128px;
+}
+
+.cases-container{
+    app-case-card-v2{
+        margin-bottom: 8px;
+    }
+}
