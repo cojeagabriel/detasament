@@ -7,7 +7,7 @@ import { InjuryV2 } from './../../types/injury-v2.d';
 import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { MatSidenav } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { filter, switchMap, tap, map, take } from 'rxjs/operators';
@@ -77,6 +77,9 @@ export class InjuryFormComponent implements OnInit, AfterViewInit {
           return casualties.filter(casualty => casualty.injuries[formValue.id]);
         }),
         switchMap(casualties => {
+          if (!casualties.length) {
+            return of([]);
+          }
           const updates$ = casualties.map(casualty => {
             casualty.injuries[formValue.id] = formValue.name;
             return this.db.collection('casualties').doc(casualty.id).update(casualty);

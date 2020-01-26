@@ -1,7 +1,7 @@
-import { Maneuver } from "./maneuver";
+import { ManeuverV2 } from './maneuver-v2.d';
 
 export interface InjuryV2 {
   id?: string;
   name: string;
-  maneuvers: Maneuver[];
+  maneuvers: ManeuverV2[];
 }

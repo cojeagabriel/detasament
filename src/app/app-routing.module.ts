@@ -20,6 +20,7 @@ import { CasualtyV2Component } from './components/casualty-v2/casualty-v2.compon
 import { CaseFormComponent } from './components/case-form/case-form.component';
 import { CasesV3Component } from './components/cases-v3/cases-v3.component';
 import { CaseV2Component } from './components/case-v2/case-v2.component';
+import { CasualtyNormComponent } from './components/casualty-norm/casualty-norm.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { state: '0' } },
@@ -37,21 +38,6 @@ const routes: Routes = [
     ],
     data: { state: '1' }
   },
-  { path: 'cases',
-    children: [
-      { path: '', component: CasesV3Component, data: { state: '1' } },
-      { path: 'create', component: CaseFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '2' } },
-      {
-        path: ':id',
-        children: [
-          { path: '', component: CaseV2Component, data: { state: '2' } },
-          { path: 'casualties/:id', component: CasualtyV2Component, data: { state: '3' } },
-          { path: 'edit', component: CaseFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '3' } }
-        ],
-        data: { state: '2' }
-      },
-    ]
-  },
   {
     path: 'casualties',
     children: [
@@ -60,8 +46,36 @@ const routes: Routes = [
       {
         path: ':id',
         children: [
-          { path: '', component: CasualtyV2Component, data: { state: '2' } },
+          {
+            path: '',
+            children: [
+              { path: '', component: CasualtyV2Component, data: { state: '2' } },
+              { path: 'norm', component: CasualtyNormComponent, data: { state: '3' } },
+            ],
+            data: { state: '2' }
+          },
           { path: 'edit', component: CasualtyFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '3' } }
+        ],
+        data: { state: '2' }
+      },
+    ]
+  },
+  { path: 'cases',
+    children: [
+      { path: '', component: CasesV3Component, data: { state: '1' } },
+      { path: 'create', component: CaseFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '2' } },
+      {
+        path: ':id',
+        children: [
+          { path: '', component: CaseV2Component, data: { state: '2' } },
+          {
+            path: 'casualties/:id',
+            children: [
+              { path: '', component: CasualtyV2Component, data: { state: '3' } },
+              { path: 'norm', component: CasualtyNormComponent, data: { state: '4' } },
+            ],
+            data: { state: '3' } },
+          { path: 'edit', component: CaseFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '3' } }
         ],
         data: { state: '2' }
       },

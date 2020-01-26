@@ -1,0 +1,41 @@
+<div #screen class="screen">
+    <div class="header" [class.raised]="scrolling$ | async">
+        <button mat-icon-button (click)="back()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <span class="top-bar-title">{{ (casualty$ | async)?.name }}</span>
+        <span class="secondary-text">{{ score }}/{{ totalScore }}</span>
+
+        <div class="actions">
+            <button mat-icon-button class="secondary-button">
+                <mat-icon>info_outline</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="content">
+        <mat-accordion multi="true">
+            <mat-expansion-panel *ngFor="let injury of injuries$ | async" [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{ injury.name }}
+                    </mat-panel-title>
+                    <mat-panel-description class="secondary-text">
+                        {{ count[injury.id].value }}/{{ count[injury.id].maximum }}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+        
+                <app-maneuver-norm-list-item *ngFor="let maneuver of injury.maneuvers" [maneuver]="maneuver" (selected)="countSelection($event, injury.id)" (scoreChange)="changeScore($event)"></app-maneuver-norm-list-item>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <div class="footer">
+        <div class="actions">
+            <button mat-raised-button color="accent" [disabled]="!canFinish()" (click)="back()">
+                Finalizează
+            </button>
+        </div>
+    </div>
+</div>

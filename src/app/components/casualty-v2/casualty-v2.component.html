@@ -17,8 +17,8 @@
         <div class="avatar">
             <mat-icon>account_circle</mat-icon>
         </div>
-        <span class="title mat-typography">{{ (casualty$ | async)?.name }}</span>
-        <span class="subtitle mat-typography">{{ (casualty$ | async)?.age }} ani</span>
+        <span class="title">{{ (casualty$ | async)?.name }}</span>
+        <span class="secondary-text">{{ (casualty$ | async)?.age }} ani</span>
 
         <div class="injuries-list">
             <mat-chip-list class="simple-chip-list">
@@ -28,8 +28,16 @@
             </mat-chip-list>
         </div>
 
-        <p class="details mat-typography">
+        <div class="text">
             {{ (casualty$ | async)?.details }}
-        </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="actions">
+            <button mat-raised-button color="accent" [routerLink]="'norm'">
+                Arbitrează
+            </button>
+        </div>
     </div>
 </div>
