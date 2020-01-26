@@ -1,3 +1,5 @@
+@import "../../../assets/scss/variables";
+
 :host {
     position: relative;
     z-index: 3;
@@ -45,22 +47,13 @@
     margin-bottom: 8px;
 }
 
-.title{
-    font-size: 18px;
-}
-
-.subtitle{
-    color: rgba(0, 0, 0, .42);
+.secondary-text{
+    color: $light-grey;
     margin-bottom: 32px;
 }
 
-.details{
-    margin: 0;
-    color: rgba(0, 0, 0, .54);
-}
-
 .injuries-list{
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 
     &::ng-deep{
         .mat-chip-list-wrapper{

@@ -7,9 +7,14 @@ $lightest-grey: #f7f7f7;
 
 $elevate-2: 0 2px 4px -1px rgba(0, 0, 0, .1),
     0 1px 3px -1px rgba(0, 0, 0, 0.1);
-$elevate-4: 0 8px 12px -3px rgba(0, 0, 0, .08),
-    0 1px 3px -5px rgba(0, 0, 0, .2);
+// $elevate-4: 0 8px 12px -3px rgba(0, 0, 0, .08),
+//     0 1px 3px -5px rgba(0, 0, 0, .2);
+$elevate-4: 0 8px 20px 0 rgba(0,0,0,.04);
 
 $primary-font: 'Roboto', sans-serif;
 
 $transition: all 135ms cubic-bezier(.4,0,.2,1);
+
+@mixin transition($property) {
+    transition: $property 135ms cubic-bezier(.4,0,.2,1);
+}

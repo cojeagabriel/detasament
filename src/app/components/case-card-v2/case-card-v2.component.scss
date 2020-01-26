@@ -5,17 +5,17 @@
 }
 
 .custom-card{
-    position: relative;
-    width: 100%;
-    border-radius: 6px;
-    border: solid 1px #F3F3F3;
-    box-shadow: $elevate-4;
-    background-color: #fff;
-    transition: $transition;
+    // position: relative;
+    // width: 100%;
+    // border-radius: 6px;
+    // border: solid 1px #F3F3F3;
+    // box-shadow: $elevate-4;
+    // background-color: #fff;
+    // transition: $transition;
 
-    &:active {
-        box-shadow: $elevate-2;
-    }
+    // &:active {
+    //     box-shadow: $elevate-2;
+    // }
 
     &.new{
         &:before{

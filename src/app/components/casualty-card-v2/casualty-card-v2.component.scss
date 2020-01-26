@@ -4,21 +4,21 @@
     display: flex;
 }
 
-.custom-card{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 4px;
-    background-color: #fff;
-    border: solid 1px $white-grey;
-    box-shadow: $elevate-4;
-    transition: $transition;
+// .custom-card{
+//     display: flex;
+//     flex-direction: column;
+//     width: 100%;
+//     box-sizing: border-box;
+//     border-radius: 8px;
+//     background-color: #fff;
+//     border: solid 1px $white-grey;
+//     box-shadow: $elevate-4;
+//     transition: $transition;
 
-    &:active {
-        box-shadow: $elevate-2;
-    }
-}
+//     &:active {
+//         box-shadow: $elevate-2;
+//     }
+// }
 
 .card-header{
     display: flex;

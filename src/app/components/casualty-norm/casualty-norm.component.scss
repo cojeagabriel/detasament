@@ -1,0 +1,61 @@
+@import "../../../assets/scss/variables";
+
+:host {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 8px 10px -5px rgba(0, 0, 0, .2),
+        0 16px 24px 2px rgba(0, 0, 0, .14),
+        0 6px 30px 5px rgba(0, 0, 0, .12);
+    background-color: #fff;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px 0 24px;
+}
+
+.screen {
+    padding-bottom: 96px;
+}
+
+mat-expansion-panel-header{
+    padding: 0 22px 0 16px;
+}
+
+mat-expansion-panel{
+    border-radius: 0 !important;
+
+    &:not(.mat-expanded) + mat-expansion-panel:not(.mat-expanded){
+        border-top-color: transparent;
+    }
+
+    &:not([class*=mat-elevation-z]){
+        box-shadow: $elevate-4;
+        border-top: solid 1px $white-grey;
+        border-bottom: solid 1px $white-grey;
+    }
+
+    &::ng-deep{
+        .mat-expansion-panel-body{
+            padding: 0 0 16px;
+        }
+    }
+}
+
+.mat-expansion-panel-spacing{
+    margin: 4px 0;
+}
+
+mat-panel-title{
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+mat-panel-description{
+    justify-content: flex-end;
+}

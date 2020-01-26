@@ -1,3 +1,4 @@
+import { CasualtyV2 } from './../../types/casualty-v2.d';
 import { ScreenService } from './../../services/screen.service';
 import { Location } from '@angular/common';
 import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
@@ -47,7 +48,7 @@ export class CasualtyFormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.route.params.pipe(
       filter(params => params.id),
       switchMap(params => {
-        return this.db.collection('casualties').doc<Casualty>(params.id).snapshotChanges().pipe(
+        return this.db.collection('casualties').doc<CasualtyV2>(params.id).snapshotChanges().pipe(
           map(actions => {
             const data = actions.payload.data();
             const id = actions.payload.id;
@@ -66,7 +67,6 @@ export class CasualtyFormComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy() {}
 
   private setFormFromcasualty(casualty: any) {
-    // console.log(casualty);
     this.form.patchValue({
       name: casualty.name,
       age: casualty.age,
