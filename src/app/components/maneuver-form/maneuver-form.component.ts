@@ -6,6 +6,7 @@ import { ManeuverV2 } from './../../types/maneuver-v2.d';
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DialogAddScoreComponent } from '../dialog-add-score/dialog-add-score.component';
+import { toInteger } from 'lodash';
 
 @Component({
   selector: 'app-maneuver-form',
@@ -55,7 +56,7 @@ export class ManeuverFormComponent implements OnInit, AfterViewInit {
     this.getKeys(this.scores).map(key => this.scores[key] = false);
     this.scores[score] = true;
     this.form.patchValue({
-      score
+      score: toInteger(score)
     });
 
     if (+score % 2 !== 0) {

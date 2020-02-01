@@ -22,7 +22,8 @@ export class InjuryFormComponent implements OnInit, AfterViewInit {
   form = this.fb.group({
     id: undefined,
     name: [undefined, Validators.required],
-    maneuvers: new FormArray([])
+    maneuvers: new FormArray([]),
+    default: [false]
   });
   maneuver$ = new BehaviorSubject<{ maneuver: ManeuverV2, index: number } | null>(null);
 
@@ -144,7 +145,7 @@ export class InjuryFormComponent implements OnInit, AfterViewInit {
     this.sidenav.toggle();
   }
 
-  setManeuver(value): void {
+  setManeuver(value: { maneuver: ManeuverV2 | null, index: number | null }): void {
     if (value && value.maneuver) {
       if (value.index === null) {
         this.maneuversForms.push(this.fb.group(value.maneuver));

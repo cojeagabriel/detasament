@@ -1,13 +1,15 @@
+import { defaultInjuriesAfter } from 'src/app/constants/default-injuries-after.contants';
 import { ManeuverV2 } from './../../types/maneuver-v2.d';
 import { InjuryV2 } from 'src/app/types/injury-v2';
 import { CasualtyV2 } from './../../types/casualty-v2.d';
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { Location } from '@angular/common';
 import { switchMap, map, tap, filter } from 'rxjs/operators';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { defaultInjuriesBefore } from 'src/app/constants/default-injuries-before.constant';
 
 @Component({
   selector: 'app-casualty-norm',
@@ -48,6 +50,11 @@ export class CasualtyNormComponent implements OnInit, OnDestroy, AfterViewInit {
       }),
       tap(casualty => this.casualty$.next(casualty)),
       switchMap(casualty => {
+        casualty.injuries = {
+          ...defaultInjuriesBefore,
+          ...casualty.injuries,
+          ...defaultInjuriesAfter
+        };
         const injuries$ = Object.keys(casualty.injuries).map(injuryId => {
           return this.db.collection('injuries').doc<InjuryV2>(injuryId).snapshotChanges().pipe(
             map(actions => {
@@ -77,8 +84,6 @@ export class CasualtyNormComponent implements OnInit, OnDestroy, AfterViewInit {
         value: 0
       };
     });
-
-    console.log(this.totalScore);
   }
 
 

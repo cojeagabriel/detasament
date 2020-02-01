@@ -17,19 +17,19 @@
     //     box-shadow: $elevate-2;
     // }
 
-    &.new{
-        &:before{
-            content: '';
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translate(0, -50%);
-            width: 6px;
-            height: 6px;
-            background-color: $primary;
-            border-radius: 50%;
-        }
-    }
+    // &.new{
+    //     &:before{
+    //         content: '';
+    //         position: absolute;
+    //         left: 10px;
+    //         top: 50%;
+    //         transform: translate(0, -50%);
+    //         width: 6px;
+    //         height: 6px;
+    //         background-color: $primary;
+    //         border-radius: 50%;
+    //     }
+    // }
 }
 
 .card-content{
