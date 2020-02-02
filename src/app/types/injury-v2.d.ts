@@ -4,5 +4,5 @@ export interface InjuryV2 {
   id?: string;
   name: string;
   maneuvers: ManeuverV2[];
-  default: boolean
+  default?: boolean
 }

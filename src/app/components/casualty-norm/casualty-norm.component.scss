@@ -35,9 +35,11 @@ mat-expansion-panel{
     }
 
     &:not([class*=mat-elevation-z]){
-        box-shadow: $elevate-4;
-        border-top: solid 1px $white-grey;
-        border-bottom: solid 1px $white-grey;
+        // box-shadow: $elevate-4;
+        // border-top: solid 1px $white-grey;
+        // border-bottom: solid 1px $white-grey;
+        box-shadow: none;
+        border: none;
     }
 
     &::ng-deep{
@@ -58,4 +60,10 @@ mat-panel-title{
 
 mat-panel-description{
     justify-content: flex-end;
+    align-items: center;
+    white-space: nowrap;
+
+    &.error {
+        color: $primary;
+    }
 }

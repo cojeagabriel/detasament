@@ -50,7 +50,7 @@ const routes: Routes = [
             path: '',
             children: [
               { path: '', component: CasualtyV2Component, data: { state: '2' } },
-              { path: 'norm', component: CasualtyNormComponent, data: { state: '3' } },
+              { path: 'norm', component: CasualtyNormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '3' } },
             ],
             data: { state: '2' }
           },
@@ -72,7 +72,7 @@ const routes: Routes = [
             path: 'casualties/:id',
             children: [
               { path: '', component: CasualtyV2Component, data: { state: '3' } },
-              { path: 'norm', component: CasualtyNormComponent, data: { state: '4' } },
+              { path: 'norm', component: CasualtyNormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '4' } },
             ],
             data: { state: '3' } },
           { path: 'edit', component: CaseFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '3' } }

@@ -4,8 +4,7 @@
             <mat-icon>arrow_back</mat-icon>
         </button>
 
-        <span class="top-bar-title">{{ (casualty$ | async)?.name }}</span>
-        <span class="secondary-text">{{ score }}/{{ totalScore }}</span>
+        <span class="top-bar-title">00:00</span>
 
         <div class="actions">
             <button mat-icon-button class="secondary-button">
@@ -16,24 +15,26 @@
 
     <div class="content">
         <mat-accordion multi="true">
-            <mat-expansion-panel *ngFor="let injury of injuries$ | async" [expanded]="true">
+            <mat-expansion-panel *ngFor="let injury of (injuries$ | async); let injuryIndex = index" [expanded]="true">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         {{ injury.name }}
                     </mat-panel-title>
-                    <mat-panel-description class="secondary-text">
-                        {{ count[injury.id].value }}/{{ count[injury.id].maximum }}
+                    <mat-panel-description class="secondary-text" [class.error]="getCount(injuryIndex) !== injury.maneuvers.length">
+                        {{ getCount(injuryIndex) }}/{{ injury.maneuvers.length }}
                     </mat-panel-description>
                 </mat-expansion-panel-header>
         
-                <app-maneuver-norm-list-item *ngFor="let maneuver of injury.maneuvers" [maneuver]="maneuver" (selected)="countSelection($event, injury.id)" (scoreChange)="changeScore($event)"></app-maneuver-norm-list-item>
+                <app-maneuver-norm-list-item *ngFor="let maneuver of injury.maneuvers; let maneuverIndex = index"
+                    [maneuver]="maneuver"
+                    (scoreChange)="setSelectedScore(injuryIndex, maneuverIndex, $event)"></app-maneuver-norm-list-item>
             </mat-expansion-panel>
         </mat-accordion>
     </div>
 
     <div class="footer">
         <div class="actions">
-            <button mat-raised-button color="accent" [disabled]="!canFinish()" (click)="back()">
+            <button mat-raised-button color="accent" (click)="openNormReview()">
                 Finalizează
             </button>
         </div>

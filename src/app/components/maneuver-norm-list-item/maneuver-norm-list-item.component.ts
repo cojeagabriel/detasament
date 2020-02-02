@@ -1,19 +1,17 @@
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
-import { ManeuverV2 } from './../../types/maneuver-v2.d';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ManeuverV2 } from 'src/app/types/maneuver-v2.d';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { isNil } from 'lodash';
 
 @Component({
   selector: 'app-maneuver-norm-list-item',
   templateUrl: './maneuver-norm-list-item.component.html',
-  styleUrls: ['./maneuver-norm-list-item.component.scss']
+  styleUrls: ['./maneuver-norm-list-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ManeuverNormListItemComponent implements OnInit {
 
   @Input() maneuver: ManeuverV2;
   @Output() scoreChange = new EventEmitter<number>();
-  @Output() selected = new EventEmitter<boolean>();
-
-  score$ = new BehaviorSubject<number | null>(null);
 
   constructor() { }
 
@@ -21,24 +19,16 @@ export class ManeuverNormListItemComponent implements OnInit {
   }
 
   onScoreChange(value: number) {
-    if (value === this.maneuver.score / 2 && !this.maneuver.average) {
-      return;
-    }
-
-    const score = this.score$.getValue();
-    if (score !== value) {
-      if (score !== null) {
-        this.scoreChange.emit(-score + value);
-      } else {
-        this.scoreChange.emit(value);
-        this.selected.emit(true);
-      }
-      this.score$.next(value);
+    const oldScore = this.maneuver.selectedScore;
+    if (!isNil(oldScore) && oldScore === value) {
+      this.scoreChange.next(null);
     } else {
-      this.scoreChange.emit(-score);
-      this.score$.next(null);
-      this.selected.emit(false);
+      this.scoreChange.next(value);
     }
+  }
+
+  isSelected(): boolean {
+    return !isNil(this.maneuver.selectedScore);
   }
 
 }

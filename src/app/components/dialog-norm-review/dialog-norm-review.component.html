@@ -1,0 +1,28 @@
+<div #screen class="screen">
+    <div class="content">
+        <!-- <mat-accordion multi="true">
+            <mat-expansion-panel *ngFor="let injury of injuries$ | async" [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{ injury.name }}
+                    </mat-panel-title>
+                    <mat-panel-description class="secondary-text">
+                        {{ count[injury.id].value }}/{{ count[injury.id].maximum }}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <app-maneuver-norm-list-item *ngFor="let maneuver of injury.maneuvers" [maneuver]="maneuver"
+                    (selected)="countSelection($event, injury.id)" (scoreChange)="changeScore($event)">
+                </app-maneuver-norm-list-item>
+            </mat-expansion-panel>
+        </mat-accordion> -->
+    </div>
+
+    <div class="footer">
+        <div class="actions">
+            <button mat-raised-button color="accent" (click)="close()">
+                Continuă
+            </button>
+        </div>
+    </div>
+</div>

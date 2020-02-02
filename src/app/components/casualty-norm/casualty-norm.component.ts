@@ -1,7 +1,10 @@
+import { CasualtyRecord } from 'src/app/types/casualty-record.d';
+import { ScreenService } from 'src/app/services/screen.service';
+import { DialogNormReviewComponent } from './../dialog-norm-review/dialog-norm-review.component';
+import { MatDialog } from '@angular/material';
 import { defaultInjuriesAfter } from 'src/app/constants/default-injuries-after.contants';
-import { ManeuverV2 } from './../../types/maneuver-v2.d';
 import { InjuryV2 } from 'src/app/types/injury-v2';
-import { CasualtyV2 } from './../../types/casualty-v2.d';
+import { CasualtyV2 } from 'src/app/types/casualty-v2.d';
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,6 +13,7 @@ import { Location } from '@angular/common';
 import { switchMap, map, tap, filter } from 'rxjs/operators';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { defaultInjuriesBefore } from 'src/app/constants/default-injuries-before.constant';
+import { isNil } from 'lodash';
 
 @Component({
   selector: 'app-casualty-norm',
@@ -25,15 +29,13 @@ export class CasualtyNormComponent implements OnInit, OnDestroy, AfterViewInit {
   scrolling$ = new BehaviorSubject(false);
   loading$ = new BehaviorSubject(false);
 
-  totalScore = 0;
-  score = 0;
-  count = {};
-
   constructor(
     private db: AngularFirestore,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
+    private matDialog: MatDialog,
+    private screenService: ScreenService
   ) { }
 
   ngOnInit() {
@@ -69,47 +71,62 @@ export class CasualtyNormComponent implements OnInit, OnDestroy, AfterViewInit {
       untilDestroyed(this)
     ).subscribe(injuries => {
       this.injuries$.next(injuries);
-      this.initScores(injuries);
     });
   }
   ngOnDestroy() {}
 
-  initScores(injuries: InjuryV2[]) {
-    injuries.forEach(injury => {
-      this.totalScore += injury.maneuvers
-        .map((value: ManeuverV2) => value.score)
-        .reduce((total: number, value: number) => total + value);
-      this.count[injury.id] = {
-        maximum: injury.maneuvers.length,
-        value: 0
-      };
+  openNormReview() {
+    const dialogRef = this.matDialog.open(DialogNormReviewComponent, {
+      closeOnNavigation: false,
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      panelClass: 'full-screen-modal',
+      autoFocus: false,
+      data: {
+        record: this.getRecord()
+      }
     });
+    this.screenService.push(dialogRef);
   }
 
+  getRecord(): CasualtyRecord {
+    const casualty = this.casualty$.getValue();
+    const injuries = this.injuries$.getValue();
+    return {
+      name: casualty.name,
+      age: casualty.age,
+      details: casualty.details || null,
+      injuries
+    };
+  }
+
+  getCount(injuryIndex: number): number {
+    const injuries = this.injuries$.getValue();
+    return injuries[injuryIndex].maneuvers.filter(maneuver => !isNil(maneuver.selectedScore))
+      .map(maneuver => maneuver.selectedScore)
+      .reduce((total: number, score: number) => total + 1, 0);
+  }
 
   canFinish(): boolean {
-    if (!Object.values(this.count).length) {
-      return;
+    const injuries = this.injuries$.getValue();
+    if (!injuries) {
+      return false;
     }
-    const count = Object.values(this.count)
-      .map((value: { maximum: number, value: number }) => value.value)
-      .reduce((total: number, value: number) => total + value);
-    const maximum = Object.values(this.count)
-      .map((value: { maximum: number, value: number }) => value.maximum)
-      .reduce((total: number, value: number) => total + value);
-    return count === maximum;
+
+    for (const injury of injuries) {
+      if (injury.maneuvers.find(maneuver => isNil(maneuver.selectedScore))) {
+        return false;
+      }
+    }
+    return true;
   }
 
-  countSelection(selected: boolean, injuryId: string) {
-    if (selected) {
-      this.count[injuryId].value++;
-    } else {
-      this.count[injuryId].value--;
-    }
-  }
-
-  changeScore(change: number) {
-    this.score += change;
+  setSelectedScore(injuryIndex: number, maneuverIndex: number, selectedScore: number) {
+    const injuries = this.injuries$.getValue();
+    injuries[injuryIndex].maneuvers[maneuverIndex].selectedScore = selectedScore;
+    this.injuries$.next(injuries);
   }
 
   back() {
