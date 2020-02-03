@@ -1,0 +1,18 @@
+<div #screen class="screen">
+    <div class="content">
+        <div class="title">Punctaj</div>
+        <div class="score">
+            {{ getScore() }}<span class="score total-score">/{{totalScore}}</span>
+        </div>
+        <app-norm [injuries]="filteredInjuries$ | async" [showCounting]="false" (scoreChange)="setSelectedScore($event.injuryIndex, $event.maneuverIndex, $event.selectedScore)"></app-norm>
+        <button mat-button color="accent" (click)="toggleShowAll()">Arată tot</button>
+    </div>
+
+    <div class="footer">
+        <div class="actions">
+            <button mat-raised-button color="accent" (click)="close()">
+                Continuă
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+@import "../../../assets/scss/variables";
+
+mat-expansion-panel-header{
+    padding: 0 22px 0 16px;
+}
+
+mat-expansion-panel{
+    border-radius: 0 !important;
+
+    &:not(.mat-expanded) + mat-expansion-panel:not(.mat-expanded){
+        border-top-color: transparent;
+    }
+
+    &:not([class*=mat-elevation-z]){
+        // box-shadow: $elevate-4;
+        // border-top: solid 1px $white-grey;
+        // border-bottom: solid 1px $white-grey;
+        box-shadow: none;
+        border: none;
+    }
+
+    &::ng-deep{
+        .mat-expansion-panel-body{
+            padding: 0 0 16px;
+        }
+    }
+}
+
+.mat-expansion-panel-spacing{
+    margin: 4px 0;
+}
+
+mat-panel-title{
+    flex-wrap: wrap;
+    align-items: center;
+    font-weight: 500;
+}
+
+mat-panel-description{
+    justify-content: flex-end;
+    align-items: center;
+    white-space: nowrap;
+
+    &.error {
+        color: $primary;
+    }
+}

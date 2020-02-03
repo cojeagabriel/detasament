@@ -83,6 +83,8 @@ import { AddCasualtyComponent } from './components/add-casualty/add-casualty.com
 import { CaseCardV2Component } from './components/case-card-v2/case-card-v2.component';
 import { CasualtyNormComponent } from './components/casualty-norm/casualty-norm.component';
 import { ManeuverNormListItemComponent } from './components/maneuver-norm-list-item/maneuver-norm-list-item.component';
+import { DialogNormReviewComponent } from './components/dialog-norm-review/dialog-norm-review.component';
+import { NormComponent } from './components/norm/norm.component';
 
 
 @NgModule({
@@ -133,12 +135,15 @@ import { ManeuverNormListItemComponent } from './components/maneuver-norm-list-i
     AddCasualtyComponent,
     CaseCardV2Component,
     CasualtyNormComponent,
-    ManeuverNormListItemComponent
+    ManeuverNormListItemComponent,
+    DialogNormReviewComponent,
+    NormComponent
   ],
   entryComponents: [
     AddManeuverComponent,
     DialogAddScoreComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    DialogNormReviewComponent
   ],
   imports: [
     BrowserModule,

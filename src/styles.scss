@@ -329,6 +329,10 @@ mat-chip{
   align-items: center;
   justify-content: center;
 
+  .mat-button-focus-overlay {
+    background-color: transparent !important;
+  }
+
   .mat-raised-button.mat-accent{
     width: calc(100vw - 64px);
     line-height: 48px;
@@ -532,7 +536,7 @@ mat-selection-list{
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
-  border-radius: 8px;
+  border-radius: 4px;
   background-color: #fff;
   border: solid 1px $white-grey;
   box-shadow: $elevate-4;
@@ -546,4 +550,12 @@ mat-selection-list{
 
 .secondary-button {
   color: $light-grey;
+}
+
+.full-screen-modal{
+  border-radius: 0;
+}
+
+.mat-button.mat-accent, .mat-icon-button.mat-accent, .mat-stroked-button.mat-accent{
+  color: $primary;
 }

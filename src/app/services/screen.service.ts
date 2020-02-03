@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MatDialogRef } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScreenService {
 
-  screens: MatSidenav[] = [];
+  screens: (MatSidenav | MatDialogRef<any>)[] = [];
 
   constructor() { }
 
-  push(screen: MatSidenav) {
+  push(screen: MatSidenav | MatDialogRef<any>) {
     this.screens.push(screen);
   }
 
@@ -28,5 +28,9 @@ export class ScreenService {
       return false;
     }
     return true;
+  }
+
+  log() {
+    console.log(this.screens);
   }
 }
