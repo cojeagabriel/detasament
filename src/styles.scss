@@ -555,3 +555,7 @@ mat-selection-list{
 .full-screen-modal{
   border-radius: 0;
 }
+
+.mat-button.mat-accent, .mat-icon-button.mat-accent, .mat-stroked-button.mat-accent{
+  color: $primary;
+}

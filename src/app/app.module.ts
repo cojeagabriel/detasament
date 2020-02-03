@@ -84,6 +84,7 @@ import { CaseCardV2Component } from './components/case-card-v2/case-card-v2.comp
 import { CasualtyNormComponent } from './components/casualty-norm/casualty-norm.component';
 import { ManeuverNormListItemComponent } from './components/maneuver-norm-list-item/maneuver-norm-list-item.component';
 import { DialogNormReviewComponent } from './components/dialog-norm-review/dialog-norm-review.component';
+import { NormComponent } from './components/norm/norm.component';
 
 
 @NgModule({
@@ -135,7 +136,8 @@ import { DialogNormReviewComponent } from './components/dialog-norm-review/dialo
     CaseCardV2Component,
     CasualtyNormComponent,
     ManeuverNormListItemComponent,
-    DialogNormReviewComponent
+    DialogNormReviewComponent,
+    NormComponent
   ],
   entryComponents: [
     AddManeuverComponent,

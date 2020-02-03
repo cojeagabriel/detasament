@@ -102,13 +102,6 @@ export class CasualtyNormComponent implements OnInit, OnDestroy, AfterViewInit {
     };
   }
 
-  getCount(injuryIndex: number): number {
-    const injuries = this.injuries$.getValue();
-    return injuries[injuryIndex].maneuvers.filter(maneuver => !isNil(maneuver.selectedScore))
-      .map(maneuver => maneuver.selectedScore)
-      .reduce((total: number, score: number) => total + 1, 0);
-  }
-
   canFinish(): boolean {
     const injuries = this.injuries$.getValue();
     if (!injuries) {

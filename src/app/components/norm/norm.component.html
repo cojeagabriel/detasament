@@ -1,0 +1,17 @@
+<mat-accordion multi="true">
+    <mat-expansion-panel *ngFor="let injury of injuries; let injuryIndex = index" [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{ injury.name }}
+            </mat-panel-title>
+            <mat-panel-description *ngIf="showCounting" class="secondary-text"
+                [class.error]="getCount(injuryIndex) !== injury.maneuvers.length">
+                {{ getCount(injuryIndex) }}/{{ injury.maneuvers.length }}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <app-maneuver-norm-list-item *ngFor="let maneuver of injury.maneuvers; let maneuverIndex = index"
+            [maneuver]="maneuver" (scoreChange)="onScoreChange(injuryIndex, maneuverIndex, $event)">
+        </app-maneuver-norm-list-item>
+    </mat-expansion-panel>
+</mat-accordion>
