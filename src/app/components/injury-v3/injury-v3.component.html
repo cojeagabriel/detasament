@@ -7,7 +7,7 @@
         <span class="top-bar-title"></span>
 
         <div class="actions">
-            <button mat-icon-button [routerLink]="'edit'">
+            <button mat-icon-button class="secondary-button" [routerLink]="'edit'">
                 <mat-icon>edit</mat-icon>
             </button>
         </div>
@@ -17,7 +17,7 @@
         <span class="title">{{ (injury$ | async)?.name }}</span>
 
         <div class="maneuvers-header">
-            <label class="mat-label">Manevre</label>
+            <label class="label">Manevre</label>
         </div>
 
         <div class="maneuvers-container">
