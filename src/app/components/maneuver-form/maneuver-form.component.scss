@@ -6,23 +6,6 @@
     padding: 24px;
 }
 
-.header{
-    .actions{
-        button {
-            mat-icon{
-                color: rgba(0, 0, 0, 0.24);
-                transition: color 100ms ease;
-            }
-
-            &:active {
-                mat-icon{
-                    color: black;
-                }
-            }
-        }
-    }
-}
-
 mat-slide-toggle{
   width: 100%;
 

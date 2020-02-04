@@ -15,29 +15,12 @@
     align-items: center;
     width: 100%;
     box-sizing: border-box;
-    padding: 16px 24px;
-}
-
-.header{
-    .actions{
-        button {
-            mat-icon{
-                color: rgba(0, 0, 0, 0.24);
-                transition: color 100ms ease;
-            }
-
-            &:active {
-                mat-icon{
-                    color: black;
-                }
-            }
-        }
-    }
+    padding: 16px 24px 0;
 }
 
 .title{
     &:not(:last-child) {
-        padding-bottom: 18px;
+        padding-bottom: 16px;
     }
 }
 
@@ -65,5 +48,5 @@
 }
 
 .screen{
-    padding-bottom: 64px;
+    padding-bottom: 120px;
 }

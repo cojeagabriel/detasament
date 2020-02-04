@@ -26,8 +26,11 @@ export class CasualtyNormComponent implements OnInit, OnDestroy, AfterViewInit {
   injuries$ = new BehaviorSubject<InjuryV2[] | null>(null);
 
   @ViewChild('screen', { static: false }) screen: ElementRef;
+  @ViewChild('content', { static: false }) content: ElementRef;
   scrolling$ = new BehaviorSubject(false);
   loading$ = new BehaviorSubject(false);
+  additionalInfoExpanded$ = new BehaviorSubject(false);
+  disableAnimation = true;
 
   constructor(
     private db: AngularFirestore,
@@ -74,6 +77,10 @@ export class CasualtyNormComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
   ngOnDestroy() {}
+
+  toggleAdditionalInfo() {
+    this.additionalInfoExpanded$.next(!this.additionalInfoExpanded$.getValue());
+  }
 
   openNormReview() {
     const dialogRef = this.matDialog.open(DialogNormReviewComponent, {
@@ -127,8 +134,9 @@ export class CasualtyNormComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.screen.nativeElement.addEventListener('scroll', () => {
-      const scrollTop = this.screen.nativeElement.scrollTop;
+    setTimeout(() => this.disableAnimation = false);
+    this.content.nativeElement.addEventListener('scroll', () => {
+      const scrollTop = this.content.nativeElement.scrollTop;
       if (scrollTop > 0 && this.scrolling$.getValue() === false) {
         this.scrolling$.next(true);
       } else if (scrollTop === 0 && this.scrolling$.getValue() === true) {

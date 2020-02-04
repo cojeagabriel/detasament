@@ -424,29 +424,47 @@ mat-spinner {
     }
 }
 
-.chips-header {
-    transition: box-shadow 150ms ease-in-out;
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    border-bottom: solid 1px #e5e5e5;
+.chips-header,
+.expanding-header{
+  border-bottom: solid 1px #e5e5e5;
+}
 
-    .nav{
-        width: 100%;
-        box-sizing: border-box;
-        padding: 0 8px;
-        height: 56px;
-        display: flex;
-        align-items: center;
+.chips-header,
+.expanding-header {
+  position: relative;
+  z-index: 99;
+  transition: box-shadow 150ms ease-in-out;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .nav{
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 8px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+  }
+
+  .mat-icon-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .mat-button-wrapper{
+      display: flex;
     }
+  }
 }
 
 .header,
-.chips-header {
+.chips-header,
+.expanding-header {
   &.raised{
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08),
       0 1px 3px -1px rgba(0, 0, 0, 0.2);
+      border-bottom: transparent;
   }
 }
 
@@ -490,7 +508,8 @@ mat-selection-list{
   display: block;
   font-size: 13px;
   line-height: 1.5rem;
-  color: #121212;
+  font-weight: 500;
+  color: $light-grey;
   letter-spacing: 0.4px;
   font-family: 'Roboto', sans-serif;
   -moz-osx-font-smoothing: grayscale;
@@ -508,6 +527,17 @@ mat-selection-list{
   color: black;
 }
 
+.subtitle{
+  font-family: 'Roboto', sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  letter-spacing: .0178571429em;
+  color: black;
+}
+
 .secondary-text{
   font-family: 'Roboto', sans-serif;
   -moz-osx-font-smoothing: grayscale;
@@ -516,7 +546,7 @@ mat-selection-list{
   line-height: 1.25rem;
   font-weight: 400;
   letter-spacing: .0178571429em;
-  color: #616161;
+  color: $light-grey;
 }
 
 .text{
@@ -527,7 +557,7 @@ mat-selection-list{
   line-height: 1.25rem;
   font-weight: 400;
   letter-spacing: .0178571429em;
-  color: #616161;
+  color: $grey;
 }
 
 .custom-card {
@@ -548,8 +578,17 @@ mat-selection-list{
   }
 }
 
+mat-panel-title{
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
 .secondary-button {
   color: $light-grey;
+
+  &.active{
+    color: $grey;
+  }
 }
 
 .full-screen-modal{

@@ -13,7 +13,7 @@
                 <span class="top-bar-title">{{ (editing$ | async) ? 'Modifică leziunea' : 'Creează o leziune' }}</span>
 
                 <div class="actions">
-                    <button *ngIf="editing$ | async" mat-icon-button (click)="delete()">
+                    <button *ngIf="editing$ | async" class="secondary-button" mat-icon-button (click)="delete()">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>

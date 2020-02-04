@@ -1,10 +1,10 @@
 import { InjuryV2 } from 'src/app/types/injury-v2';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { CasualtyRecord } from './../../types/casualty-record.d';
 import { ScreenService } from './../../services/screen.service';
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { map, withLatestFrom, filter, take } from 'rxjs/operators';
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { map, filter, take } from 'rxjs/operators';
 import { isNil } from 'lodash';
 
 @Component({
@@ -16,28 +16,28 @@ export class DialogNormReviewComponent implements OnInit {
 
   filter$ = new BehaviorSubject<boolean>(true);
   injuries$ = new BehaviorSubject<InjuryV2[] | null>(null);
-  filteredInjuries$ = this.injuries$.pipe(
-    filter(injuries => !!injuries),
-    withLatestFrom(this.filter$),
-    map(([injuries, value]) => {
-      console.log(value);
-      if (value) {
-        return injuries.map(injury => {
-          return {
-            ...injury,
-            maneuvers: injury.maneuvers.filter(maneuver => maneuver.selectedScore !== maneuver.score)
-          };
-        })
-          .filter(filteredInjuries => filteredInjuries.maneuvers.length);
-      }
-      return injuries;
-    })
-  );
+  filteredInjuries$ = combineLatest(
+    this.injuries$,
+    this.filter$
+    ).pipe(
+      filter(([injuries, value]) => !!injuries),
+      map(([injuries, value]) => {
+        if (value) {
+          return injuries.map(injury => {
+            return {
+              ...injury,
+              maneuvers: injury.maneuvers.filter(maneuver => maneuver.selectedScore !== maneuver.score)
+            };
+          })
+            .filter(filteredInjuries => filteredInjuries.maneuvers.length);
+        }
+        return injuries;
+      })
+    );
 
   totalScore = this.getTotalScore(this.data.record.injuries);
 
   constructor(
-    private dialogRef: MatDialogRef<DialogNormReviewComponent>,
     @Inject(MAT_DIALOG_DATA) private data: { record: CasualtyRecord },
     private screenService: ScreenService
   ) { }
@@ -49,6 +49,7 @@ export class DialogNormReviewComponent implements OnInit {
 
   close() {
     this.screenService.close();
+    window.history.go(-2);
   }
 
   setSelectedScore(injuryIndex: number, maneuverIndex: number, selectedScore: number) {
@@ -95,9 +96,7 @@ export class DialogNormReviewComponent implements OnInit {
   }
 
   toggleShowAll() {
-    // console.log(this.filter$.getValue());
-    const filterValue = this.filter$.getValue();
-    this.filter$.next(!filterValue);
+    this.filter$.next(!this.filter$.getValue());
   }
 
 }

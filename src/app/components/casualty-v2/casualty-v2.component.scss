@@ -20,29 +20,12 @@
     padding: 0 24px;
 }
 
-.header{
-    .actions{
-        button {
-            mat-icon{
-                color: rgba(0, 0, 0, 0.24);
-                transition: color 100ms ease;
-            }
-
-            &:active {
-                mat-icon{
-                    color: black;
-                }
-            }
-        }
-    }
-}
-
 .avatar {
     mat-icon {
         width: 64px;
         height: 64px;
         font-size: 64px;
-        color: rgba($color: #000, $alpha: 0.24);
+        color: $light-grey;
     }
     margin-bottom: 8px;
 }

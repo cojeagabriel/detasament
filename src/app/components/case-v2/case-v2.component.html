@@ -7,7 +7,7 @@
         <span class="top-bar-title"></span>
 
         <div class="actions">
-            <button mat-icon-button [routerLink]="'edit'">
+            <button mat-icon-button class="secondary-button" [routerLink]="'edit'">
                 <mat-icon>edit</mat-icon>
             </button>
         </div>
@@ -25,6 +25,15 @@
                 <app-casualty-card-v2 *ngFor="let casualty of casualties$ | async" [casualty]="casualty" [routerLink]="'casualties/' + casualty.id">
                 </app-casualty-card-v2>
             </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="actions">
+            <button mat-raised-button color="accent">
+                <!-- Publică -->
+                Alege
+            </button>
         </div>
     </div>
 </div>

@@ -46,27 +46,6 @@ mat-sidenav-content {
     }
 }
 
-.edit-injuries-button{
-  color: rgba(0, 0, 0, 0.16);
-}
-
-.header{
-    .actions{
-        button {
-            mat-icon{
-                color: rgba(0, 0, 0, 0.24);
-                transition: color 100ms ease;
-            }
-
-            &:active {
-                mat-icon{
-                    color: black;
-                }
-            }
-        }
-    }
-}
-
 .casualties-container{
     app-casualty-card-v2{
         margin-bottom: 16px;

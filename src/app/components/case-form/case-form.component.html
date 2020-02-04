@@ -14,7 +14,7 @@
                 <span class="top-bar-title">{{ (id$ | async) ? 'Modifică cazul' : 'Creează un caz' }}</span>
 
                 <div class="actions">
-                    <button *ngIf="id$ | async" mat-icon-button (click)="delete()">
+                    <button *ngIf="id$ | async" mat-icon-button class="secondary-button" (click)="delete()">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>

@@ -56,23 +56,6 @@ mat-sidenav-content {
     }
 }
 
-.header{
-    .actions{
-        button {
-            mat-icon{
-                color: rgba(0, 0, 0, 0.24);
-                transition: color 100ms ease;
-            }
-
-            &:active {
-                mat-icon{
-                    color: black;
-                }
-            }
-        }
-    }
-}
-
 .overlay {
   position: absolute;
   z-index: 999;
