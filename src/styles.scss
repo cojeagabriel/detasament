@@ -91,6 +91,11 @@ app-casualty-card{
   box-shadow: 0 3px 5px -1px hsla(357, 86%, 52%, .2),
   0 6px 10px 0 hsla(357, 86%, 52%, .14),
   0 1px 18px 0 hsla(357, 86%, 52%, .12);
+  &:not([disabled]):active:not([class*=mat-elevation-z]){
+    box-shadow: 0 5px 5px -3px hsla(357, 86%, 52%, .2), 
+    0 8px 10px 1px hsla(357, 86%, 52%, .14), 
+    0 3px 14px 2px hsla(357, 86%, 52%, .12);
+  }
 }
 
 .mat-raised-button[disabled]:not([class*=mat-elevation-z]){
@@ -509,7 +514,7 @@ mat-selection-list{
   font-size: 13px;
   line-height: 1.5rem;
   font-weight: 500;
-  color: $light-grey;
+  color: $grey;
   letter-spacing: 0.4px;
   font-family: 'Roboto', sans-serif;
   -moz-osx-font-smoothing: grayscale;
@@ -573,8 +578,8 @@ mat-selection-list{
   transition: $transition;
 
   &:active {
-    transform: translateY(8px);
-    box-shadow: none;
+    transform: translateY(4px);
+    box-shadow: $elevate-2;
   }
 }
 
@@ -584,10 +589,10 @@ mat-panel-title{
 }
 
 .secondary-button {
-  color: $light-grey;
+  color: $grey;
 
   &.active{
-    color: $grey;
+    color: $dark-grey;
   }
 }
 
@@ -597,4 +602,59 @@ mat-panel-title{
 
 .mat-button.mat-accent, .mat-icon-button.mat-accent, .mat-stroked-button.mat-accent{
   color: $primary;
+}
+
+.box-placeholder{
+  background-color: $white-grey;
+  border-radius: 20px;
+  animation: fading 1.5s infinite;
+}
+
+.title-placeholder{
+  width: 180px;
+  height: 24px;
+}
+
+.text-placeholder{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+
+  .line-placeholder{
+    height: 16px;
+    width: 100%;
+
+    &:not(:last-child){
+      margin-bottom: 8px;
+    }
+
+    &:last-child{
+      width: 68%;
+    }
+  }
+}
+
+.label-placeholder{
+  width: 48px;
+  height: 16px;
+}
+
+.casualty-placeholder{
+  width: 100%;
+  padding-bottom: 48%;
+}
+
+@keyframes fading {
+  0% {
+    opacity: 0.3;
+  }
+  
+  50% {
+    opacity: 0.8;
+  }
+  
+  100% {
+    opacity: 0.3;
+  }
 }

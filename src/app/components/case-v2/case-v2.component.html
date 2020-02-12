@@ -13,7 +13,24 @@
         </div>
     </div>
 
-    <div class="content">
+    <div *ngIf="(loading$ | async)" class="content content-placeholder">
+        <div class="box-placeholder title-placeholder"></div>
+        <div class="text-placeholder">
+            <div class="box-placeholder line-placeholder"></div>
+            <!-- <div class="box-placeholder line-placeholder"></div> -->
+            <div class="box-placeholder line-placeholder"></div>
+        </div>
+
+        <div class="casualties casualties-placeholder">
+            <div class="box-placeholder label-placeholder"></div>
+
+            <div class="box-placeholder casualty-placeholder"></div>
+            <div class="box-placeholder casualty-placeholder"></div>
+            <!-- <div class="box-placeholder casualty-placeholder"></div> -->
+        </div>
+    </div>
+
+    <div *ngIf="!(loading$ | async)" class="content">
         <div class="content-header">
             <span class="title">{{ (case$ | async)?.name }}</span>
             <span *ngIf="(case$ | async)?.details" class="text">{{ (case$ | async)?.details }}</span>
@@ -30,9 +47,10 @@
 
     <div class="footer">
         <div class="actions">
-            <button mat-raised-button color="accent">
+            <button mat-raised-button color="accent" [routerLink]="'casualties/7VmD9bzw9zsjHhyfNwNt/norm'">
                 <!-- Publică -->
-                Alege
+                <!-- Alege -->
+                Start caz
             </button>
         </div>
     </div>

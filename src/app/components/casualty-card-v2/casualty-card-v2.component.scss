@@ -43,6 +43,7 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     color: $dark-grey;
+    flex-grow: 1;
 }
 
 .card-avatar{
@@ -61,4 +62,18 @@
 mat-chip-list{
     display: flex;
     margin-bottom: 14px;
+}
+
+.card-actions{
+    display: flex;
+    padding: 8px;
+    button{
+        padding: 0 8px;
+        text-transform: uppercase;
+        letter-spacing: .0892857143em;
+    }
+}
+
+.card-header-actions{
+    margin: -8px;
 }

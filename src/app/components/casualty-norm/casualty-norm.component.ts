@@ -2,7 +2,7 @@ import { CasualtyRecord } from 'src/app/types/casualty-record.d';
 import { ScreenService } from 'src/app/services/screen.service';
 import { DialogNormReviewComponent } from './../dialog-norm-review/dialog-norm-review.component';
 import { MatDialog } from '@angular/material';
-import { defaultInjuriesAfter } from 'src/app/constants/default-injuries-after.contants';
+import { defaultInjuriesAfter } from 'src/app/constants/default-injuries-after.contant';
 import { InjuryV2 } from 'src/app/types/injury-v2';
 import { CasualtyV2 } from 'src/app/types/casualty-v2.d';
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
@@ -14,6 +14,7 @@ import { switchMap, map, tap, filter } from 'rxjs/operators';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { defaultInjuriesBefore } from 'src/app/constants/default-injuries-before.constant';
 import { isNil } from 'lodash';
+import { chiefInjuries } from 'src/app/constants/chief-injuries.constant';
 
 @Component({
   selector: 'app-casualty-norm',
@@ -55,11 +56,15 @@ export class CasualtyNormComponent implements OnInit, OnDestroy, AfterViewInit {
       }),
       tap(casualty => this.casualty$.next(casualty)),
       switchMap(casualty => {
-        casualty.injuries = {
-          ...defaultInjuriesBefore,
-          ...casualty.injuries,
-          ...defaultInjuriesAfter
-        };
+        if (!casualty.chief) {
+          casualty.injuries = {
+            ...defaultInjuriesBefore,
+            ...casualty.injuries,
+            ...defaultInjuriesAfter
+          };
+        } else {
+          casualty.injuries = chiefInjuries;
+        }
         const injuries$ = Object.keys(casualty.injuries).map(injuryId => {
           return this.db.collection('injuries').doc<InjuryV2>(injuryId).snapshotChanges().pipe(
             map(actions => {

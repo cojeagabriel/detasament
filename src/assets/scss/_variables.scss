@@ -7,12 +7,23 @@ $lightest-grey: #f7f7f7;
 
 $elevate-2: 0 2px 4px -1px rgba(0, 0, 0, .1),
     0 1px 3px -1px rgba(0, 0, 0, 0.1);
-// $elevate-4: 0 8px 12px -3px rgba(0, 0, 0, .08),
+// $elevate-4: 0 8px 12px -4px rgba(0, 0, 0, .08),
 //     0 1px 3px -5px rgba(0, 0, 0, .2);
-// $elevate-4: 0 8px 20px 0 rgba(0,0,0,.04);
-$elevate-4: 0 8px 16px -6px rgba(0,0,0,.08),
-    0 1px 3px -3px rgba(0, 0, 0, .2);
-// $elevate-4: 0 4px 8px 0 rgba(0, 0, 0, 0.03), 0 8px 16px 0 rgba(0, 0, 0, 0.01), 0 12px 20px 4px rgba(0, 0, 0, 0.01);
+// $elevate-4: 0 8px 16px 0 rgba(0,0,0,.08);
+// $elevate-4: 0 8px 16px -6px rgba(0,0,0,.14),
+//     0 1px 3px -3px rgba(0, 0, 0, .4);
+// $elevate-4: 0 4px 8px -4px rgba(0, 0, 0, 0.08), 0 8px 16px -4px rgba(0, 0, 0, 0.02), 0 12px 20px -4px rgba(0, 0, 0, 0.02);
+// $elevate-4: 0 8px 8px -4px rgba(0, 0, 0, .04), 0 8px 16px -6px rgba(0,0,0,.08);
+// $elevate-4: 0 4px 6px -4px rgba(0, 0, 0, .2),
+//     0 8px 8px -4px rgba(0, 0, 0, .04),
+//     0 12px 20px -8px rgba(0, 0, 0, .02);
+$elevate-4: 0 4px 6px -4px rgba(0, 0, 0, .04),
+    0 8px 8px -2px rgba(0, 0, 0, .04),
+    0 10px 16px 0px rgba(0, 0, 0, .04);
+// $elevate-4: 0 3px 5px -3px rgba($color: $light-grey, $alpha: .2),
+//   0 12px 8px -4px rgba($color: $light-grey, $alpha: .14),
+//   0 1px 18px 0 rgba($color: $light-grey, $alpha: .12);
+// $elevate-4: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0,0,0,.12);
 
 $primary-font: 'Roboto', sans-serif;
 
