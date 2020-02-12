@@ -20,6 +20,7 @@ export class CaseV2Component implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('screen', { static: false }) screen: ElementRef;
   scrolling$ = new BehaviorSubject(false);
+  loading$ = new BehaviorSubject(true);
 
   constructor(
     private db: AngularFirestore,
@@ -59,6 +60,14 @@ export class CaseV2Component implements OnInit, OnDestroy, AfterViewInit {
           });
       }),
     );
+
+    this.casualties$.pipe(
+      untilDestroyed(this)
+    ).subscribe(res => {
+      if (res) {
+        this.loading$.next(false);
+      }
+    });
   }
   ngOnDestroy() {}
 

@@ -4,6 +4,11 @@
             <mat-icon>account_circle</mat-icon>
         </div>
         <div class="card-title">{{ casualty.name }}</div>
+        <div class="card-header-actions">
+            <button mat-icon-button color="accent">
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
     </div>
     <div class="card-content">
         <mat-chip-list class="simple-chip-list">
@@ -13,4 +18,8 @@
             {{ casualty.details }}
         </div>
     </div>
+    <!-- <div class="card-actions">
+        <button mat-button color="accent">Arbitrează</button>
+        <button mat-icon-button color="accent"><mat-icon>arrow_forward</mat-icon></button>
+    </div> -->
 </div>

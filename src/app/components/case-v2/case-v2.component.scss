@@ -43,10 +43,23 @@
     }
 }
 
-.label{
+.label,
+.label-placeholder{
     margin-bottom: 8px;
 }
 
 .screen{
     padding-bottom: 120px;
+}
+
+.title-placeholder{
+    margin-bottom: 24px;
+}
+
+.text-placeholder{
+    margin-bottom: 32px;
+}
+
+.casualty-placeholder{
+    margin-bottom: 16px;
 }

@@ -7,7 +7,7 @@
             
             <span class="top-bar-title">00:00</span>
             
-            <div class="actions">
+            <div class="actions" *ngIf="(casualty$ | async) && !(casualty$ | async)?.chief">
                 <button mat-icon-button class="secondary-button" [class.active]="additionalInfoExpanded$ | async" (click)="toggleAdditionalInfo()">
                     <mat-icon>info_outline</mat-icon>
                 </button>
@@ -33,7 +33,7 @@
 
     <div class="footer">
         <div class="actions">
-            <button mat-raised-button color="accent" (click)="openNormReview()">
+            <button mat-raised-button color="accent" [disabled]="!canFinish()" (click)="openNormReview()">
                 Finalizează
             </button>
         </div>
