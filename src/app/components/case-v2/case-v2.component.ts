@@ -1,7 +1,7 @@
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { CasualtyV2 } from './../../types/casualty-v2.d';
 import { CaseV2 } from './../../types/case-v2.d';
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
@@ -11,7 +11,8 @@ import { switchMap, map, shareReplay, filter, catchError, take } from 'rxjs/oper
 @Component({
   selector: 'app-case-v2',
   templateUrl: './case-v2.component.html',
-  styleUrls: ['./case-v2.component.scss']
+  styleUrls: ['./case-v2.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CaseV2Component implements OnInit, OnDestroy, AfterViewInit {
 
@@ -20,6 +21,7 @@ export class CaseV2Component implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('screen', { static: false }) screen: ElementRef;
   scrolling$ = new BehaviorSubject(false);
+  showTitle$ = new BehaviorSubject(false);
   loading$ = new BehaviorSubject(true);
 
   constructor(
@@ -78,6 +80,11 @@ export class CaseV2Component implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.screen.nativeElement.addEventListener('scroll', () => {
       const scrollTop = this.screen.nativeElement.scrollTop;
+      if (scrollTop > 48 && this.showTitle$.getValue() === false) {
+        this.showTitle$.next(true);
+      } else if (scrollTop <= 48 && this.showTitle$.getValue() === true) {
+        this.showTitle$.next(false);
+      }
       if (scrollTop > 0 && this.scrolling$.getValue() === false) {
         this.scrolling$.next(true);
       } else if (scrollTop === 0 && this.scrolling$.getValue() === true) {
