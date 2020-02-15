@@ -1,3 +1,5 @@
+@import "../../../assets/scss/variables";
+
 :host{
   position: relative;
   z-index: 2;
@@ -62,4 +64,17 @@
 
 .casualty-placeholder{
     margin-bottom: 16px;
+}
+
+.header{
+    overflow: hidden;
+}
+
+.top-bar-title{
+    transition: $transition;
+
+    &.hidden {
+        opacity: 0;
+        transform: translateY(60%);
+    }
 }

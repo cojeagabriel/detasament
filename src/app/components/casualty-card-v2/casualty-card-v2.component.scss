@@ -4,22 +4,6 @@
     display: flex;
 }
 
-// .custom-card{
-//     display: flex;
-//     flex-direction: column;
-//     width: 100%;
-//     box-sizing: border-box;
-//     border-radius: 8px;
-//     background-color: #fff;
-//     border: solid 1px $white-grey;
-//     box-shadow: $elevate-4;
-//     transition: $transition;
-
-//     &:active {
-//         box-shadow: $elevate-2;
-//     }
-// }
-
 .card-header{
     display: flex;
     align-items: center;
@@ -61,11 +45,12 @@
 
 mat-chip-list{
     display: flex;
-    margin-bottom: 14px;
+    // margin-bottom: 16px;
 }
 
 .card-actions{
     display: flex;
+    justify-content: space-between;
     padding: 8px;
     button{
         padding: 0 8px;
@@ -76,4 +61,8 @@ mat-chip-list{
 
 .card-header-actions{
     margin: -8px;
+}
+
+.simple-chip-list + .text{
+    margin-top: 16px;
 }

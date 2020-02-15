@@ -99,7 +99,8 @@ app-casualty-card{
 }
 
 .mat-raised-button[disabled]:not([class*=mat-elevation-z]){
-  background-color: #e0e0e0;
+  background-color: #fbd0d2;
+  color: white;
 }
 
 .mat-tab-label-active {
@@ -657,4 +658,8 @@ mat-panel-title{
   100% {
     opacity: 0.3;
   }
+}
+
+[hidden] {
+  display: none !important;
 }

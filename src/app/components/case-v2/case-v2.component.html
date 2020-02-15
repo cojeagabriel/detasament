@@ -4,7 +4,9 @@
             <mat-icon>arrow_back</mat-icon>
         </button>
 
-        <span class="top-bar-title"></span>
+        <span class="top-bar-title" [class.hidden]="!(showTitle$ | async)">
+            {{ (case$ | async)?.name }}
+        </span>
 
         <div class="actions">
             <button mat-icon-button class="secondary-button" [routerLink]="'edit'">
@@ -30,7 +32,7 @@
         </div>
     </div>
 
-    <div *ngIf="!(loading$ | async)" class="content">
+    <div [hidden]="(loading$ | async)" class="content">
         <div class="content-header">
             <span class="title">{{ (case$ | async)?.name }}</span>
             <span *ngIf="(case$ | async)?.details" class="text">{{ (case$ | async)?.details }}</span>
@@ -39,7 +41,7 @@
         <div class="casualties">
             <label class="label">Victime</label>
             <div class="casualties-container">
-                <app-casualty-card-v2 *ngFor="let casualty of casualties$ | async" [casualty]="casualty" [routerLink]="'casualties/' + casualty.id">
+                <app-casualty-card-v2 *ngFor="let casualty of casualties$ | async" [casualty]="casualty">
                 </app-casualty-card-v2>
             </div>
         </div>
