@@ -1,4 +1,4 @@
-<div class="custom-card" [routerLink]="'casualties/' + casualty.id">
+<div class="custom-card" [routerLink]="[getCasualtyRoute()]">
     <div class="card-header">
         <div class="card-avatar">
             <mat-icon>account_circle</mat-icon>
@@ -14,10 +14,10 @@
         </div>
     </div>
     <div class="card-actions">
-        <button mat-button color="accent" (click)="$event.stopPropagation()" [routerLink]="'casualties/' + casualty.id + '/norm'" >Arbitrează</button>
+        <button mat-button color="accent" (click)="$event.stopPropagation()" [routerLink]="[getCasualtyRoute() + '/norm']">Arbitrează</button>
         
         <div class="secondary-actions">
-            <button mat-icon-button color="accent" (click)="$event.stopPropagation()" [routerLink]="'casualties/' + casualty.id">
+            <button mat-icon-button color="accent" (click)="$event.stopPropagation()" [routerLink]="[getCasualtyRoute()]">
                 <mat-icon>arrow_forward</mat-icon>
             </button>
         </div>

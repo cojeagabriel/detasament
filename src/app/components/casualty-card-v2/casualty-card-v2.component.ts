@@ -11,10 +11,15 @@ export class CasualtyCardV2Component implements OnInit {
   objectKeys = Object.keys;
 
   @Input() casualty: Casualty;
+  @Input() baseRoute = '';
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  getCasualtyRoute() {
+    return `${this.baseRoute}${this.baseRoute ? '/' : ''}${this.casualty.id}`;
   }
 
 }
