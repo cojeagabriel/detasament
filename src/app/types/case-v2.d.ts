@@ -3,5 +3,9 @@ export interface CaseV2 {
     name: string,
     details?: string,
     casualties: string[],
-    new?: boolean
+    new?: boolean,
+    timer?: string,
+    status?: string,
+    started?: boolean,
+    stopped?: boolean
 }

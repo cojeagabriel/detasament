@@ -21,6 +21,7 @@ import { CaseFormComponent } from './components/case-form/case-form.component';
 import { CasesV3Component } from './components/cases-v3/cases-v3.component';
 import { CaseV2Component } from './components/case-v2/case-v2.component';
 import { CasualtyNormComponent } from './components/casualty-norm/casualty-norm.component';
+import { ChiefNormComponent } from './components/chief-norm/chief-norm.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { state: '0' } },
@@ -73,6 +74,7 @@ const routes: Routes = [
             children: [
               { path: '', component: CasualtyV2Component, data: { state: '3' } },
               { path: 'norm', component: CasualtyNormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '4' } },
+              { path: 'chief-norm', component: ChiefNormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '4' } },
             ],
             data: { state: '3' } },
           { path: 'edit', component: CaseFormComponent, canDeactivate: [CanDeactivateGuardGuard], data: { state: '3' } }

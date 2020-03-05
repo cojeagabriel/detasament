@@ -23,6 +23,9 @@ export class CanDeactivateGuardGuard implements CanDeactivate<CanDeactivateCompo
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot
   ): boolean {
+    if (component.canDeactivate) {
+      return component.canDeactivate();
+    }
     const canDeactivateResult = this.screenService.canDeactivate();
     if (!canDeactivateResult) {
       this.location.go(currentState.url);

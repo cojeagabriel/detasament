@@ -1,0 +1,55 @@
+<div #screen class="screen">
+    <div class="expanding-header" [@.disabled]="disableAnimation">
+        <div class="nav">
+            <button mat-icon-button (click)="back()">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+
+            <span class="top-bar-title">{{ (timer$ | async)?.time | time }}</span>
+
+            <div class="actions">
+                <button mat-icon-button class="secondary-button" [class.active]="additionalInfoExpanded$ | async" [disabled]="!(timer$ | async)?.laps.length"
+                    (click)="toggleAdditionalInfo()">
+                    <mat-icon>timer</mat-icon>
+                </button>
+            </div>
+        </div>
+        <mat-accordion class="additional-header-info">
+            <mat-expansion-panel [expanded]="additionalInfoExpanded$ | async">
+                <div *ngFor="let lap of (timer$ | async)?.laps" class="lap">
+                    {{ lap | time }}
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <mat-tab-group mat-stretch-tabs [class.raised]="scrolling$ | async">
+        <mat-tab label="Barem">
+            <div #content class="content">
+                <app-norm [injuries]="(casualty$ | async)?.injuries"></app-norm>
+            </div>
+        </mat-tab>
+        <mat-tab label="Victime">
+            <div class="content">
+                test content
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+    <div class="footer">
+        <div class="actions">
+            <button mat-raised-button *ngIf="!(case$ | async)?.started && !(case$ | async)?.stopped" color="accent" (click)="start()">
+                Start
+            </button>
+            <button mat-raised-button *ngIf="(case$ | async)?.started && !(case$ | async)?.stopped"  color="accent" (click)="lap()">
+                Lap
+            </button>
+            <button mat-raised-button *ngIf="(case$ | async)?.started && !(case$ | async)?.stopped" color="accent" (click)="stop()">
+                Stop
+            </button>
+            <button mat-raised-button *ngIf="(case$ | async)?.started && (case$ | async)?.stopped" color="accent" (click)="finish()">
+                Finish
+            </button>
+        </div>
+    </div>
+</div>
