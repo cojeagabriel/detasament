@@ -4,16 +4,16 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit } fr
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { CasualtyV2 } from 'src/app/types/casualty-v2';
 import { Location } from '@angular/common';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, Action, DocumentSnapshot } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material';
-import { ScreenService } from 'src/app/services/screen.service';
-import { Timer } from 'src/app/types/timer';
-import { map, switchMap, tap, shareReplay, take, filter } from 'rxjs/operators';
-import * as firebase from 'firebase';
-import { Case } from 'src/app/types/case';
+import { map, switchMap, filter } from 'rxjs/operators';
 import { chiefInjuries } from 'src/app/constants/chief-injuries.constant';
 import { InjuryV2 } from 'src/app/types/injury-v2';
+import { isNil } from 'lodash';
+import { CasualtyRecord } from 'src/app/types/casualty-record';
+import { MatDialog } from '@angular/material';
+import { ScreenService } from 'src/app/services/screen.service';
+import { DialogNormReviewComponent } from '../dialog-norm-review/dialog-norm-review.component';
 
 @Component({
   selector: 'app-chief-norm',
@@ -21,14 +21,22 @@ import { InjuryV2 } from 'src/app/types/injury-v2';
   styleUrls: ['./chief-norm.component.scss']
 })
 export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
-  
-  casualty$ = this.getCasualtyObservable();
-  caseRef: AngularFirestoreDocument<CaseV2>;
-  case$ = this.getCase();
-  timer$ = this.getTimer();
-  timerId$ = new BehaviorSubject<string | null>(null);
+
+  objectKeys = Object.keys;
+
+  casualtyRef: AngularFirestoreDocument<CasualtyV2>;
+  casualty$: Observable<CasualtyV2>;
+  caseRef: AngularFirestoreDocument;
+  case$: Observable<any>;
+  casualties$: Observable<CasualtyV2[]>;
+  casualtySubject$ = new BehaviorSubject<CasualtyV2 | null>(null);
+  injuries$ = new BehaviorSubject<InjuryV2[] | null>(null);
+
   time = 0;
-  timerRef;
+  timerInterval;
+  laps = [];
+  started = false;
+  stopped = false;
 
   @ViewChild('screen', { static: false }) screen: ElementRef;
   @ViewChild('content', { static: false }) content: ElementRef;
@@ -46,21 +54,127 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    this.route.parent.parent.params.pipe(
+      filter(params => params.id),
+      map(params => params.id),
+      untilDestroyed(this)
+    ).subscribe(caseId => {
+      this.caseRef = this.db.collection('cases').doc<CaseV2>(caseId);
+      this.case$ = this.getCaseObservable();
+      this.casualties$ = this.getCasualtiesObservable();
+    });
 
+    this.route.params.pipe(
+      filter(params => params.id),
+      map(params => params.id),
+      untilDestroyed(this)
+    ).subscribe(casualtyId => {
+      this.casualtyRef = this.db.collection('casualties').doc<CasualtyV2>(casualtyId);
+      this.casualty$ = this.getCasualtyObservable();
+    });
+
+    this.casualty$.pipe(
+      filter(casualty => !!casualty),
+      untilDestroyed(this)
+    ).subscribe(casualty => {
+      this.casualtySubject$.next(casualty);
+      this.injuries$.next(casualty.injuries as InjuryV2[]);
+    });
   }
   ngOnDestroy() {}
 
+  start() {
+    this.started = true;
+    this.timerInterval = setInterval(() => {
+      this.time++;
+    }, 1000);
+  }
+
+  stop() {
+    clearInterval(this.timerInterval);
+    this.stopped = true;
+  }
+
+  lap() {
+    this.laps.push({
+      time: this.time
+    });
+  }
+
+  finish() {
+    this.reset();
+  }
+
+  reset() {
+    this.time = 0;
+    this.laps = [];
+    this.started = false;
+    this.stopped = false;
+  }
+
+  openNormReview() {
+    const dialogRef = this.matDialog.open(DialogNormReviewComponent, {
+      closeOnNavigation: false,
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      panelClass: 'full-screen-modal',
+      autoFocus: false,
+      data: {
+        record: this.getRecord()
+      }
+    });
+    this.screenService.push(dialogRef);
+  }
+
+  getRecord(): CasualtyRecord {
+    const casualty = this.casualtySubject$.getValue();
+    const injuries = this.injuries$.getValue();
+    return {
+      name: casualty.name,
+      age: casualty.age,
+      details: casualty.details || null,
+      injuries
+    };
+  }
+
+  canFinish(): boolean {
+    const injuries = this.injuries$.getValue();
+    if (!injuries) {
+      return false;
+    }
+
+    for (const injury of injuries) {
+      if (injury.maneuvers.find(maneuver => isNil(maneuver.selectedScore))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  setSelectedScore(injuryIndex: number, maneuverIndex: number, selectedScore: number) {
+    const injuries = this.injuries$.getValue();
+    injuries[injuryIndex].maneuvers[maneuverIndex].selectedScore = selectedScore;
+    this.injuries$.next(injuries);
+  }
+
+  private getCaseObservable(): Observable<any> {
+    return this.caseRef.snapshotChanges().pipe(
+      map(actions => {
+        const data = actions.payload.data();
+        const id = actions.payload.id;
+        return { ...data, id };
+      })
+    );
+  }
+
   private getCasualtyObservable(): Observable<CasualtyV2> {
-    return this.route.params.pipe(
-      filter(params => params.id),
-      switchMap(params => {
-        return this.db.collection('casualties').doc<CasualtyV2>(params.id).snapshotChanges().pipe(
-          map(actions => {
-            const data = actions.payload.data();
-            const id = actions.payload.id;
-            return { ...data, id };
-          })
-        );
+    return this.casualtyRef.snapshotChanges().pipe(
+      map(actions => {
+        const data = actions.payload.data();
+        const id = actions.payload.id;
+        return { ...data, id };
       }),
       switchMap(casualty => {
         casualty.injuries = chiefInjuries;
@@ -78,92 +192,36 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
             return {
               ...casualty,
               injuries
-            }
+            };
           })
         );
       }),
-      untilDestroyed(this)
     );
   }
 
-  private getCase(): Observable<CaseV2> {
-    return this.route.parent.parent.params.pipe(
-      map(params => params.id),
-      switchMap(caseId => {
-        this.caseRef = this.db.collection('cases').doc<CaseV2>(caseId);
-        return this.db.collection('cases').doc<CaseV2>(caseId).snapshotChanges().pipe(
-          map(actions => {
+  private getCasualtiesObservable(): Observable<CasualtyV2[]> {
+    return this.case$.pipe(
+      switchMap(cs => {
+        const casualties$ = cs.casualties.map(casualtyId => {
+          return this.db.collection('casualties').doc<CasualtyV2>(casualtyId).snapshotChanges();
+        });
+        return combineLatest(casualties$);
+      }),
+      map(casualtiesActions => {
+        return casualtiesActions
+          .filter((actions: Action<DocumentSnapshot<CasualtyV2>>) => actions.payload.data())
+          .map((actions: Action<DocumentSnapshot<CasualtyV2>>) => {
             const data = actions.payload.data();
             const id = actions.payload.id;
             return { ...data, id };
-          })
-        );
+          });
       }),
-      shareReplay(1)
     );
   }
 
-  private getTimer() {
-    return this.case$.pipe(
-      switchMap(cs => {
-        return this.db.collection<Timer>('timers', ref => ref.where('caseId', '==', cs.id)).valueChanges({ idField: 'id' });
-      }),
-      map(cases => cases[0]),
-      tap(timer => {
-        this.timerId$.next(timer.id),
-        this.time = timer.time;
-      }),
-      shareReplay(1)
-    );
-  }
-
-  start() {
-    this.timer();
-    this.caseRef.update({ started: true });
-  }
-
-  stop() {
-    clearInterval(this.timerRef);
-    this.caseRef.update({ stopped: true });
-  }
-
-  lap() {
-    this.db.collection<Timer>('timers').doc(this.timerId$.getValue()).update({
-      laps: firebase.firestore.FieldValue.arrayUnion(this.time)
-    });
-  }
-
-  reset() {
-    this.time = 0;
-    this.update();
-  }
-
-  finish() {
-    this.stop();
-    this.reset();
-    this.db.collection<Timer>('timers').doc(this.timerId$.getValue()).update(
-      {
-        time: this.time,
-        laps: []
-      }
-    );
-    this.caseRef.update(
-      {
-        started: false,
-        stopped: false
-      }
-    );
-  }
-
-  timer() {
-    this.timerRef = setInterval(() => {
-      this.time ++;
-      this.update()
-    }, 1000);
-  }
-
-  update() {
-    this.db.collection<Timer>('timers').doc(this.timerId$.getValue()).update({ time: this.time })
+  getCounter(index: number): string {
+    index ++;
+    return index.toString().padStart(2, '0');
   }
 
   toggleAdditionalInfo() {
@@ -184,11 +242,6 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
         this.scrolling$.next(false);
       }
     }, true);
-  }
-
-  canDeactivate(): boolean {
-    this.finish();
-    return true;
   }
 
 }

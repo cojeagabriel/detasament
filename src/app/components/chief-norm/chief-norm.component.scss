@@ -48,8 +48,58 @@ mat-accordion{
 
 mat-tab-group{
     overflow: scroll;
+    height: 100%;
+
+    &::ng-deep{
+        .mat-tab-body-wrapper{
+            height: 100%;
+        }
+    }
 
     .content{
         height: 100%;
     }
+}
+
+.casualty-header{
+    display: flex;
+    align-items: center;
+    padding: 16px 16px 0;
+
+    .subtitle{
+        color: $dark-grey;
+        flex-grow: 1;
+    }
+
+    .avatar{
+        display: flex;
+        align-items: center;
+        margin-right: 8px;
+
+        mat-icon{
+            width: 28px;
+            height: 28px;
+            font-size: 28px;
+            color: $grey;
+        }
+    }
+}
+
+.injuries{
+    padding: 0 16px 0 52px;
+}
+
+.laps{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.counter{
+    display: inline-block;
+    min-width: 40px;
+}
+
+mat-expansion-panel{
+    overflow: scroll;
+    max-height: 108px;
 }

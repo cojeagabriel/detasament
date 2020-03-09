@@ -5,10 +5,10 @@
                 <mat-icon>arrow_back</mat-icon>
             </button>
 
-            <span class="top-bar-title">{{ (timer$ | async)?.time | time }}</span>
+            <span class="top-bar-title">{{ time | time }}</span>
 
             <div class="actions">
-                <button mat-icon-button class="secondary-button" [class.active]="additionalInfoExpanded$ | async" [disabled]="!(timer$ | async)?.laps.length"
+                <button mat-icon-button class="secondary-button" [class.active]="additionalInfoExpanded$ | async" [disabled]="!laps.length"
                     (click)="toggleAdditionalInfo()">
                     <mat-icon>timer</mat-icon>
                 </button>
@@ -16,8 +16,11 @@
         </div>
         <mat-accordion class="additional-header-info">
             <mat-expansion-panel [expanded]="additionalInfoExpanded$ | async">
-                <div *ngFor="let lap of (timer$ | async)?.laps" class="lap">
-                    {{ lap | time }}
+                <div class="laps">
+                    <div *ngFor="let lap of laps; let i = index" class="lap">
+                        <span class="counter secondary-text">{{ getCounter(i) }}</span>
+                        <span class="time text">{{ lap.time | time }}</span>
+                    </div>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
@@ -26,28 +29,42 @@
     <mat-tab-group mat-stretch-tabs [class.raised]="scrolling$ | async">
         <mat-tab label="Barem">
             <div #content class="content">
-                <app-norm [injuries]="(casualty$ | async)?.injuries"></app-norm>
+                <app-norm [injuries]="injuries$ | async" (scoreChange)="setSelectedScore($event.injuryIndex, $event.maneuverIndex, $event.selectedScore)"></app-norm>
             </div>
         </mat-tab>
-        <mat-tab label="Victime">
+        <mat-tab label="Leziuni">
             <div class="content">
-                test content
+                <div class="casualties" *ngFor="let casualty of (casualties$ | async)">
+                    <div class="casualty">
+                        <div class="casualty-header">
+                            <div class="avatar">
+                                <mat-icon>account_circle</mat-icon>
+                            </div>
+                            <div class="subtitle">{{ casualty.name }}</div>
+                        </div>
+                        <div class="injuries">
+                            <mat-checkbox *ngFor="let key of objectKeys(casualty.injuries)">
+                                {{ casualty.injuries[key] }}
+                            </mat-checkbox>
+                        </div>
+                    </div>
+                </div>
             </div>
         </mat-tab>
     </mat-tab-group>
 
     <div class="footer">
         <div class="actions">
-            <button mat-raised-button *ngIf="!(case$ | async)?.started && !(case$ | async)?.stopped" color="accent" (click)="start()">
+            <button mat-raised-button *ngIf="!started && !stopped" color="accent" (click)="start()">
                 Start
             </button>
-            <button mat-raised-button *ngIf="(case$ | async)?.started && !(case$ | async)?.stopped"  color="accent" (click)="lap()">
+            <button mat-raised-button *ngIf="!stopped && started"  color="accent" (click)="lap()">
                 Lap
             </button>
-            <button mat-raised-button *ngIf="(case$ | async)?.started && !(case$ | async)?.stopped" color="accent" (click)="stop()">
+            <button mat-raised-button *ngIf="!stopped && started" color="accent" (click)="stop()">
                 Stop
             </button>
-            <button mat-raised-button *ngIf="(case$ | async)?.started && (case$ | async)?.stopped" color="accent" (click)="finish()">
+            <button mat-raised-button *ngIf="stopped" color="accent" [disabled]="!canFinish()" (click)="openNormReview()">
                 Finish
             </button>
         </div>
