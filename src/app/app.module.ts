@@ -85,6 +85,8 @@ import { CasualtyNormComponent } from './components/casualty-norm/casualty-norm.
 import { ManeuverNormListItemComponent } from './components/maneuver-norm-list-item/maneuver-norm-list-item.component';
 import { DialogNormReviewComponent } from './components/dialog-norm-review/dialog-norm-review.component';
 import { NormComponent } from './components/norm/norm.component';
+import { ChiefNormComponent } from './components/chief-norm/chief-norm.component';
+import { TimePipe } from './pipes/time.pipe';
 
 
 @NgModule({
@@ -137,7 +139,9 @@ import { NormComponent } from './components/norm/norm.component';
     CasualtyNormComponent,
     ManeuverNormListItemComponent,
     DialogNormReviewComponent,
-    NormComponent
+    NormComponent,
+    ChiefNormComponent,
+    TimePipe
   ],
   entryComponents: [
     AddManeuverComponent,
@@ -184,7 +188,8 @@ import { NormComponent } from './components/norm/norm.component';
     CasualtyService,
     InjuryService,
     ManeuverService,
-    ScreenService
+    ScreenService,
+    TimePipe
   ],
   bootstrap: [AppComponent]
 })

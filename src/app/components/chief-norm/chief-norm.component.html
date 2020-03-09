@@ -1,0 +1,72 @@
+<div #screen class="screen">
+    <div class="expanding-header" [@.disabled]="disableAnimation">
+        <div class="nav">
+            <button mat-icon-button (click)="back()">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+
+            <span class="top-bar-title">{{ time | time }}</span>
+
+            <div class="actions">
+                <button mat-icon-button class="secondary-button" [class.active]="additionalInfoExpanded$ | async" [disabled]="!laps.length"
+                    (click)="toggleAdditionalInfo()">
+                    <mat-icon>timer</mat-icon>
+                </button>
+            </div>
+        </div>
+        <mat-accordion class="additional-header-info">
+            <mat-expansion-panel [expanded]="additionalInfoExpanded$ | async">
+                <div class="laps">
+                    <div *ngFor="let lap of laps; let i = index" class="lap">
+                        <span class="counter secondary-text">{{ getCounter(i) }}</span>
+                        <span class="time text">{{ lap.time | time }}</span>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <mat-tab-group mat-stretch-tabs [class.raised]="scrolling$ | async">
+        <mat-tab label="Barem">
+            <div #content class="content">
+                <app-norm [injuries]="injuries$ | async" (scoreChange)="setSelectedScore($event.injuryIndex, $event.maneuverIndex, $event.selectedScore)"></app-norm>
+            </div>
+        </mat-tab>
+        <mat-tab label="Leziuni">
+            <div class="content">
+                <div class="casualties" *ngFor="let casualty of (casualties$ | async)">
+                    <div class="casualty">
+                        <div class="casualty-header">
+                            <div class="avatar">
+                                <mat-icon>account_circle</mat-icon>
+                            </div>
+                            <div class="subtitle">{{ casualty.name }}</div>
+                        </div>
+                        <div class="injuries">
+                            <mat-checkbox *ngFor="let key of objectKeys(casualty.injuries)">
+                                {{ casualty.injuries[key] }}
+                            </mat-checkbox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+    <div class="footer">
+        <div class="actions">
+            <button mat-raised-button *ngIf="!started && !stopped" color="accent" (click)="start()">
+                Start
+            </button>
+            <button mat-raised-button *ngIf="!stopped && started"  color="accent" (click)="lap()">
+                Lap
+            </button>
+            <button mat-raised-button *ngIf="!stopped && started" color="accent" (click)="stop()">
+                Stop
+            </button>
+            <button mat-raised-button *ngIf="stopped" color="accent" [disabled]="!canFinish()" (click)="openNormReview()">
+                Finish
+            </button>
+        </div>
+    </div>
+</div>
