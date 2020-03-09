@@ -1,0 +1,17 @@
+<div [ngClass]="{'selected': isSelected()}" class="text">
+    {{ maneuver.description }}
+</div>
+
+<mat-chip-list class="custom-chip-list circular">
+    <mat-chip [selected]="maneuver.selectedScore === 0" (click)="onScoreChange(0)">
+        0
+    </mat-chip>
+    <mat-chip [disabled]="!maneuver.average"
+        [selected]="maneuver.selectedScore === maneuver.score/2"
+        (click)="onScoreChange(maneuver.score/2)">
+        {{ maneuver.average ? maneuver.score/2 : '-' }}
+    </mat-chip>
+    <mat-chip [selected]="maneuver.selectedScore === maneuver.score" (click)="onScoreChange(maneuver.score)">
+        {{ maneuver.score }}
+    </mat-chip>
+</mat-chip-list>

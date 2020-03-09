@@ -1,0 +1,41 @@
+<div #screen class="screen">
+    <div class="expanding-header" [class.raised]="scrolling$ | async" [@.disabled]="disableAnimation">
+        <div class="nav">
+            <button mat-icon-button (click)="back()">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            
+            <span class="top-bar-title">00:00</span>
+            
+            <div class="actions" *ngIf="(casualty$ | async) && !(casualty$ | async)?.chief">
+                <button mat-icon-button class="secondary-button" [class.active]="additionalInfoExpanded$ | async" (click)="toggleAdditionalInfo()">
+                    <mat-icon>info_outline</mat-icon>
+                </button>
+            </div>
+        </div>
+        <mat-accordion class="additional-header-info">
+            <mat-expansion-panel [expanded]="additionalInfoExpanded$ | async">
+                <div class="casualty-header">
+                    <div class="casualty-avatar">
+                        <mat-icon>account_circle</mat-icon>
+                    </div>
+                    <div class="subtitle casualty-name">{{ (casualty$ | async)?.name }}</div>
+                    <div class="secondary-text">{{ (casualty$ | async)?.age }} ani</div>
+                </div>
+                <div *ngIf="(casualty$ | async)?.details" class="text">{{ (casualty$ | async)?.details }}</div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <div #content class="content">
+        <app-norm [injuries]="injuries$ | async" (scoreChange)="setSelectedScore($event.injuryIndex, $event.maneuverIndex, $event.selectedScore)"></app-norm>
+    </div>
+
+    <div class="footer">
+        <div class="actions">
+            <button mat-raised-button color="accent" [disabled]="!canFinish()" (click)="openNormReview()">
+                Finalizează
+            </button>
+        </div>
+    </div>
+</div>

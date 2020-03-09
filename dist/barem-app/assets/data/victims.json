@@ -1,0 +1,883 @@
+[{
+    "_id": "12121",
+    "name": "Serban",
+    "age": 14,
+    "context": [
+      "cutremur",
+      "incendiu"
+    ],
+    "lesions": [{
+        "name": "Fractura inchisa antebrat stang",
+        "maneuvers": [{
+            "name": "velit elit nostrud sint",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "laborum sunt ullamco do",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "ullamco cupidatat pariatur est",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "ullamco ex et eiusmod",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "Lorem id ut et",
+        "maneuvers": [{
+            "name": "pariatur reprehenderit id ea",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "deserunt dolore ea nostrud",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "ad nulla ex amet",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "quis elit ad mollit",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "sint magna enim ut",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "dolor tempor nostrud consequat",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "commodo officia anim est",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "est enim adipisicing commodo",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "nostrud eiusmod dolore sit",
+        "maneuvers": [{
+            "name": "voluptate laboris ea commodo",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "Lorem tempor laborum qui",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "ut eiusmod consequat amet",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "aliqua nisi minim ex",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "labore reprehenderit esse anim",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "non culpa quis ut",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "nostrud ut dolore proident",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "222222",
+    "name": "Antonia Gentry",
+    "age": 16,
+    "context": [
+      "incendiu",
+      "inundatie"
+    ],
+    "lesions": [{
+        "name": "laboris do laboris duis",
+        "maneuvers": [{
+            "name": "id elit eu mollit",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "ut sunt velit reprehenderit",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "eu nulla magna magna",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "commodo sint consectetur occaecat",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "incididunt in fugiat sit",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "ad sit deserunt anim",
+        "maneuvers": [{
+            "name": "sunt sunt cillum ea",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "non deserunt elit deserunt",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "occaecat incididunt excepteur Lorem",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "occaecat culpa fugiat nisi",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "consequat tempor nisi excepteur",
+        "maneuvers": [{
+            "name": "magna ut veniam ullamco",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "ex mollit sunt pariatur",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "nulla ut sit voluptate",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "dolore quis elit aliqua",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "in nostrud consectetur esse",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "333333",
+    "name": "Stuart Castro",
+    "age": 79,
+    "context": [
+      "incendiu",
+      "inundatie"
+    ],
+    "lesions": [{
+        "name": "exercitation est occaecat deserunt",
+        "maneuvers": [{
+            "name": "commodo sint aliqua sunt",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "occaecat velit duis nulla",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "culpa aute dolor anim",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "consequat cillum irure et",
+        "maneuvers": [{
+            "name": "irure nulla incididunt voluptate",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "ut nulla laborum ea",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "fugiat ex nostrud laboris",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "Lorem velit est velit",
+        "maneuvers": [{
+            "name": "dolore veniam duis est",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "cupidatat in qui laboris",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "exercitation elit aute aliqua",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "444444",
+    "name": "Holman Ware",
+    "age": 82,
+    "context": [
+      "cutremur",
+      "incendiu",
+      "inundatie"
+    ],
+    "lesions": [{
+        "name": "proident commodo incididunt elit",
+        "maneuvers": [{
+            "name": "in velit ipsum sit",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "eu deserunt eu eiusmod",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "ullamco mollit irure in",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "sit nisi cillum nisi",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "proident elit magna esse",
+        "maneuvers": [{
+            "name": "amet magna consectetur in",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "nisi ullamco consectetur ipsum",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "eiusmod dolor elit id",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "quis irure sint et",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "quis aliquip cillum et",
+        "maneuvers": [{
+            "name": "est nisi minim non",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "nulla qui voluptate sit",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "veniam consectetur eiusmod exercitation",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "dolor officia sunt est",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "ullamco eiusmod occaecat tempor",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "non magna sit consectetur",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "55555",
+    "name": "Avila Lindsay",
+    "age": 65,
+    "context": [
+      "cutremur"
+    ],
+    "lesions": [{
+        "name": "mollit culpa dolor et",
+        "maneuvers": [{
+            "name": "officia consequat magna consequat",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "laboris quis ipsum ea",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "dolore aute adipisicing voluptate",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "pariatur id eiusmod anim",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "velit officia velit ullamco",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "nostrud id sunt pariatur",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "ex laborum enim dolore",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "sunt dolor id commodo",
+        "maneuvers": [{
+            "name": "aliqua velit cillum anim",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "non non culpa sit",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "ut exercitation dolor id",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "magna commodo nostrud fugiat",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "adipisicing et ea nulla",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "excepteur cillum nisi aliqua",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "officia proident esse consequat",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "aute elit do laboris",
+        "maneuvers": [{
+            "name": "tempor eiusmod occaecat veniam",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "minim eu fugiat exercitation",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "magna officia sint tempor",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "ut reprehenderit magna tempor",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "666666",
+    "name": "Melisa Espinoza",
+    "age": 5,
+    "context": [
+      "cutremur",
+      "inundatie"
+    ],
+    "lesions": [{
+        "name": "aute consequat laborum aliqua",
+        "maneuvers": [{
+            "name": "commodo culpa nulla magna",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "labore ullamco non fugiat",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "mollit dolore duis anim",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "do Lorem et aute",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "dolore ea ex deserunt",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "anim occaecat mollit eu",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "elit deserunt proident quis",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "proident anim nisi in",
+        "maneuvers": [{
+            "name": "eu fugiat sint elit",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "et adipisicing amet eiusmod",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "tempor velit dolor officia",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "non proident officia nostrud",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "eu do officia dolore",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "nisi Lorem aliqua esse",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "velit ea cupidatat ut",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "do laboris dolore laboris",
+        "maneuvers": [{
+            "name": "laborum labore eiusmod excepteur",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "occaecat veniam officia elit",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "cupidatat amet nulla aute",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "77777",
+    "name": "Washington Howe",
+    "age": 48,
+    "context": [
+      "cutremur",
+      "incendiu"
+    ],
+    "lesions": [{
+        "name": "magna do ipsum ad",
+        "maneuvers": [{
+            "name": "incididunt eu do veniam",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "labore fugiat do tempor",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "culpa tempor anim dolore",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "irure aute culpa duis",
+        "maneuvers": [{
+            "name": "ad eiusmod ut velit",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "commodo voluptate velit cupidatat",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "nostrud qui commodo id",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "proident laboris eu ex",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "eiusmod elit deserunt fugiat",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "est consequat esse velit",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      },
+      {
+        "name": "occaecat cillum ut consequat",
+        "maneuvers": [{
+            "name": "enim eu sunt incididunt",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "adipisicing adipisicing non consequat",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "est excepteur ullamco nulla",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          },
+          {
+            "name": "velit do exercitation ex",
+            "score": {
+              "average": 1,
+              "maximum": 2
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

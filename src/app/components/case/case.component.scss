@@ -1,0 +1,90 @@
+@import "../../../assets/scss/variables";
+
+.mat-headline {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  margin-left: 8px;
+}
+
+.mat-card-subtitle {
+  margin-bottom: 8px;
+}
+
+.container {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+.mat-list-base {
+  padding-top: 0;
+
+  mat-icon {
+    color: $primary;
+    margin-right: 8px;
+  }
+
+  .mat-list-item {
+    height: 32px;
+    font-size: 14px;
+    color: rgba($color: #000, $alpha: 0.54);
+  }
+}
+
+mat-card {
+  margin-bottom: 16px;
+  padding: 0;
+}
+
+.state-number {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  // border: solid 1px $primary;
+  border: solid 1px rgba(0, 0, 0, 0.14);
+  font-size: 14px;
+}
+
+.card-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f8f8f8;
+  padding: 4px 0 4px 16px;
+  min-height: 40px;
+}
+
+.actions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-card-content{
+  margin-bottom: 0;
+}
+
+mat-card-actions{
+  padding: 0px 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mat-card>.mat-card-actions:last-child{
+  padding-bottom: 8px;
+}

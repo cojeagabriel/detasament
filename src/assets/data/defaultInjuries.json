@@ -1,0 +1,118 @@
+[{
+    "nume": "Managementul situatiei si abordarea victimei",
+    "manevre": [{
+        "descriere": "Calm si increzator",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Realizarea unei zone sigure",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Initierea contactului verbal cu victima",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Prezentare ca salvator",
+        "punctajMaxim": 2
+      },
+      {
+        "descriere": "Cere informatii despre ce s-a intamplat",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      }
+    ]
+  },
+  {
+    "nume": "Examinare si tratament specific",
+    "manevre": [{
+        "descriere": "Incurajarea victimei de a sta jos",
+        "punctajMaxim": 2
+      },
+      {
+        "descriere": "Intreaba ce o doare",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Examinarea victimei",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Localizeaza si recunoaste leziunea / ile",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      }
+    ]
+  },
+  {
+    "nume": "Tratament general",
+    "manevre": [{
+        "descriere": "Pastrarea pozitiei confortabile pentru victima",
+        "punctajMaxim": 2
+      },
+      {
+        "descriere": "Verificarea respiratiei si frecventa acesteia",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Verificarea circulatiei si frecventa cardiaca",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Evaluarea secundara",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Protejarea victimei de conditiile meteo",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Desfacerea articolelor vestimentare stramte",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Reevaluarea manevrelor efectuate",
+        "punctajMaxim": 1
+      },
+      {
+        "descriere": "Folosirea corecta a componentelor trusei",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Folosirea corecta a manusilor",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      }
+    ]
+  },
+  {
+    "nume": "Suportul psihologic",
+    "manevre": [{
+        "descriere": "Tratarea cu respect a victimei",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Explicarea tratamentului efectuat",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      },
+      {
+        "descriere": "Linistirea eficienta a victimei",
+        "punctajMaxim": 2,
+        "punctajPartial": 1
+      }
+    ]
+  }
+]

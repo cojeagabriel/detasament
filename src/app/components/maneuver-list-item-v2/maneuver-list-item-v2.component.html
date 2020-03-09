@@ -1,0 +1,12 @@
+<span class="description">
+    {{ maneuver.description }}
+</span>
+
+<span class="score-container">
+    <div class="score-chip">
+        {{ maneuver.average ? maneuver.score/2 : '-' }}
+    </div>
+    <div class="score-chip">
+        {{ maneuver.score }}
+    </div>
+</span>

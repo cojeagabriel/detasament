@@ -1,0 +1,5 @@
+<div class="injury-container container">
+    <span class="mat-h4 injury-title">{{ injury.name }}</span>
+    <app-maneuver *ngFor="let maneuver of injury.maneuvers" [maneuver]="maneuver" (scoreEmitter)="emittScore($event)">
+    </app-maneuver>
+</div>

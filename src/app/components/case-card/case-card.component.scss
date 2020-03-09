@@ -1,0 +1,15 @@
+.card {
+  background-color: #fafafa;
+  border: 1px solid #ed1b2e;
+  border-radius: 10px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  .actions {
+    display: flex;
+    flex-direction: row;
+  }
+}

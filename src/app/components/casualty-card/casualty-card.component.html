@@ -1,0 +1,28 @@
+<div class="actions" *ngIf="!chief && arbitrate && (casualty)?.details">
+    <button mat-icon-button (click)="showNote()" [ngClass]="{'panelOpen': panelOpenState}">
+        <mat-icon>description</mat-icon>
+    </button>
+</div>
+
+<div class="header">
+    <span class="name">{{ (casualty)?.name }}</span>
+    <span *ngIf="!chief" class="age">{{ (casualty)?.age + ' ani' }}</span>
+</div>
+
+<div *ngIf="!chief" class="content">
+    <ul class="injuries-list">
+        <li *ngFor="let injury of (casualty)?.injuries">
+            <span>{{ injury.name }}</span>
+        </li>
+    </ul>
+</div>
+
+<mat-expansion-panel *ngIf="!chief && (casualty)?.details" [(expanded)]="panelOpenState">
+    <span>{{ (casualty)?.details }}</span>
+</mat-expansion-panel>
+
+<div *ngIf="arbitrate" class="footer">
+    <button [routerLink]="'/case/' + case?.caseCode + '/barem/' + ((casualty)?._id? casualty._id : 'chief')" mat-flat-button>
+        Arbitrează
+    </button>
+</div>

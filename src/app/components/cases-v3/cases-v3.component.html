@@ -1,0 +1,47 @@
+<div #screen class="screen">
+    <div *ngIf="!(searching$ | async)" class="header" [class.raised]="scrolling$ | async">
+        <button mat-icon-button (click)="back()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <span class="top-bar-title mat-typogrphy">Cazuri</span>
+
+        <div class="actions">
+            <button mat-icon-button (click)="openSearch()">
+                <mat-icon>search</mat-icon>
+            </button>
+            <button mat-icon-button [routerLink]="'create'">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="searching$ | async" class="header" [class.raised]="scrolling$ | async">
+        <button mat-icon-button (click)="closeSearch()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <input #searchInput type="text" placeholder="Caută după nume" class="top-bar-title search-input"
+            [formControl]="search" spellcheck="false">
+
+        <div class="actions">
+            <button *ngIf="search.value.length" mat-icon-button (click)="clearSearchInput();">
+                <mat-icon>close</mat-icon>
+            </button>
+            <button mat-icon-button [routerLink]="'create'">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="loading$ | async" class="loader-container">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <div class="content">
+        <div class="cases-container">
+            <app-case-card-v2 *ngFor="let case of cases$ | async" [routerLink]="case.id" [case]="case">
+            </app-case-card-v2>
+        </div>
+    </div>
+</div>

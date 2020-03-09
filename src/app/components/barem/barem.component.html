@@ -1,0 +1,58 @@
+<div class="header-container">
+    <span class="mat-headline">{{ (victim$ | async)?.name }}{{ (victim$ | async)?.age? ', ' +  (victim$ | async)?.age + ' ani' : '' }}</span>
+    <span *ngIf="(case$ | async)?.context && chief === false" class="victim-injuries-text mat-typography">{{ (victim$ | async)?.injuries | injuriesToString }}</span>
+    <span class="case-context mat-caption text-center">{{ (case$ | async)?.context }}</span>
+    <span class="victim-description mat-caption text-center">{{ (victim$ | async)?.details }}</span>
+</div>
+
+<div *ngIf="(case$ | async)?.context && chief === true">
+    <mat-tab-group>
+        <mat-tab label="Barem">
+            <div class="container">
+                <div class="injuries-container">
+                    <app-barem-injury *ngFor="let injury of (victim$ | async)?.injuries" [injury]="injury"
+                        (scoreEmitter)="calculateScore($event)"></app-barem-injury>
+                </div>
+    
+                <div class="score-container">
+                    <h5 class="mat-h5">Punctaj</h5>
+                    <span>{{ score }}<small>/ {{ totalScore }}</small></span>
+                </div>
+    
+                <button routerLink="/" mat-raised-button color="accent">Încheie caz</button>
+            </div>
+        </mat-tab>
+        <mat-tab label="Leziuni">
+            <div class="injuries-summary-container">
+                <div *ngFor="let victim of (case$ | async)?.victims" class="injuries-summary">
+                    <div class="casualty-name-container">
+                        <mat-icon aria-hidden="false">face</mat-icon>
+                        <span class="victim-name">{{ victim.name }}</span>
+                    </div>
+                    <div class="injuries-list-container">
+                        <mat-checkbox *ngFor="let injury of victim.injuries">{{ injury.name }}</mat-checkbox>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+<div *ngIf="(case$ | async)?.context && chief === false" class="container">
+    
+    <div *ngIf="(case$ | async)?.context && chief === false" class="injuries-container">
+        <app-barem-injury *ngFor="let injury of (baremStart$ | async)" [injury]="injury"
+            (scoreEmitter)="calculateScore($event)"></app-barem-injury>
+        <app-barem-injury *ngFor="let injury of (victim$ | async)?.injuries" [injury]="injury"
+            (scoreEmitter)="calculateScore($event)"></app-barem-injury>
+        <app-barem-injury *ngFor="let injury of (baremEnd$ | async)" [injury]="injury" 
+            (scoreEmitter)="calculateScore($event)"></app-barem-injury>
+    </div>
+    
+    <div class="score-container">
+        <h5 class="mat-h5">Punctaj</h5>
+        <span>{{ score }}<small>/ {{ totalScore }}</small></span>
+    </div>
+    
+    <button routerLink="/" mat-raised-button color="accent">Încheie caz</button>
+</div>

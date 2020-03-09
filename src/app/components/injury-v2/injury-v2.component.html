@@ -1,0 +1,31 @@
+<div #screen class="screen">
+    <div class="header" [class.raised]="scrolling$ | async">
+        <button mat-icon-button (click)="back()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <span class="top-bar-title mat-typogrphy"></span>
+
+        <div class="actions">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="'edit'">Modifică</button>
+            </mat-menu>
+        </div>
+    </div>
+
+    <div class="content">
+        <span class="injury-title mat-typogrphy">{{ (injury$ | async)?.name }}</span>
+
+        <div class="maneuvers-header">
+            <label class="mat-label">Manevre</label>
+        </div>
+
+        <div class="maneuvers-container">
+            <app-maneuver-list-item *ngFor="let maneuver of (injury$ | async)?.maneuvers" [maneuver]="maneuver">
+            </app-maneuver-list-item>
+        </div>
+    </div>
+</div>

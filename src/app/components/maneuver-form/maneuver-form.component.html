@@ -1,0 +1,49 @@
+<div #screen class="screen">
+    <div class="header" [class.raised]="scrolling$ | async">
+        <button mat-icon-button (click)="back()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <span class="top-bar-title">{{ (editing$ | async) ? 'Modifică manevra' : 'Adaugă o manevră' }}</span>
+
+        <div class="actions">
+            <button *ngIf="editing$ | async" class="secondary-button" mat-icon-button (click)="delete()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="content" [formGroup]="form">
+        <mat-form-field>
+            <textarea placeholder="Descriere" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" formControlName="description" spellcheck="false"></textarea>
+        </mat-form-field>
+
+        <div class="custom-form-field">
+            <label class="mat-label">Punctaj maxim</label>
+            <mat-chip-list class="custom-chip-list">
+                <mat-chip *ngFor="let key of getKeys(scores); let i = index" [selected]="scores[key]"
+                    (click)="setScore(key)">
+                    {{ key == '0'? '-' : key}}
+                </mat-chip>
+                <mat-chip class="add-chip" (click)="openAddScoreDialog('maximum')">
+                    <mat-icon>add</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+
+        <div class="custom-form-field">
+            <mat-slide-toggle labelPosition="before"
+                formControlName="average">Punctaj mediu</mat-slide-toggle>
+        </div>
+
+
+        <div class="footer">
+            <div class="actions">
+                <button mat-raised-button color="accent" [disabled]="!form.valid"
+                    (click)="save()">{{ (editing$ | async) ? 'Salvează': 'Adaugă' }}</button>
+            </div>
+        </div>
+
+    </div>
+</div>

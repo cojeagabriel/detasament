@@ -1,0 +1,30 @@
+.content{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 24px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.custom-form-field,
+mat-form-field {
+  margin-bottom: 16px;
+}
+
+mat-slide-toggle{
+  width: 100%;
+
+  &::ng-deep{
+    .mat-slide-toggle-label{
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .mat-slide-toggle-content{
+      color: rgba(0, 0, 0, .54);
+      font-size: 16px;
+    }
+  }
+}

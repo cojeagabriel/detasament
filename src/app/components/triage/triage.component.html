@@ -1,0 +1,43 @@
+<div class="triage-casualty-resume">
+
+    <div class="score-container">
+        <span class="correct">{{ score.correct }}</span>
+        /
+        <span class="wrong">{{ score.wrong }}</span>
+    </div>
+
+    <div class="options">
+        <button mat-raised-button class="option"
+            (click)="snackValue(triageCasualty?.breathing? triageCasualty?.name +', ' + triageCasualty?.age + ' ani' : triageCasualty?.age + ' ani')">Initierea
+            contactului verbal</button>
+        <button mat-raised-button class="option"
+            (click)="snackValue(triageCasualty?.breathing? (triageCasualty?.canWalk? 'Da, pot sa merg' : 'Nu, nu pot sa merg') : '-')">Poti
+            sa mergi?</button>
+        <button mat-raised-button class="option"
+            (click)="snackValue(triageCasualty?.breathing? triageCasualty?.breathing + '/min' : 'Nu respira'); showAirway()">Respiratie</button>
+        <button mat-raised-button class="option" *ngIf="!triageCasualty?.breathing && openAirway"
+            (click)="snackValue(triageCasualty?.openAirway? 'Respira' : 'Nu respira'); showInsufflations()">Deschidere cai
+            aeriene</button>
+        <button mat-raised-button class="option"
+            *ngIf="!triageCasualty?.breathing && insufflations && triageCasualty?.age < childAgeThreshold && !triageCasualty?.openAirway"
+            (click)="snackValue(triageCasualty?.insufflations? 'Respira' : 'Nu respira')">Insuflatii</button>
+        <button mat-raised-button class="option" (click)="snackValue(triageCasualty?.TRC)">TRC</button>
+        <button mat-raised-button class="option"
+            (click)="snackValue(triageCasualty?.mentalStatus? 'Executa comenzi simple' : 'NU executa comenzi simple')">Status
+            mental</button>
+    </div>
+</div>
+
+<div class="actions">
+    <div class="tags">
+        <button mat-raised-button color="accent" (click)="verify('green')">Verde</button>
+        <button mat-raised-button color="accent" (click)="verify('yellow')">Galben</button>
+        <button mat-raised-button color="accent" (click)="verify('red')">Rosu</button>
+        <button mat-raised-button color="accent" (click)="verify('black')">Negru</button>
+    </div>
+
+    <div class="result" [ngClass]="{'correct': result == true, 'wrong': result == false }"
+        *ngIf="result != null">{{ result == true? 'Corect' : 'Gresit' }}</div>
+
+    <button mat-raised-button color="accent" (click)="generate()">Genereaza</button>
+</div>
