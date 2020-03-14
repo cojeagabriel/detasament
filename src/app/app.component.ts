@@ -1,6 +1,4 @@
-import { BottomNavigationService } from './services/bottom-navigation.service';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { trigger, transition, style, query, group, animate } from '@angular/animations';
 
 @Component({
@@ -43,13 +41,8 @@ import { trigger, transition, style, query, group, animate } from '@angular/anim
 })
 export class AppComponent {
   title = 'barem-app';
-  bottomNavigationVisible$ = this.bottomNavigationService.visible$;
 
-  constructor(
-    router: Router,
-    activatedRoute: ActivatedRoute,
-    private bottomNavigationService: BottomNavigationService
-  ) {}
+  constructor() {}
 
   getState(outlet) {
     return outlet.activatedRouteData['state'];

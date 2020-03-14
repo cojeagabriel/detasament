@@ -1,4 +1,3 @@
-import { BottomNavigationService } from './services/bottom-navigation.service';
 import { ScreenService } from './services/screen.service';
 import { CasualtyService } from './services/casualty.service';
 import { InjuryService } from './services/injury.service';
@@ -187,7 +186,6 @@ import { BottomNavigationComponent } from './components/bottom-navigation/bottom
     AngularFirestoreModule
   ],
   providers: [
-    BottomNavigationService,
     CaseService,
     CasualtyService,
     InjuryService,

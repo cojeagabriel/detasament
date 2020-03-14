@@ -53,7 +53,8 @@ export class AddInjuriesV2Component implements OnInit, OnDestroy, AfterViewInit 
     return this.search.valueChanges.pipe(
       startWith(''),
       switchMap(searchText => {
-        return this.db.collection<InjuryV2>('injuries', ref => ref.orderBy('name', 'asc')).valueChanges({ idField: 'id' })
+        return this.db.collection<InjuryV2>('injuries', ref => ref.where('default', '==', false).orderBy('name', 'asc'))
+          .valueChanges({ idField: 'id' })
           .pipe(
             map(injuries => {
               return injuries.filter(injury => injury.name.toLowerCase().includes(searchText.toLowerCase()));
