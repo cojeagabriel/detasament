@@ -1,3 +1,4 @@
+import { BottomNavigationService } from './services/bottom-navigation.service';
 import { ScreenService } from './services/screen.service';
 import { CasualtyService } from './services/casualty.service';
 import { InjuryService } from './services/injury.service';
@@ -87,6 +88,7 @@ import { DialogNormReviewComponent } from './components/dialog-norm-review/dialo
 import { NormComponent } from './components/norm/norm.component';
 import { ChiefNormComponent } from './components/chief-norm/chief-norm.component';
 import { TimePipe } from './pipes/time.pipe';
+import { BottomNavigationComponent } from './components/bottom-navigation/bottom-navigation.component';
 
 
 @NgModule({
@@ -141,7 +143,8 @@ import { TimePipe } from './pipes/time.pipe';
     DialogNormReviewComponent,
     NormComponent,
     ChiefNormComponent,
-    TimePipe
+    TimePipe,
+    BottomNavigationComponent
   ],
   entryComponents: [
     AddManeuverComponent,
@@ -184,6 +187,7 @@ import { TimePipe } from './pipes/time.pipe';
     AngularFirestoreModule
   ],
   providers: [
+    BottomNavigationService,
     CaseService,
     CasualtyService,
     InjuryService,
