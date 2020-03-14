@@ -1,0 +1,20 @@
+<div class="bottom-navigation">
+    <div class="bottom-navigation-link" (click)="goTo('/cases')" [class.active]="(currentUrl$ | async) === '/cases'">
+        <mat-icon>home</mat-icon>
+        <div class="mat-caption bottom-navigation-text">
+            Cazuri
+        </div>
+    </div>
+    <div class="bottom-navigation-link" (click)="goTo('/casualties')" [class.active]="(currentUrl$ | async) === '/casualties'">
+        <mat-icon>people</mat-icon>
+        <div class="mat-caption bottom-navigation-text">
+            Victime
+        </div>
+    </div>
+    <div class="bottom-navigation-link" (click)="goTo('/injuries')" [class.active]="(currentUrl$ | async) === '/injuries'">
+        <mat-icon>add_location</mat-icon>
+        <div class="mat-caption bottom-navigation-text">
+            Leziuni
+        </div>
+    </div>
+</div>

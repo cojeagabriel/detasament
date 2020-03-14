@@ -24,7 +24,33 @@ import { CasualtyNormComponent } from './components/casualty-norm/casualty-norm.
 import { ChiefNormComponent } from './components/chief-norm/chief-norm.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, data: { state: '0' } },
+  {
+    path: '',
+    component: HomeComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'cases',
+      },
+      {
+        path: 'cases',
+        component: CasesV3Component,
+        data: { state: '1' }
+      },
+      {
+        path: 'casualties',
+        component: CasualtiesV2Component,
+        data: { state: '1' }
+      },
+      {
+        path: 'injuries',
+        component: InjuriesV3Component,
+        data: { state: '1' }
+      }
+    ],
+    data: { state: '1' }
+  },
   { path: 'injuries',
     children: [
       { path: '', component: InjuriesV3Component, data: { state: '1' } },
@@ -83,7 +109,7 @@ const routes: Routes = [
       },
     ]
   },
-  { path: 'triage', component: TriageComponent},
+  // { path: 'triage', component: TriageComponent},
 ];
 
 @NgModule({

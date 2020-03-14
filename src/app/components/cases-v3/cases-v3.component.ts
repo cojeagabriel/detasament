@@ -1,5 +1,6 @@
+import { BottomNavigationService } from './../../services/bottom-navigation.service';
 import { CaseV2 } from './../../types/case-v2.d';
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl } from '@angular/forms';
@@ -11,7 +12,7 @@ import { Location } from '@angular/common';
   templateUrl: './cases-v3.component.html',
   styleUrls: ['./cases-v3.component.scss']
 })
-export class CasesV3Component implements OnInit, AfterViewInit {
+export class CasesV3Component implements OnInit, OnDestroy, AfterViewInit {
 
   search = new FormControl('');
   cases$ = this.getCasesObservable();
@@ -24,11 +25,16 @@ export class CasesV3Component implements OnInit, AfterViewInit {
 
   constructor(
     private db: AngularFirestore,
-    private location: Location
+    private location: Location,
+    private bottomNavigationService: BottomNavigationService
   ) { }
 
   ngOnInit() {
+    this.bottomNavigationService.show();
     this.cases$.subscribe(res => this.loading$.next(false));
+  }
+  ngOnDestroy() {
+    // this.bottomNavigationService.hide();
   }
 
   private getCasesObservable(): Observable<CaseV2[]> {
@@ -43,16 +49,6 @@ export class CasesV3Component implements OnInit, AfterViewInit {
       }),
       shareReplay(1)
     );
-
-    // return combineLatest(
-    //   this.db.collection<CaseV2>('cases', ref => ref.orderBy('name', 'asc')).valueChanges({ idField: 'id' }),
-    //   this.search.valueChanges
-    // ).pipe(
-    //   map(([cases, searchText]) => {
-    //     return cases.filter(case => case.name.toLowerCase().includes(searchText.toLowerCase()));
-    //   }),
-    //   shareReplay(1)
-    // );
   }
 
   openSearch() {
