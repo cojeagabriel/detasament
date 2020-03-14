@@ -1,17 +1,35 @@
 <div class="bottom-navigation">
-    <div class="bottom-navigation-link" (click)="goTo('/cases')" [class.active]="(currentUrl$ | async) === '/cases'">
+    <div class="bottom-navigation-link"
+        [class.active]="(currentUrl$ | async) === '/cases'"
+        matRipple
+        matRippleCentered="true"
+        matRippleRadius="40"
+        matRippleColor="rgba(0, 0, 0, 0.03)"
+        (click)="goTo('/cases')">
         <mat-icon>home</mat-icon>
         <div class="mat-caption bottom-navigation-text">
             Cazuri
         </div>
     </div>
-    <div class="bottom-navigation-link" (click)="goTo('/casualties')" [class.active]="(currentUrl$ | async) === '/casualties'">
+    <div class="bottom-navigation-link" 
+        [class.active]="(currentUrl$ | async) === '/casualties'"
+        matRipple
+        matRippleCentered="true"
+        matRippleRadius="40"
+        matRippleColor="rgba(0, 0, 0, 0.03)"
+        (click)="goTo('/casualties')">
         <mat-icon>people</mat-icon>
         <div class="mat-caption bottom-navigation-text">
             Victime
         </div>
     </div>
-    <div class="bottom-navigation-link" (click)="goTo('/injuries')" [class.active]="(currentUrl$ | async) === '/injuries'">
+    <div class="bottom-navigation-link"
+        [class.active]="(currentUrl$ | async) === '/injuries'"
+        matRipple
+        matRippleCentered="true"
+        matRippleRadius="40"
+        matRippleColor="rgba(0, 0, 0, 0.03)"
+        (click)="goTo('/injuries')">
         <mat-icon>add_location</mat-icon>
         <div class="mat-caption bottom-navigation-text">
             Leziuni
