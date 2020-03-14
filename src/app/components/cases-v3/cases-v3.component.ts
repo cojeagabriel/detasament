@@ -1,7 +1,6 @@
-import { BottomNavigationService } from './../../services/bottom-navigation.service';
 import { CaseV2 } from './../../types/case-v2.d';
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl } from '@angular/forms';
 import { startWith, switchMap, map, shareReplay } from 'rxjs/operators';
@@ -12,7 +11,7 @@ import { Location } from '@angular/common';
   templateUrl: './cases-v3.component.html',
   styleUrls: ['./cases-v3.component.scss']
 })
-export class CasesV3Component implements OnInit, OnDestroy, AfterViewInit {
+export class CasesV3Component implements OnInit, AfterViewInit {
 
   search = new FormControl('');
   cases$ = this.getCasesObservable();
@@ -25,16 +24,11 @@ export class CasesV3Component implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private db: AngularFirestore,
-    private location: Location,
-    private bottomNavigationService: BottomNavigationService
+    private location: Location
   ) { }
 
   ngOnInit() {
-    this.bottomNavigationService.show();
     this.cases$.subscribe(res => this.loading$.next(false));
-  }
-  ngOnDestroy() {
-    // this.bottomNavigationService.hide();
   }
 
   private getCasesObservable(): Observable<CaseV2[]> {
