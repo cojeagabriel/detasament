@@ -103,3 +103,20 @@ mat-expansion-panel{
     overflow: scroll;
     max-height: 108px;
 }
+
+.footer{
+    .actions{
+        .side-button{
+            position: absolute;
+            bottom: 0;
+        }
+
+        .side-button-left{
+            left: 0;
+        }
+
+        .side-button-right{
+            right: 0;
+        }
+    }
+}

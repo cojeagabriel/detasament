@@ -1,3 +1,4 @@
+import { trigger, transition, style, animate, state } from '@angular/animations';
 import { Lap } from './../../types/lap.d';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { CaseV2 } from './../../types/case-v2.d';
@@ -20,6 +21,41 @@ import { DialogNormReviewComponent } from '../dialog-norm-review/dialog-norm-rev
   selector: 'app-chief-norm',
   templateUrl: './chief-norm.component.html',
   styleUrls: ['./chief-norm.component.scss'],
+  animations: [
+    trigger('split', [
+      state('split', style({
+        width: 'calc(50% - 8px)'
+      })),
+      transition(':enter', [
+        style({
+          width: '100%'
+        }),
+        animate('0.3s cubic-bezier(0.215, 0.61, 0.355, 1)')
+      ]),
+      transition(':leave', [
+        animate('0.3s cubic-bezier(0.215, 0.61, 0.355, 1)', style({
+          opacity: 0,
+          width: '100%'
+        }))
+      ])
+    ]),
+    trigger('fade', [
+      state('fade', style({
+        opacity: 1
+      })),
+      transition(':enter', [
+        style({
+          opacity: 0
+        }),
+        animate('0.3s cubic-bezier(0.215, 0.61, 0.355, 1)')
+      ]),
+      transition(':leave', [
+        animate('0.3s cubic-bezier(0.215, 0.61, 0.355, 1)', style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
