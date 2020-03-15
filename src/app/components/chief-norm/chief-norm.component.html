@@ -29,7 +29,9 @@
     <mat-tab-group mat-stretch-tabs [class.raised]="scrolling$ | async">
         <mat-tab label="Barem">
             <div #content class="content">
-                <app-norm [injuries]="injuries$ | async" (scoreChange)="setSelectedScore($event.injuryIndex, $event.maneuverIndex, $event.selectedScore)"></app-norm>
+                <ng-template matTabContent>
+                    <app-norm [injuries]="injuries$ | async" (scoreChange)="setSelectedScore($event.injuryIndex, $event.maneuverIndex, $event.selectedScore)"></app-norm>
+                </ng-template>
             </div>
         </mat-tab>
         <mat-tab label="Leziuni">
