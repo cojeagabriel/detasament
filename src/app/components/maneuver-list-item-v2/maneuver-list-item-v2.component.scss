@@ -1,3 +1,5 @@
+@import '../../../assets/scss/variables';
+
 :host {
     display: flex;
     align-items: center;
@@ -7,27 +9,6 @@
 
     &:not(:last-child) {
         border-bottom: solid 1px rgba($color: #000000, $alpha: 0.04);
-    }
-}
-
-.score-container {
-    display: flex;
-}
-
-.score-chip {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    box-sizing: border-box;
-    border: solid 1px rgba(0, 0, 0, .16);
-    border-radius: 100%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-
-    &:not(:last-child) {
-        margin-right: 4px;
     }
 }
 
