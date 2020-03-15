@@ -55,16 +55,16 @@
 
     <div class="footer">
         <div class="actions">
-            <button mat-raised-button *ngIf="!(started$ | async) && !(stopped$ | async)" color="accent" (click)="start()">
+            <button mat-raised-button *ngIf="!(started$ | async) && !(stopped$ | async)" color="accent" [@fade]="'fade'"  (click)="start()">
                 Start
             </button>
-            <button mat-raised-button *ngIf="!(stopped$ | async) && (started$ | async)"  color="accent" (click)="lap()">
+            <button *ngIf="!(stopped$ | async) && (started$ | async)" mat-raised-button color="accent" class="side-button side-button-left" [@split]="'split'" (click)="lap()">
                 Lap
             </button>
-            <button mat-raised-button *ngIf="!(stopped$ | async) && (started$ | async)" color="accent" (click)="stop()">
+            <button *ngIf="!(stopped$ | async) && (started$ | async)" mat-raised-button color="accent" class="side-button side-button-right" [@split]="'split'" (click)="stop()">
                 Stop
             </button>
-            <button mat-raised-button *ngIf="(stopped$ | async)" color="accent" [disabled]="!canFinish()" (click)="openNormReview()">
+            <button mat-raised-button *ngIf="(stopped$ | async)" color="accent" [disabled]="!canFinish()" [@fade]="'fade'" (click)="openNormReview()">
                 Finish
             </button>
         </div>
