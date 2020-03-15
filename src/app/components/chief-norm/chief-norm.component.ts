@@ -1,6 +1,7 @@
+import { Lap } from './../../types/lap.d';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { CaseV2 } from './../../types/case-v2.d';
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { CasualtyV2 } from 'src/app/types/casualty-v2';
 import { Location } from '@angular/common';
@@ -18,7 +19,8 @@ import { DialogNormReviewComponent } from '../dialog-norm-review/dialog-norm-rev
 @Component({
   selector: 'app-chief-norm',
   templateUrl: './chief-norm.component.html',
-  styleUrls: ['./chief-norm.component.scss']
+  styleUrls: ['./chief-norm.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
 
@@ -32,11 +34,11 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
   casualtySubject$ = new BehaviorSubject<CasualtyV2 | null>(null);
   injuries$ = new BehaviorSubject<InjuryV2[] | null>(null);
 
-  time = 0;
+  time$ = new BehaviorSubject<number>(0);
   timerInterval;
-  laps = [];
-  started = false;
-  stopped = false;
+  laps$ = new BehaviorSubject<Lap[]>([]);
+  started$ = new BehaviorSubject<boolean>(false);
+  stopped$ = new BehaviorSubject<boolean>(false);
 
   @ViewChild('screen', { static: false }) screen: ElementRef;
   @ViewChild('content', { static: false }) content: ElementRef;
@@ -84,21 +86,24 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy() {}
 
   start() {
-    this.started = true;
+    this.started$.next(true);
     this.timerInterval = setInterval(() => {
-      this.time++;
+      this.time$.next(this.time$.getValue() + 1);
     }, 1000);
   }
 
   stop() {
     clearInterval(this.timerInterval);
-    this.stopped = true;
+    this.stopped$.next(true);
   }
 
   lap() {
-    this.laps.push({
-      time: this.time
-    });
+    this.laps$.next([
+      ...this.laps$.getValue(),
+      {
+        time: this.time$.getValue()
+      }
+    ]);
   }
 
   finish() {
@@ -106,10 +111,10 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   reset() {
-    this.time = 0;
-    this.laps = [];
-    this.started = false;
-    this.stopped = false;
+    this.time$.next(0);
+    this.laps$.next([]);
+    this.started$.next(false);
+    this.stopped$.next(false);
   }
 
   openNormReview() {
