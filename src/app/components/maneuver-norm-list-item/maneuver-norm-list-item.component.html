@@ -8,7 +8,7 @@
     </mat-chip>
     <mat-chip [disabled]="!maneuver.average"
         [selected]="maneuver.selectedScore === maneuver.score/2"
-        (click)="onScoreChange(maneuver.score/2)">
+        (click)="maneuver.average && onScoreChange(maneuver.score/2)">
         {{ maneuver.average ? maneuver.score/2 : '-' }}
     </mat-chip>
     <mat-chip [selected]="maneuver.selectedScore === maneuver.score" (click)="onScoreChange(maneuver.score)">
