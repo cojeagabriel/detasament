@@ -12,7 +12,7 @@
 }
 
 .screen {
-    padding-top: 24px;
+    padding-top: 0;
     padding-bottom: 96px;
 }
 
@@ -37,4 +37,33 @@
 
 .perfect-score{
     margin-bottom: 16px;
+}
+
+.expanding-header{
+    border: none;
+}
+
+mat-accordion{
+    width: 100%;
+
+    &::ng-deep{
+        .mat-expansion-panel-body{
+            padding: 0 24px;
+        }
+
+        .mat-expansion-panel:not([class*=mat-elevation-z]){
+            box-shadow: none;
+            border: none;
+        }
+    }
+}
+
+.laps{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.counter{
+    display: inline-block;
+    min-width: 40px;
 }
