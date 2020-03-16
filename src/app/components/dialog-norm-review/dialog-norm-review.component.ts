@@ -40,7 +40,7 @@ export class DialogNormReviewComponent implements OnInit, AfterViewInit {
   disableAnimation = true;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: { record: CasualtyRecord },
+    @Inject(MAT_DIALOG_DATA) public data: { record: CasualtyRecord },
     private screenService: ScreenService
   ) { }
 
