@@ -172,11 +172,16 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
   getRecord(): CasualtyRecord {
     const casualty = this.casualtySubject$.getValue();
     const injuries = this.injuries$.getValue();
+    const timer = {
+      time: this.time$.getValue(),
+      laps: this.laps$.getValue()
+    };
     return {
       name: casualty.name,
       age: casualty.age,
       details: casualty.details || null,
-      injuries
+      injuries,
+      timer
     };
   }
 
