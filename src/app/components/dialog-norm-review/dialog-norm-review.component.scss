@@ -6,12 +6,14 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    min-height: 100%;
     box-sizing: border-box;
     padding: 24px 0;
+    flex-grow: 1;
 }
 
 .screen {
+    display: flex;
+    flex-direction: column;
     padding-top: 0;
     padding-bottom: 96px;
 }
