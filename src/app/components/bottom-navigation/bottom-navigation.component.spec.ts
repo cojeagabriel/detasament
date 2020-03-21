@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CaseCodeComponent } from './case-code.component';
+import { BottomNavigationComponent } from './bottom-navigation.component';
 
-describe('CaseCodeComponent', () => {
-  let component: CaseCodeComponent;
-  let fixture: ComponentFixture<CaseCodeComponent>;
+describe('BottomNavigationComponent', () => {
+  let component: BottomNavigationComponent;
+  let fixture: ComponentFixture<BottomNavigationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CaseCodeComponent ]
+      declarations: [ BottomNavigationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CaseCodeComponent);
+    fixture = TestBed.createComponent(BottomNavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

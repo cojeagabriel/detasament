@@ -1,6 +1,8 @@
+import { trigger, transition, style, animate, state } from '@angular/animations';
+import { Lap } from './../../types/lap.d';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { CaseV2 } from './../../types/case-v2.d';
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { CasualtyV2 } from 'src/app/types/casualty-v2';
 import { Location } from '@angular/common';
@@ -11,14 +13,50 @@ import { chiefInjuries } from 'src/app/constants/chief-injuries.constant';
 import { InjuryV2 } from 'src/app/types/injury-v2';
 import { isNil } from 'lodash';
 import { CasualtyRecord } from 'src/app/types/casualty-record';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTabChangeEvent } from '@angular/material';
 import { ScreenService } from 'src/app/services/screen.service';
 import { DialogNormReviewComponent } from '../dialog-norm-review/dialog-norm-review.component';
 
 @Component({
   selector: 'app-chief-norm',
   templateUrl: './chief-norm.component.html',
-  styleUrls: ['./chief-norm.component.scss']
+  styleUrls: ['./chief-norm.component.scss'],
+  animations: [
+    trigger('split', [
+      state('split', style({
+        width: 'calc(50% - 8px)'
+      })),
+      transition(':enter', [
+        style({
+          width: '100%'
+        }),
+        animate('0.3s cubic-bezier(0.215, 0.61, 0.355, 1)')
+      ]),
+      transition(':leave', [
+        animate('0.3s cubic-bezier(0.215, 0.61, 0.355, 1)', style({
+          opacity: 0,
+          width: '100%'
+        }))
+      ])
+    ]),
+    trigger('fade', [
+      state('fade', style({
+        opacity: 1
+      })),
+      transition(':enter', [
+        style({
+          opacity: 0
+        }),
+        animate('0.3s cubic-bezier(0.215, 0.61, 0.355, 1)')
+      ]),
+      transition(':leave', [
+        animate('0.3s cubic-bezier(0.215, 0.61, 0.355, 1)', style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
 
@@ -32,11 +70,11 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
   casualtySubject$ = new BehaviorSubject<CasualtyV2 | null>(null);
   injuries$ = new BehaviorSubject<InjuryV2[] | null>(null);
 
-  time = 0;
+  time$ = new BehaviorSubject<number>(0);
   timerInterval;
-  laps = [];
-  started = false;
-  stopped = false;
+  laps$ = new BehaviorSubject<Lap[]>([]);
+  started$ = new BehaviorSubject<boolean>(false);
+  stopped$ = new BehaviorSubject<boolean>(false);
 
   @ViewChild('screen', { static: false }) screen: ElementRef;
   @ViewChild('content', { static: false }) content: ElementRef;
@@ -44,6 +82,9 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
   loading$ = new BehaviorSubject(false);
   additionalInfoExpanded$ = new BehaviorSubject(false);
   disableAnimation = true;
+  scrollTop$ = new BehaviorSubject<number>(0);
+  expandedMap$ = new BehaviorSubject<{ [key: number]: boolean }>({});
+  showNorm$ = new BehaviorSubject(true);
 
   constructor(
     private db: AngularFirestore,
@@ -78,27 +119,38 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
       untilDestroyed(this)
     ).subscribe(casualty => {
       this.casualtySubject$.next(casualty);
+      this.expandedMap$.next(
+        (casualty.injuries as InjuryV2[]).reduce((expandedMap, injury, index) => {
+          return {
+            ...expandedMap,
+            [index]: true
+          };
+        }, {})
+      );
       this.injuries$.next(casualty.injuries as InjuryV2[]);
     });
   }
   ngOnDestroy() {}
 
   start() {
-    this.started = true;
+    this.started$.next(true);
     this.timerInterval = setInterval(() => {
-      this.time++;
+      this.time$.next(this.time$.getValue() + 1);
     }, 1000);
   }
 
   stop() {
     clearInterval(this.timerInterval);
-    this.stopped = true;
+    this.stopped$.next(true);
   }
 
   lap() {
-    this.laps.push({
-      time: this.time
-    });
+    this.laps$.next([
+      ...this.laps$.getValue(),
+      {
+        time: this.time$.getValue()
+      }
+    ]);
   }
 
   finish() {
@@ -106,10 +158,10 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   reset() {
-    this.time = 0;
-    this.laps = [];
-    this.started = false;
-    this.stopped = false;
+    this.time$.next(0);
+    this.laps$.next([]);
+    this.started$.next(false);
+    this.stopped$.next(false);
   }
 
   openNormReview() {
@@ -131,11 +183,16 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
   getRecord(): CasualtyRecord {
     const casualty = this.casualtySubject$.getValue();
     const injuries = this.injuries$.getValue();
+    const timer = {
+      time: this.time$.getValue(),
+      laps: this.laps$.getValue()
+    };
     return {
       name: casualty.name,
       age: casualty.age,
       details: casualty.details || null,
-      injuries
+      injuries,
+      timer
     };
   }
 
@@ -157,6 +214,28 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
     const injuries = this.injuries$.getValue();
     injuries[injuryIndex].maneuvers[maneuverIndex].selectedScore = selectedScore;
     this.injuries$.next(injuries);
+  }
+
+  onSelectedTabChange(tabChange: MatTabChangeEvent) {
+    if (tabChange.index === 0) {
+      this.showNorm$.next(true);
+      setTimeout(() => {
+        this.content.nativeElement.scrollTop = this.scrollTop$.getValue();
+      }, 0);
+    } else {
+      this.scrollTop$.next(this.content.nativeElement.scrollTop);
+      setTimeout(() => {
+        this.showNorm$.next(false);
+      }, 360);
+    }
+    this.content.nativeElement.scrollTop = this.scrollTop$.getValue();
+  }
+
+  mapExpanded(event: {index: number, value: boolean}) {
+    this.expandedMap$.next({
+      ...this.expandedMap$.getValue(),
+      [event.index]: event.value
+    });
   }
 
   private getCaseObservable(): Observable<any> {

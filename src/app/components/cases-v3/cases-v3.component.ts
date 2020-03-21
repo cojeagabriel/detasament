@@ -1,6 +1,6 @@
 import { CaseV2 } from './../../types/case-v2.d';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl } from '@angular/forms';
 import { startWith, switchMap, map, shareReplay } from 'rxjs/operators';
@@ -43,16 +43,6 @@ export class CasesV3Component implements OnInit, AfterViewInit {
       }),
       shareReplay(1)
     );
-
-    // return combineLatest(
-    //   this.db.collection<CaseV2>('cases', ref => ref.orderBy('name', 'asc')).valueChanges({ idField: 'id' }),
-    //   this.search.valueChanges
-    // ).pipe(
-    //   map(([cases, searchText]) => {
-    //     return cases.filter(case => case.name.toLowerCase().includes(searchText.toLowerCase()));
-    //   }),
-    //   shareReplay(1)
-    // );
   }
 
   openSearch() {

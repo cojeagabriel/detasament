@@ -40,16 +40,15 @@
                         </button>
                     </div>
                 </div>
-
-                <div *ngIf="hasCasualties" class="casualties-container">
-                    <app-casualty-card-v2 *ngFor="let casualty of casualties; let i = index" [casualty]="casualty" (click)="edit$.next({casualty: casualty, index: i}); sidenav.toggle()"
+                <div *ngIf="hasCasualties$ | async" class="casualties-container">
+                    <app-casualty-card-v2 *ngFor="let casualty of getCasualties(); let i = index" [casualty]="casualty" (click)="edit$.next({casualty: casualty, index: i}); sidenav.toggle()"
                     ></app-casualty-card-v2>
                 </div>
             </div>
 
             <div class="footer">
                 <div class="actions">
-                    <button mat-raised-button color="accent" [disabled]="!form.valid || !hasCasualties" (click)="save()">
+                    <button mat-raised-button color="accent" [disabled]="!form.valid || !(hasCasualties$ | async)" (click)="save()">
                         {{ (id$ | async) ? 'Salvează' : 'Creează' }}
                     </button>
                 </div>

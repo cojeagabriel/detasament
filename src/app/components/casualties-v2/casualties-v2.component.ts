@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest, defer } from 'rxjs';
-import { Casualty } from 'src/app/types/casualty';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { CasualtyV2 } from 'src/app/types/casualty-v2';
 
 @Component({
   selector: 'app-casualties-v2',
@@ -30,8 +30,8 @@ export class CasualtiesV2Component implements OnInit, AfterViewInit {
     this.location.back();
   }
 
-  private getCasualtiesObservable(): Observable<Casualty[]> {
-    return this.db.collection<Casualty>('casualties', ref => ref.where('visible', '==', true)).valueChanges({ idField: 'id' });
+  private getCasualtiesObservable(): Observable<CasualtyV2[]> {
+    return this.db.collection<CasualtyV2>('casualties', ref => ref.where('visible', '==', true)).valueChanges({ idField: 'id' });
   }
 
   ngAfterViewInit() {

@@ -1,5 +1,8 @@
 <mat-accordion multi="true">
-    <mat-expansion-panel *ngFor="let injury of injuries; let injuryIndex = index" [expanded]="true">
+    <mat-expansion-panel *ngFor="let injury of injuries; let injuryIndex = index"
+        [expanded]="objectKeys(expandedMap$ | async).length ? (expandedMap$ | async)[injuryIndex] : true"
+        (opened)="onExpandedChange(injuryIndex, true)"
+        (closed)="onExpandedChange(injuryIndex, false)">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 {{ injury.name }}

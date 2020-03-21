@@ -1,16 +1,8 @@
-import { CreateCasualtyComponent } from './components/create-casualty/create-casualty.component';
-import { CreateCaseV2Component } from './components/create-case-v2/create-case-v2.component';
-import { CasesV2Component } from './components/cases-v2/cases-v2.component';
-import { InjuryV2Component } from './components/injury-v2/injury-v2.component';
 import { CanDeactivateGuardGuard } from './guards/can-deactivate-guard.guard';
-import { CreateInjuryV2Component } from './components/create-injury-v2/create-injury-v2.component';
 import { TriageComponent } from './components/triage/triage.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { InjuriesV2Component } from './components/injuries-v2/injuries-v2.component';
-import { CasualtiesComponent } from './components/casualties/casualties.component';
-import { CasualtyComponent } from './components/casualty/casualty.component';
 import { InjuriesV3Component } from './components/injuries-v3/injuries-v3.component';
 import { InjuryV3Component } from './components/injury-v3/injury-v3.component';
 import { InjuryFormComponent } from './components/injury-form/injury-form.component';
@@ -24,7 +16,33 @@ import { CasualtyNormComponent } from './components/casualty-norm/casualty-norm.
 import { ChiefNormComponent } from './components/chief-norm/chief-norm.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, data: { state: '0' } },
+  {
+    path: '',
+    component: HomeComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'cases',
+      },
+      {
+        path: 'cases',
+        component: CasesV3Component,
+        data: { state: '1' }
+      },
+      {
+        path: 'casualties',
+        component: CasualtiesV2Component,
+        data: { state: '1' }
+      },
+      {
+        path: 'injuries',
+        component: InjuriesV3Component,
+        data: { state: '1' }
+      }
+    ],
+    data: { state: '1' }
+  },
   { path: 'injuries',
     children: [
       { path: '', component: InjuriesV3Component, data: { state: '1' } },
@@ -83,11 +101,11 @@ const routes: Routes = [
       },
     ]
   },
-  { path: 'triage', component: TriageComponent},
+  // { path: 'triage', component: TriageComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { paramsInheritanceStrategy: 'always' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

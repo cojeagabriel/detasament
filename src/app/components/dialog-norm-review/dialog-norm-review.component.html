@@ -1,10 +1,33 @@
 <div #screen class="screen">
+    <div class="expanding-header" [@.disabled]="disableAnimation">
+        <div class="nav">
+    
+            <span class="top-bar-title">{{ data.record.timer?.time | time }}</span>
+    
+            <div class="actions">
+                <button *ngIf="data.record.timer?.laps.length" mat-icon-button class="secondary-button" [class.active]="additionalInfoExpanded$ | async" (click)="toggleAdditionalInfo()">
+                    <mat-icon>timer</mat-icon>
+                </button>
+            </div>
+        </div>
+        <mat-accordion class="additional-header-info">
+            <mat-expansion-panel [expanded]="additionalInfoExpanded$ | async">
+                <div *ngIf="data.record.timer?.laps.length" class="laps">
+                    <div *ngFor="let lap of data.record.timer.laps; let i = index" class="lap">
+                        <span class="counter secondary-text">{{ getCounter(i) }}</span>
+                        <span class="time text">{{ lap.time | time }}</span>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
     <div class="content">
         <div class="title">Punctaj</div>
         <div class="score">
             {{ getScore() }}<span class="total-score">/{{totalScore}}</span>
         </div>
-        <div *ngIf="getScore() === totalScore" class="text perfect-score">Felicitări! Ai obținut scorul maxim!</div>
+        <div *ngIf="getScore() === totalScore" class="text perfect-score">Scor maxim!</div>
         <app-norm [injuries]="filteredInjuries$ | async" [showCounting]="false" (scoreChange)="setSelectedScore($event.injuryIndex, $event.maneuverIndex, $event.selectedScore)"></app-norm>
         <button mat-button color="accent" (click)="toggleShowAll()">{{ (filter$ | async) ? 'Arată tot baremul' : 'Arată doar rezumatul' }}</button>
     </div>
