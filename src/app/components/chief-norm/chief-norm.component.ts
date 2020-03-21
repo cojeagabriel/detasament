@@ -13,7 +13,7 @@ import { chiefInjuries } from 'src/app/constants/chief-injuries.constant';
 import { InjuryV2 } from 'src/app/types/injury-v2';
 import { isNil } from 'lodash';
 import { CasualtyRecord } from 'src/app/types/casualty-record';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTabChangeEvent } from '@angular/material';
 import { ScreenService } from 'src/app/services/screen.service';
 import { DialogNormReviewComponent } from '../dialog-norm-review/dialog-norm-review.component';
 
@@ -82,6 +82,9 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
   loading$ = new BehaviorSubject(false);
   additionalInfoExpanded$ = new BehaviorSubject(false);
   disableAnimation = true;
+  scrollTop$ = new BehaviorSubject<number>(0);
+  expandedMap$ = new BehaviorSubject<{ [key: number]: boolean }>({});
+  showNorm$ = new BehaviorSubject(true);
 
   constructor(
     private db: AngularFirestore,
@@ -116,6 +119,14 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
       untilDestroyed(this)
     ).subscribe(casualty => {
       this.casualtySubject$.next(casualty);
+      this.expandedMap$.next(
+        (casualty.injuries as InjuryV2[]).reduce((expandedMap, injury, index) => {
+          return {
+            ...expandedMap,
+            [index]: true
+          };
+        }, {})
+      );
       this.injuries$.next(casualty.injuries as InjuryV2[]);
     });
   }
@@ -203,6 +214,28 @@ export class ChiefNormComponent implements OnInit, OnDestroy, AfterViewInit {
     const injuries = this.injuries$.getValue();
     injuries[injuryIndex].maneuvers[maneuverIndex].selectedScore = selectedScore;
     this.injuries$.next(injuries);
+  }
+
+  onSelectedTabChange(tabChange: MatTabChangeEvent) {
+    if (tabChange.index === 0) {
+      this.showNorm$.next(true);
+      setTimeout(() => {
+        this.content.nativeElement.scrollTop = this.scrollTop$.getValue();
+      }, 0);
+    } else {
+      this.scrollTop$.next(this.content.nativeElement.scrollTop);
+      setTimeout(() => {
+        this.showNorm$.next(false);
+      }, 360);
+    }
+    this.content.nativeElement.scrollTop = this.scrollTop$.getValue();
+  }
+
+  mapExpanded(event: {index: number, value: boolean}) {
+    this.expandedMap$.next({
+      ...this.expandedMap$.getValue(),
+      [event.index]: event.value
+    });
   }
 
   private getCaseObservable(): Observable<any> {
