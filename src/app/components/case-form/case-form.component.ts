@@ -1,7 +1,7 @@
 import { CaseV2 } from './../../types/case-v2.d';
 import { CasualtyV2 } from './../../types/casualty-v2.d';
 import { ScreenService } from './../../services/screen.service';
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { MatSidenav } from '@angular/material';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
@@ -15,7 +15,8 @@ import { isNil } from 'lodash';
 @Component({
   selector: 'app-case-form',
   templateUrl: './case-form.component.html',
-  styleUrls: ['./case-form.component.scss']
+  styleUrls: ['./case-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
@@ -33,6 +34,7 @@ export class CaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
   scrolling$ = new BehaviorSubject(false);
   loading$ = new BehaviorSubject(false);
   edit$ = new BehaviorSubject<{ casualty: CasualtyV2, index: number } | null>(null);
+  hasCasualties$ = this.getHasCasualtiesObservable();
 
   constructor(
     private fb: FormBuilder,
@@ -81,7 +83,6 @@ export class CaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
       this.initialCasualties$.next(casualties);
       this.setCasualties(casualties);
     });
-
   }
   ngOnDestroy() {}
 
@@ -188,16 +189,20 @@ export class CaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
     return combineLatest(updates$);
   }
 
-  get hasCasualties(): boolean {
-    return this.form.value.casualties.length ? true : false;
+  private getHasCasualtiesObservable(): Observable<boolean> {
+    return this.form.controls.casualties.valueChanges.pipe(
+      map(casualties => {
+        return casualties.length ? true : false;
+      })
+    );
   }
 
   get casualtiesFormArray() {
-    return this.form.get('casualties') as FormArray;
+    return this.form.controls.casualties as FormArray;
   }
 
-  get casualties() {
-    return this.casualtiesFormArray.value;
+  getCasualties(): CasualtyV2[] {
+    return (this.form.controls.casualties as FormArray).value;
   }
 
   setCasualty(casualty: CasualtyV2 | null) {
