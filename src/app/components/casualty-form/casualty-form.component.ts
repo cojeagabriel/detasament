@@ -5,12 +5,10 @@ import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms'
 import { AngularFirestore } from '@angular/fire/firestore';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { map, filter, switchMap } from 'rxjs/operators';
-import { Casualty } from 'src/app/types/casualty';
 import { MatSidenav } from '@angular/material';
-import { Injury } from 'src/app/types/injury';
 
 @Component({
   selector: 'app-casualty-form',

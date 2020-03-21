@@ -1,4 +1,4 @@
-import { Casualty } from 'src/app/types/casualty';
+import { CasualtyV2 } from './../../types/casualty-v2.d';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -10,7 +10,7 @@ export class CasualtyCardV2Component implements OnInit {
 
   objectKeys = Object.keys;
 
-  @Input() casualty: Casualty;
+  @Input() casualty: CasualtyV2;
   @Input() baseRoute = '';
 
   constructor() { }
