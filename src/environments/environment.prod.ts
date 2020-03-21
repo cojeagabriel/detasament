@@ -1,14 +1,14 @@
 export const environment = {
   production: true,
-  apiUrl: "https://barem-detasament-api.herokuapp.com",
+  apiUrl: 'https://barem-detasament-api.herokuapp.com',
   firebase: {
-    apiKey: 'AIzaSyAhiCV3XyGu1V3J91zNNTyhe75-ZrRoaPo',
-    authDomain: 'detasament-8f226.firebaseapp.com',
-    databaseURL: 'https://detasament-8f226.firebaseio.com',
-    projectId: 'detasament-8f226',
-    storageBucket: 'detasament-8f226.appspot.com',
-    messagingSenderId: '964767019490',
-    appId: '1:964767019490:web:9c47ad1766c690b6b9c9bb',
-    measurementId: 'G-YYHP0HQTDF'
+    apiKey: 'AIzaSyDg5JEK29YLGeGVV0VSUJYHIYi5LU_Lxes',
+    authDomain: 'detasament-prod.firebaseapp.com',
+    databaseURL: 'https://detasament-prod.firebaseio.com',
+    projectId: 'detasament-prod',
+    storageBucket: 'detasament-prod.appspot.com',
+    messagingSenderId: '396684024418',
+    appId: '1:396684024418:web:90df1b9d99bc0adbff4f3b',
+    measurementId: 'G-8MFZ6QSZ2T'
   }
 };
