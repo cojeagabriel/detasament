@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { switchMap, map, shareReplay } from 'rxjs/operators';
+import { switchMap, map, shareReplay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-casualty-v2',
@@ -15,6 +15,7 @@ export class CasualtyV2Component implements OnInit, OnDestroy, AfterViewInit {
 
   objectKeys = Object.keys;
   casualty$!: Observable<any>;
+  canEdit$ = new BehaviorSubject(false);
 
   @ViewChild('screen', { static: false }) screen: ElementRef;
   scrolling$ = new BehaviorSubject(false);
@@ -26,6 +27,9 @@ export class CasualtyV2Component implements OnInit, OnDestroy, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    if (this.route.pathFromRoot.map(r => r.snapshot.url.map(segment => segment.path))[1][0] !== 'cases') {
+      this.canEdit$.next(true);
+    }
     this.casualty$ = this.route.params.pipe(
       switchMap(params => this.db.collection('casualties').doc<CasualtyV2>(params.id).valueChanges()),
       map(casualty => {
