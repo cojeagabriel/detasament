@@ -7,7 +7,7 @@
         <span class="top-bar-title"></span>
 
         <div class="actions">
-            <button mat-icon-button class="secondary-button" [routerLink]="'edit'">
+            <button *ngIf="canEdit$ | async" mat-icon-button class="secondary-button" [routerLink]="'edit'">
                 <mat-icon>edit</mat-icon>
             </button>
         </div>
